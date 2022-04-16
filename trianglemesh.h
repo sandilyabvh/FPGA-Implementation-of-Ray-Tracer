@@ -106,84 +106,47 @@ public:
     TriangleMesh(
         const Matrix44f o2w,
         const uint32_t nfaces,
-        const uint32_t faceIndex[3200],
-        const uint32_t vertsIndex[12720],
-        float verts[3241][3],
-        float normals[12720][3],
-        float st[12720][3]) :
+        const uint32_t faceIndex[NUM_FACES],
+        const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
+        float verts[VERTS_ARR_SIZE][3],
+        float normals[VERTS_INDEX_ARR_SIZE][3],
+        float st[VERTS_INDEX_ARR_SIZE][2]) :
         Object(o2w),
-        numTris(6320)
+        numTris(NUM_TRIS)
     {
         // find out how many triangles we need to create for this mesh
-    	uint32_t k = 0, maxVertIndex = 3241;
+    	uint32_t k = 0, maxVertIndex = MAX_VERT_INDEX;
 
-        // allocate memory to store the position of the mesh vertices
-    	float P[3241][3];
-        for (uint32_t i = 0; i < maxVertIndex; ++i) {
-            // [comment]
+        for (uint32_t i = 0; i < maxVertIndex; ++i)
+        {
             // Transforming vertices to world space
-            // [/comment]
         	objectToWorld.multVecMatrix(verts[i], P[i]);
         }
 
-        // allocate memory to store triangle indices
-        uint32_t trisIndex[18960];
-        uint32_t l = 0;
-
-        // [comment]
         // Generate the triangle index array
-        // Keep in mind that there is generally 1 vertex attribute for each vertex of each face.
-        // So for example if you have 2 quads, you only have 6 vertices but you have 2 * 4
-        // vertex attributes (that is 8 normals, 8 texture coordinates, etc.). So the easiest
-        // lazziest method in our triangle mesh, is to create a new array for each supported
-        // vertex attribute (st, normals, etc.) whose size is equal to the number of triangles
-        // multiplied by 3, and then set the value of the vertex attribute at each vertex
-        // of each triangle using the input array (normals[], st[], etc.)
-        // [/comment]
-        float N[18960][3];
-        float texCOordinates[18960][2];
-
-        // [comment]
-        // Computing the transpose of the object-to-world inverse matrix
-        // [/comment]
         Matrix44f transformNormals = worldToObject.transpose();
 
-        // generate the triangle index array and set normals and st coordinates
-        /*
-        for (uint32_t i = 0, k = 0; i < nfaces; ++i) { // for each  face
-            for (uint32_t j = 0; j < faceIndex[i] - 2; ++j) { // for each triangle in the face
-                trisIndex[l] = vertsIndex[k];
-                trisIndex[l + 1] = vertsIndex[k + j + 1];
-                trisIndex[l + 2] = vertsIndex[k + j + 2];
-                // [comment]
-                // Transforming normals
-                // [/comment]
-                transformNormals.multDirMatrix(normals[k], N[l]);
-                transformNormals.multDirMatrix(normals[k + j + 1], N[l + 1]);
-                transformNormals.multDirMatrix(normals[k + j + 2], N[l + 2]);
-                N[l].normalize();
-                N[l + 1].normalize();
-                N[l + 2].normalize();
-                texCoordinates[l] = st[k];
-                texCoordinates[l + 1] = st[k + j + 1];
-                texCoordinates[l + 2] = st[k + j + 2];
-                l += 3;
-            }
-            k += faceIndex[i];
-        }
-        */
+        generateTriangleIndexArr(transformNormals,
+							     faceIndex,
+								 trisIndex,
+								 vertsIndex,
+								 normals,
+								 N,
+								 texCoordinates,
+								 st);
     }
-
 
     // Test if the ray interesests this triangle mesh
     bool intersect(float origArr[3], float dirArr[3], float &tNear, uint32_t &triIndex, float uv[2]) const
     {
         bool isect = false;
-        for (uint32_t i = 0; i < numTris; ++i) {
+        for (uint32_t i = 0; i < numTris; ++i)
+        {
             float t = kInfinity, u, v;
             float v0Arr[3], v1Arr[3], v2Arr[3];
             getPrimitive(v0Arr, v1Arr, v2Arr, i);
-            if (rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v) && t < tNear) {
+            if (rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v) && t < tNear)
+            {
               tNear = t;
               uv[0] = u;
               uv[1] = v;
@@ -194,54 +157,34 @@ public:
 
         return isect;
     }
-    /*
+
     void getSurfaceProperties(
-        float hitPoint[3],
-        float viewDirection[3],
-        uint32_t triIndex,
-        float uv[2],
-        float hitNormal[3],
-        float hitTextureCoordinates[3])
+        const Vec3f hitPoint,
+        const Vec3f viewDirection,
+        const uint32_t triIndex,
+        const Vec2f uv,
+        Vec3f hitNormal,
+        Vec2f hitTextureCoordinates) const
     {
-    	triIndex = 0;
         // face normal
-    	float v0[3];
-    	float v1[3];
-    	float v2[3];
-        v0 = P[trisIndex[triIndex * 3]];
-        v1 = P[trisIndex[triIndex * 3 + 1]];
-        v2 = P[trisIndex[triIndex * 3 + 2]];
-        //hitNormal = (v1 - v0).crossProduct(v2 - v0);
-        //hitNormal.normalize();
+        const Vec3f v0 = P[trisIndex[triIndex * 3]];
+        const Vec3f v1 = P[trisIndex[triIndex * 3 + 1]];
+        const Vec3f v2 = P[trisIndex[triIndex * 3 + 2]];
+        hitNormal = (v1 - v0).crossProduct(v2 - v0);
+        hitNormal.normalize();
 
         // texture coordinates
-        float st0[2];
-        float st1[2];
-        float st2[2];
-        st0 = texCoordinates[triIndex * 3];
-        st1 = texCoordinates[triIndex * 3 + 1];
-        st2 = texCoordinates[triIndex * 3 + 2];
-        hitTextureCoordinates = (1 - uv[0] - uv[1]) * st0 + uv[0] * st1 + uv[1] * st2;
-
-        // vertex normal
-#if 0
-        float n0[3];
-        float n1[3];
-        float n2[3];
-        n0 = N[triIndex * 3];
-        n1 = N[triIndex * 3 + 1];
-        n2 = N[triIndex * 3 + 2];
-        hitNormal = (1 - uv[0] - uv[1]) * n0 + uv[0] * n1 + uv[1] * n2;
-        // doesn't need to be normalized as the N's are normalized but just for safety
-        //hitNormal.normalize();
-#endif
+        const Vec2f st0 = texCoordinates[triIndex * 3];
+        const Vec2f st1 = texCoordinates[triIndex * 3 + 1];
+        const Vec2f st2 = texCoordinates[triIndex * 3 + 2];
+        hitTextureCoordinates = (1 - uv.x - uv.y) * st0 + uv.x * st1 + uv.y * st2;
     }
-    */
 
     // member variables
     uint32_t numTris;                         // number of triangles
-    float P[3241][3];                         // triangles vertex position
-    uint32_t trisIndex[18960];             // vertex index array
-    float N[18960][3];                        // triangles vertex normals
-    float texCOordinates[18960][2];           // triangles texture coordinates
+    float P[MAX_VERT_INDEX][3];               // triangles vertex position
+    uint32_t trisIndex[NUM_TRIS * 3];         // vertex index array
+    float N[NUM_TRIS * 3][3];                 // triangles vertex normals
+    float texCoordinates[NUM_TRIS * 3][2];    // triangles texture coordinates
 };
+

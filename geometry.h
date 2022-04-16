@@ -80,16 +80,15 @@ public:
     //[/comment]
     const T& operator [] (uint8_t i) const { return (&x)[i]; }
     T& operator [] (uint8_t i) { return (&x)[i]; }
-    Vec3& normalize()
+    void normalize()
     {
         T n = norm();
-        if (n > 0) {
+        if (n > 0)
+        {
             T factor = 1 / sqrt(n);
             x *= factor, y *= factor, z *= factor;
         }
-        
-        return *this;
-    }
+	}
 
     friend Vec3 operator * (const T &r, const Vec3 &v)
     { return Vec3<T>(v.x * r, v.y * r, v.z * r); }
@@ -472,32 +471,3 @@ public:
 };
 
 typedef Matrix44<float> Matrix44f;
-
-//[comment]
-// Testing our code. To test the matrix inversion code, we used Maya to output
-// the values of a matrix and its inverse (check the video at the top of this page). Of course this implies
-// that Maya actually does the right thing, but we can probably agree, that is actually does;).
-// These are the values for the input matrix:
-//
-// 0.707107 0 -0.707107 0 -0.331295 0.883452 -0.331295 0 0.624695 0.468521 0.624695 0 4.000574 3.00043 4.000574 1
-//
-// Given the input matrix, the inverse matrix computed by our code should match the following values:
-//
-// 0.707107 -0.331295 0.624695 0 0 0.883452 0.468521 0 -0.707107 -0.331295 0.624695 0 0 0 -6.404043 1
-//[/comment]
-#if 0
-int main(int argc, char **argv)
-{
-    Vec3f v(0, 1, 2);
-    std::cerr << v << std::endl;
-    Matrix44f a, b, c;
-    c = a * b;
-
-    Matrix44f d(0.707107, 0, -0.707107, 0, -0.331295, 0.883452, -0.331295, 0, 0.624695, 0.468521, 0.624695, 0, 4.000574, 3.00043, 4.000574, 1);
-    std::cerr << d << std::endl;
-    d.invert();
-    std::cerr << d << std::endl;
-
-    return 0;
-}
-#endif

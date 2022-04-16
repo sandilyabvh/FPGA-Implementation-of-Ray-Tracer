@@ -11,74 +11,78 @@
 #include <chrono>
 
 #include "geometry.h"
-//#include "common.h"
-//#include "object.h"
-//#include "options.h"
 #include "trianglemesh.h"
 
+#define PRINT
 using namespace std;
+
 
 TriangleMesh loadPolyMeshFromFile(const char *file, const Matrix44f o2w)
 {
     std::ifstream ifs;
-    uint32_t numFaces;
-    numFaces = 3200;
-    uint32_t faceIndex [3200];
-    uint32_t vertsIndexArraySize;
-    vertsIndexArraySize = 12720;
-    uint32_t vertsIndex [12720];
-    uint32_t vertsArraySize;
-    vertsArraySize = 3241;
-    float verts[3241][3];
-    float normals[12720][3];
-    float st[12720][3];
+    uint32_t numFaces = NUM_FACES;
+    uint32_t vertsIndexArraySize = VERTS_INDEX_ARR_SIZE;
+    uint32_t vertsArraySize = VERTS_ARR_SIZE;
 
-    try {
-        ifs.open(file);
-        if (ifs.fail()) throw;
-        std::stringstream ss;
-        ss << ifs.rdbuf();
-        uint32_t numFaces;
-        ss >> numFaces;
+    uint32_t faceIndex[NUM_FACES];
+    uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE];
+    float verts[VERTS_ARR_SIZE][3];
+    float normals[VERTS_INDEX_ARR_SIZE][3];
+    float st[VERTS_INDEX_ARR_SIZE][3];
 
-        // reading face index array
-        for (uint32_t i = 0; i < numFaces; ++i) {
-            ss >> faceIndex[i];
-            cout << "faceIndex:" << faceIndex[i] << " for i:" << i;
-        }
+	ifs.open(file);
+	if (ifs.fail()) throw;
+	std::stringstream ss;
+	ss << ifs.rdbuf();
+	ss >> numFaces;
 
-        // reading vertex index array
-        for (uint32_t i = 0; i < vertsIndexArraySize; ++i) {
-            ss >> vertsIndex[i];
-            cout << "vertsIndex:" << vertsIndex[i] << " for i:" << i;
-        }
+	// reading face index array
+	for (uint32_t i = 0; i < numFaces; ++i)
+	{
+		ss >> faceIndex[i];
+#ifdef PRINT
+		cout << "faceIndex:" << faceIndex[i] << " for i:" << i;
+#endif
+	}
 
-        // reading vertices
-        for (uint32_t i = 0; i < vertsArraySize; ++i) {
-            ss >> verts[i][0] >> verts[i][1] >> verts[i][2];
-            cout << "verts[i][0]:" << verts[i][0] << " verts[i][1]:"<< verts[i][1] << " verts[i][2]:" << verts[i][2] << " for i:" << i;
-        }
+	// reading vertex index array
+	for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
+	{
+		ss >> vertsIndex[i];
+#ifdef PRINT
+		cout << "vertsIndex:" << vertsIndex[i] << " for i:" << i;
+#endif
+	}
 
-        // reading normals
-        for (uint32_t i = 0; i < vertsIndexArraySize; ++i) {
-            ss >> normals[i][0] >> normals[i][1] >> normals[i][2];
-            cout << "normals[i][0]:" << normals[i][0] << " normals[i][1]:"<< normals[i][1] << " normals[i][2]:" << normals[i][2] << " for i:" << i;
-        }
+	// reading vertices
+	for (uint32_t i = 0; i < vertsArraySize; ++i)
+	{
+		ss >> verts[i][0] >> verts[i][1] >> verts[i][2];
+#ifdef PRINT
+		cout << "verts[i][0]:" << verts[i][0] << " verts[i][1]:"<< verts[i][1] << " verts[i][2]:" << verts[i][2] << " for i:" << i;
+#endif
+	}
 
-        // reading st coordinates
-        for (uint32_t i = 0; i < vertsIndexArraySize; ++i) {
-            ss >> st[i][0] >> st[i][1];
-            cout << "st[i][0]:" << verts[i][0] << " st[i][1]:"<< st[i][1] << " st[i][2]:" << st[i][2] << " for i:" << i;
-        }
+	// reading normals
+	for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
+	{
+		ss >> normals[i][0] >> normals[i][1] >> normals[i][2];
+#ifdef PRINT
+		cout << "normals[i][0]:" << normals[i][0] << " normals[i][1]:"<< normals[i][1] << " normals[i][2]:" << normals[i][2] << " for i:" << i;
+#endif
+	}
 
-        return TriangleMesh(o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
-    }
-    catch (...) {
-        ifs.close();
-    }
-    ifs.close();
+	// reading st coordinates
+	for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
+	{
+		ss >> st[i][0] >> st[i][1];
+#ifdef PRINT
+		cout << "st[i][0]:" << verts[i][0] << " st[i][1]:"<< st[i][1] << " st[i][2]:" << st[i][2] << " for i:" << i;
+#endif
+	}
 
-    return TriangleMesh(o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
+	return TriangleMesh(o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
+
 }
 
 // [comment]
@@ -99,11 +103,10 @@ int main(int argc, char **argv)
 
     //bool results;
     TriangleMesh mesh =	loadPolyMeshFromFile("./teapot.geo", objectToWorld);
-    //cout << "Results: " << results;
-    //objects.push_back((Object)mesh);
+    objects.push_back((Object)mesh);
 
     // finally, render
-    // render(options, objects, 0);
+     render(options, objects, 0);
 
     return 0;
 }
