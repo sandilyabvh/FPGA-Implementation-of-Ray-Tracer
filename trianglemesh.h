@@ -2,55 +2,99 @@
 #include "object.h"
 #include "options.h"
 
-float dotProduct(float a[3], float b[3]) {
-	return (a[0] * b[0] + a[1] * b[1] + a[2] * b[2]);
+/*
+* Function to implement cross product
+* result = in1 x in2
+*/
+void crossProduct(float in1[3], float in2[3], float result[3])
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        result[i] = in1[(i+1)%3] * in2[(i+2)%3] - in1[(i+2)%3] * in2[(i+1)%3];
+    }
 }
 
-float * crossProduct(float a[3], float b[3]) {
-	float c[3];
-	c[0] = a[1] * b[2] - a[2] * b[1];
-	c[1] = a[2] * b[0] - a[0] * b[2];
-	c[2] = a[0] * b[1] - a[1] * b[0];
-	return c;
+/*
+* Function to implement dot product
+* result = in1 . in2
+*/
+void dotProduct(float in1[3], float in2[3], float &result)
+{
+    result = in1[0] * in2[0] + in1[1] * in2[1] + in1[2] * in2[2];
 }
 
+/*
+* Function to implement subration
+* result = in1 - in2
+*/
+void subtract(float in1[3], float in2[3], float result[3])
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        result[i] = in1[i] - in2[i];
+    }
+}
+
+void print(float in[3])
+{
+    std::cout << '[' << in[0] << ' ' << in[1] << ' ' << in[2] << ']' << std::endl;
+}
+
+// Using index0 = x, index1 = y, index2 = z
 bool rayTriangleIntersect(
     float orig[3], float dir[3],
     float v0[3], float v1[3], float v2[3],
-    float t, float u, float v)
+    float &t, float &u, float &v)
 {
-	float v0v1[3];
-	float v0v2[3];
 
-    v0v1 = v1 - v0;
-    v0v2 = v2 - v0;
-	float pvec[3];
-    float * pvecPtr;
-    pvecPtr = crossProduct(dir, v0v2);
-    for(int i=0; i<3; i++)
-    	pvec[i] = *(pvecPtr+i);
+    // v0v1 = v1 - v0;
+    float v0v1[3];
+    subtract(v1, v0, v0v1);
+    
+    // v0v2 = v2 - v0;
+    float v0v2[3];
+    subtract(v2, v0, v0v2);
 
-    float det = dotProduct(v0v1, pvec);
+    // pvec = dir x v0v2;
+    float pvec[3];
+    crossProduct(dir, v0v2, pvec);
+
+    // det = v0v1.pvec;
+    float det;
+    dotProduct(v0v1, pvec, det);
+
+    float detTest = det;
+    if (detTest < 0)
+    {
+        detTest = detTest * (-1);
+    }
 
     // ray and triangle are parallel if det is close to 0
-    if (fabs(det) < kEpsilon) return false;
+    if (detTest < kEpsilon) return false;
 
     float invDet = 1 / det;
+
     float tvec[3];
-    tvec = orig - v0;
-    u = dotProduct(tvec, pvec) * invDet;
+    subtract(orig, v0, tvec);
+
+    float tempResult;
+    dotProduct(tvec, pvec, tempResult);
+    u = tempResult * invDet;
+
     if (u < 0 || u > 1) return false;
 
     float qvec[3];
-    float *qvecPtr;
-    qvecPtr = crossProduct(tvec, v0v1);
-    for(int i=0; i<3; i++)
-    	qvec[i] = *(qvecPtr+i);
+    crossProduct(tvec, v0v1, qvec);
 
-    v = dotProduct(dir, qvec) * invDet;
+    float tempResult1;
+    dotProduct(dir, qvec, tempResult1);
+    v = tempResult1 * invDet;
+
     if (v < 0 || u + v > 1) return false;
 
-    t = dotProduct(v0v2, qvec) * invDet;
+    float tempResult3;
+    dotProduct(v0v2, qvec, tempResult3);
+    t = tempResult3 * invDet;
 
     return true;
 }
@@ -130,33 +174,27 @@ public:
         */
     }
 
+
     // Test if the ray interesests this triangle mesh
-    /*
-    bool intersect(float orig[3], float dir[3], float tNear, uint32_t triIndex, float uv[2])
+    bool intersect(float origArr[3], float dirArr[3], float &tNear, uint32_t &triIndex, float uv[2]) const
     {
-        int j = 0;
         bool isect = false;
         for (uint32_t i = 0; i < numTris; ++i) {
-            float v0[3];
-            float v1[3];
-            float v2[3];
-            v0 = P[trisIndex[j]];
-            v1 = P[trisIndex[j + 1]];
-            v2 = P[trisIndex[j + 2]];
             float t = kInfinity, u, v;
-            if (rayTriangleIntersect(orig, dir, v0, v1, v2, t, u, v) && t < tNear) {
-            	tNear = t;
-                uv[0] = u;
-                uv[1] = v;
-                triIndex = i;
-                isect = true;
+            float v0Arr[3], v1Arr[3], v2Arr[3];
+            getPrimitive(v0Arr, v1Arr, v2Arr, i);
+            if (rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v) && t < tNear) {
+              tNear = t;
+              uv[0] = u;
+              uv[1] = v;
+              triIndex = i;
+              isect = true;
             }
-            j += 3;
         }
 
         return isect;
     }
-
+    /*
     void getSurfaceProperties(
         float hitPoint[3],
         float viewDirection[3],

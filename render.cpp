@@ -26,17 +26,21 @@ bool trace(
     for (uint32_t k = 0; k < objects.size(); ++k) {
         float tNearTriangle = kInfinity;
         uint32_t indexTriangle;
-        Vec2f uvTriangle;
-        if (objects[k]->intersect(orig, dir, tNearTriangle, indexTriangle, uvTriangle) && tNearTriangle < tNear) {
+        float origArr[3] = {orig.getX(), orig.getY(), orig.getZ()};
+        float dirArr[3]  = {dir.getX(), dir.getY(), dir.getZ()};
+        float uvTriangleArr[2] = {uvTriangle.x, uvTriangle.y};
+        if (objects[k]->intersect(origArr, dirArr, tNearTriangle, indexTriangle, uvTriangleArr) && tNearTriangle < tNear) {
             *hitObject = objects[k].get();
             tNear = tNearTriangle;
             index = indexTriangle;
-            uv = uvTriangle;
+            uv.x = uvTriangleArr[0];
+            uv.y = uvTriangleArr[1];
         }
     }
 
     return (*hitObject != nullptr);
 }
+
 
 Vec3f castRay(
     const Vec3f &orig, const Vec3f &dir,
