@@ -96,7 +96,8 @@ int main(int argc, char **argv)
     // loading geometry
     std::vector<Object> objects;
     Matrix44f objectToWorld = Matrix44f(1.624241, 0, 2.522269, 0, 0, 3, 0, 0, -2.522269, 0, 1.624241, 0, 0, 0, 0, 1); // Matrix44f::kIdentity;
-	//bool results;
+
+    //bool results;
     TriangleMesh mesh =	loadPolyMeshFromFile("./teapot.geo", objectToWorld);
     //cout << "Results: " << results;
     //objects.push_back((Object)mesh);
