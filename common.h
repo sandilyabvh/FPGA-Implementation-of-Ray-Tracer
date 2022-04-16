@@ -32,9 +32,9 @@ struct Options
 };
 
 void generateTriangleIndexArr (Matrix44f transformNormals,
-		uint32_t faceIndex[NUM_FACES],
+		const uint32_t faceIndex[NUM_FACES],
 		uint32_t trisIndex[NUM_TRIS * 3],
-		uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
+		const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
 		float normals[VERTS_INDEX_ARR_SIZE][3],
 		float N[NUM_TRIS * 3][3],
 		float texCoordinates[NUM_TRIS * 3][2],

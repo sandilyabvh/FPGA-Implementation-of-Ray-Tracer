@@ -1,6 +1,6 @@
 #include "common.h"
 #include "object.h"
-#include "options.h"
+//#include "options.h"
 
 /*
 * Function to implement cross product
@@ -136,7 +136,7 @@ public:
 								 st);
     }
 
-    // Test if the ray interesests this triangle mesh
+    // Test if the ray intersects this triangle mesh
     bool intersect(float origArr[3], float dirArr[3], float &tNear, uint32_t &triIndex, float uv[2]) const
     {
         bool isect = false;
@@ -167,16 +167,27 @@ public:
         Vec2f hitTextureCoordinates) const
     {
         // face normal
-        const Vec3f v0 = P[trisIndex[triIndex * 3]];
-        const Vec3f v1 = P[trisIndex[triIndex * 3 + 1]];
-        const Vec3f v2 = P[trisIndex[triIndex * 3 + 2]];
+        Vec3f v0, v1, v2;
+        v0.x = P[trisIndex[triIndex * 3]][0];
+        v0.y = P[trisIndex[triIndex * 3]][1];
+        v0.z = P[trisIndex[triIndex * 3]][2];
+        v1.x = P[trisIndex[triIndex * 3 + 1]][0];
+        v1.y = P[trisIndex[triIndex * 3 + 1]][1];
+        v1.z = P[trisIndex[triIndex * 3 + 1]][2];
+        v2.x = P[trisIndex[triIndex * 3 + 2]][0];
+        v2.y = P[trisIndex[triIndex * 3 + 2]][1];
+        v2.z = P[trisIndex[triIndex * 3 + 2]][2];
         hitNormal = (v1 - v0).crossProduct(v2 - v0);
         hitNormal.normalize();
 
         // texture coordinates
-        const Vec2f st0 = texCoordinates[triIndex * 3];
-        const Vec2f st1 = texCoordinates[triIndex * 3 + 1];
-        const Vec2f st2 = texCoordinates[triIndex * 3 + 2];
+        Vec2f st0, st1, st2;
+        st0.x = texCoordinates[triIndex * 3][0];
+        st0.y = texCoordinates[triIndex * 3][1];
+        st1.x = texCoordinates[triIndex * 3 + 1][0];
+        st1.y = texCoordinates[triIndex * 3 + 1][1];
+        st2.x = texCoordinates[triIndex * 3 + 2][0];
+        st2.y = texCoordinates[triIndex * 3 + 2][1];
         hitTextureCoordinates = (1 - uv.x - uv.y) * st0 + uv.x * st1 + uv.y * st2;
     }
 
