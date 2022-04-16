@@ -1,14 +1,13 @@
-#define NUM_FACES 			  (3200)
-#define VERTS_INDEX_ARR_SIZE  (12720)
-#define VERTS_ARR_SIZE		  (3241)
-#define MAX_VERT_INDEX		  (3241)
-#define NUM_TRIS			  (6320)
+#ifndef _COMMON_H
 
+#define _COMMON_H
+
+#include <limits>
+#include "geometry.h"
 
 static const float kInfinity = std::numeric_limits<float>::max();
 static const float kEpsilon = 1e-8;
 static const Vec3f kDefaultBackgroundColor = Vec3f(0.235294, 0.67451, 0.843137);
-template <> const Matrix44f Matrix44f::kIdentity = Matrix44f();
 
 inline
 float clamp(const float &lo, const float &hi, const float &v)
@@ -39,3 +38,5 @@ void generateTriangleIndexArr (Matrix44f transformNormals,
 		float N[NUM_TRIS * 3][3],
 		float texCoordinates[NUM_TRIS * 3][2],
 		float st[VERTS_INDEX_ARR_SIZE][2]);
+
+#endif

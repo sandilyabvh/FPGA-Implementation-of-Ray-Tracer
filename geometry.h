@@ -1,8 +1,18 @@
+#ifndef _GEOMETRY_H
+
+#define _GEOMETRY_H
+
 #include <cstdlib>
 #include <cstdio>
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+
+#define NUM_FACES 			  (3200)
+#define VERTS_INDEX_ARR_SIZE  (12720)
+#define VERTS_ARR_SIZE		  (3241)
+#define MAX_VERT_INDEX		  (3241)
+#define NUM_TRIS			  (6320)
 
 template<typename T>
 class Vec2
@@ -100,6 +110,19 @@ public:
         return s << '[' << v.x << ' ' << v.y << ' ' << v.z << ']';
     }
     
+    const T getX(void) const
+    {
+    	return this->x;
+    }
+    const T getY(void) const
+    {
+    	return this->y;
+    }
+    const T getZ(void) const
+    {
+    	return this->z;
+    }
+
     T x, y, z;
 };
 
@@ -303,28 +326,27 @@ public:
     //
     // The coordinate w is more often than not equals to 1, but it can be different than
     // 1 especially when the matrix is projective matrix (perspective projection matrix).
-    //[/comment]
-    //template<typename S>
-    void multVecMatrix(float src[3], float dst[3])
-    {
-        float a, b, c, w;
-        
-        a = src[0] * x[0][0] + src[1] * x[1][0] + src[2] * x[2][0] + x[3][0];
-        b = src[0] * x[0][1] + src[1] * x[1][1] + src[2] * x[2][1] + x[3][1];
-        c = src[0] * x[0][2] + src[1] * x[1][2] + src[2] * x[2][2] + x[3][2];
-        w = src[0] * x[0][3] + src[1] * x[1][3] + src[2] * x[2][3] + x[3][3];
-        
-        dst[0] = a / w;
-        dst[1] = b / w;
-        dst[2] = c / w;
-    }
 
-    //[comment]
+    template<typename S>
+	void multVecMatrix(const Vec3<S> src, Vec3<S> dst) const
+	{
+		 S a, b, c, w;
+
+		 a = src[0] * x[0][0] + src[1] * x[1][0] + src[2] * x[2][0] + x[3][0];
+		 b = src[0] * x[0][1] + src[1] * x[1][1] + src[2] * x[2][1] + x[3][1];
+		 c = src[0] * x[0][2] + src[1] * x[1][2] + src[2] * x[2][2] + x[3][2];
+		 w = src[0] * x[0][3] + src[1] * x[1][3] + src[2] * x[2][3] + x[3][3];
+
+		 dst.x = a / w;
+		 dst.y = b / w;
+		 dst.z = c / w;
+	}
+
     // This method needs to be used for vector-matrix multiplication. Look at the differences
     // with the previous method (to compute a point-matrix multiplication). We don't use
     // the coefficients in the matrix that account for translation (x[3][0], x[3][1], x[3][2])
     // and we don't compute w.
-    //[/comment]
+
     template<typename S>
     void multDirMatrix(const Vec3<S> &src, Vec3<S> &dst) const
     {
@@ -471,3 +493,5 @@ public:
 };
 
 typedef Matrix44<float> Matrix44f;
+
+#endif

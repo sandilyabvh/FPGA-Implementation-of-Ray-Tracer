@@ -10,12 +10,12 @@
 #include <sstream>
 #include <chrono>
 
-#include "geometry.h"
 #include "trianglemesh.h"
 
-#define PRINT
+//#define PRINT
 using namespace std;
 
+template <> const Matrix44f Matrix44f::kIdentity = Matrix44f();
 
 TriangleMesh loadPolyMeshFromFile(const char *file, const Matrix44f o2w)
 {
@@ -28,7 +28,7 @@ TriangleMesh loadPolyMeshFromFile(const char *file, const Matrix44f o2w)
     uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE];
     float verts[VERTS_ARR_SIZE][3];
     float normals[VERTS_INDEX_ARR_SIZE][3];
-    float st[VERTS_INDEX_ARR_SIZE][3];
+    float st[VERTS_INDEX_ARR_SIZE][2];
 
 	ifs.open(file);
 	if (ifs.fail()) throw;
@@ -103,10 +103,9 @@ int main(int argc, char **argv)
 
     //bool results;
     TriangleMesh mesh =	loadPolyMeshFromFile("./teapot.geo", objectToWorld);
-    objects.push_back((Object)mesh);
 
     // finally, render
-     render(options, objects, 0);
+     render(options, mesh, 0);
 
     return 0;
 }
