@@ -49,34 +49,34 @@ public:
         numTris(NUM_TRIS)
     {
         // find out how many triangles we need to create for this mesh
-    	uint32_t k = 0, maxVertIndex = MAX_VERT_INDEX;
-    	Vec3f P_Vec3f, verts_Vec3f;
+        uint32_t k = 0, maxVertIndex = MAX_VERT_INDEX;
+        Vec3f P_Vec3f, verts_Vec3f;
 
         for (uint32_t i = 0; i < maxVertIndex; ++i)
         {
-        	P_Vec3f.x = P[i][0];
-        	P_Vec3f.y = P[i][1];
-        	P_Vec3f.z = P[i][2];
+            P_Vec3f.x = P[i][0];
+            P_Vec3f.y = P[i][1];
+            P_Vec3f.z = P[i][2];
 
-        	verts_Vec3f.x = verts[i][0];
-        	verts_Vec3f.y = verts[i][1];
-        	verts_Vec3f.z = verts[i][2];
+            verts_Vec3f.x = verts[i][0];
+            verts_Vec3f.y = verts[i][1];
+            verts_Vec3f.z = verts[i][2];
 
             // Transforming vertices to world space
-        	objectToWorld.multVecMatrix(verts_Vec3f, P_Vec3f);
+            objectToWorld.multVecMatrix(verts_Vec3f, P_Vec3f);
         }
 
         // Generate the triangle index array
         Matrix44f transformNormals = worldToObject.transpose();
 
         generateTriangleIndexArr(transformNormals,
-							     faceIndex,
-								 trisIndex,
-								 vertsIndex,
-								 normals,
-								 N,
-								 texCoordinates,
-								 st);
+            faceIndex,
+            trisIndex,
+            vertsIndex,
+            normals,
+            N,
+            texCoordinates,
+            st);
     }
 
     // member variables
@@ -87,15 +87,25 @@ public:
     float texCoordinates[NUM_TRIS * 3][2];    // triangles texture coordinates
 };
 
+void getPrimitive(TriangleMesh mesh,
+    float v0Arr[3],
+    float v1Arr[3],
+    float v2Arr[3],
+    uint32_t index);
 
 void render(const Options options,
-			TriangleMesh mesh,
-			const uint32_t frame);
+    TriangleMesh mesh,
+    const uint32_t frame);
 
-bool intersect(TriangleMesh mesh, float origArr[3], float dirArr[3], float &tNear, uint32_t &triIndex, float uv[2]);
+bool intersect(TriangleMesh mesh,
+    float origArr[3],
+    float dirArr[3],
+    float &tNear,
+    uint32_t &triIndex,
+    float uv[2]);
 
 void getSurfaceProperties(
-	TriangleMesh mesh,
+    TriangleMesh mesh,
     const Vec3f hitPoint,
     const Vec3f viewDirection,
     const uint32_t triIndex,

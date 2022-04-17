@@ -11,8 +11,8 @@
 #include <chrono>
 
 #include "trianglemesh.h"
+#include "common.h"
 
-//#define PRINT
 using namespace std;
 
 template <> const Matrix44f Matrix44f::kIdentity = Matrix44f();
@@ -30,59 +30,63 @@ TriangleMesh loadPolyMeshFromFile(const char *file, const Matrix44f o2w)
     float normals[VERTS_INDEX_ARR_SIZE][3];
     float st[VERTS_INDEX_ARR_SIZE][2];
 
-	ifs.open(file);
-	if (ifs.fail()) throw;
-	std::stringstream ss;
-	ss << ifs.rdbuf();
-	ss >> numFaces;
+    ifs.open(file);
+    if (ifs.fail()) throw;
+    std::stringstream ss;
+    ss << ifs.rdbuf();
+    ss >> numFaces;
 
-	// reading face index array
-	for (uint32_t i = 0; i < numFaces; ++i)
-	{
-		ss >> faceIndex[i];
+    // reading face index array
+    for (uint32_t i = 0; i < numFaces; ++i)
+    {
+        ss >> faceIndex[i];
 #ifdef PRINT
-		cout << "faceIndex:" << faceIndex[i] << " for i:" << i;
+        if (DEBUG_LEVEL==2)
+        cout << "faceIndex:" << faceIndex[i] << " for i:" << i << std::endl;
 #endif
-	}
+    }
 
-	// reading vertex index array
-	for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
-	{
-		ss >> vertsIndex[i];
+    // reading vertex index array
+    for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
+    {
+        ss >> vertsIndex[i];
 #ifdef PRINT
-		cout << "vertsIndex:" << vertsIndex[i] << " for i:" << i;
+        if (DEBUG_LEVEL==2)
+        cout << "vertsIndex:" << vertsIndex[i] << " for i:" << i << std::endl;
 #endif
-	}
+    }
 
-	// reading vertices
-	for (uint32_t i = 0; i < vertsArraySize; ++i)
-	{
-		ss >> verts[i][0] >> verts[i][1] >> verts[i][2];
+    // reading vertices
+    for (uint32_t i = 0; i < vertsArraySize; ++i)
+    {
+        ss >> verts[i][0] >> verts[i][1] >> verts[i][2];
 #ifdef PRINT
-		cout << "verts[i][0]:" << verts[i][0] << " verts[i][1]:"<< verts[i][1] << " verts[i][2]:" << verts[i][2] << " for i:" << i;
+        if (DEBUG_LEVEL==2)
+        cout << "verts[i][0]:" << verts[i][0] << " verts[i][1]:"<< verts[i][1] << " verts[i][2]:" << verts[i][2] << " for i:" << i << std::endl;
 #endif
-	}
+    }
 
-	// reading normals
-	for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
-	{
-		ss >> normals[i][0] >> normals[i][1] >> normals[i][2];
+    // reading normals
+    for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
+    {
+        ss >> normals[i][0] >> normals[i][1] >> normals[i][2];
 #ifdef PRINT
-		cout << "normals[i][0]:" << normals[i][0] << " normals[i][1]:"<< normals[i][1] << " normals[i][2]:" << normals[i][2] << " for i:" << i;
+        if (DEBUG_LEVEL==2)
+        cout << "normals[i][0]:" << normals[i][0] << " normals[i][1]:"<< normals[i][1] << " normals[i][2]:" << normals[i][2] << " for i:" << i << std::endl;
 #endif
-	}
+    }
 
-	// reading st coordinates
-	for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
-	{
-		ss >> st[i][0] >> st[i][1];
+    // reading st coordinates
+    for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
+    {
+        ss >> st[i][0] >> st[i][1];
 #ifdef PRINT
-		cout << "st[i][0]:" << verts[i][0] << " st[i][1]:"<< st[i][1] << " st[i][2]:" << st[i][2] << " for i:" << i;
+        if (DEBUG_LEVEL==2)
+        cout << "st[i][0]:" << verts[i][0] << " st[i][1]:"<< st[i][1] << " st[i][2]:" << st[i][2] << " for i:" << i << std::endl;
 #endif
-	}
+    }
 
-	return TriangleMesh(o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
-
+    return TriangleMesh(o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
 }
 
 // [comment]
@@ -104,8 +108,13 @@ int main(int argc, char **argv)
     //bool results;
     TriangleMesh mesh =	loadPolyMeshFromFile("./teapot.geo", objectToWorld);
 
+
+#ifdef PRINT
+    std::cout << "Triangle Mesh setup DONE...\n";
+#endif
+
     // finally, render
-     render(options, mesh, 0);
+    render(options, mesh, 0);
 
     return 0;
 }

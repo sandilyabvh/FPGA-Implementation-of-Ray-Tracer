@@ -8,11 +8,11 @@
 #include <iomanip>
 #include <cmath>
 
-#define NUM_FACES 			  (3200)
+#define NUM_FACES             (3200)
 #define VERTS_INDEX_ARR_SIZE  (12720)
-#define VERTS_ARR_SIZE		  (3241)
-#define MAX_VERT_INDEX		  (3241)
-#define NUM_TRIS			  (6320)
+#define VERTS_ARR_SIZE        (3241)
+#define MAX_VERT_INDEX        (3241)
+#define NUM_TRIS              (6320)
 
 template<typename T>
 class Vec2
@@ -75,12 +75,12 @@ public:
     { x /= r, y /= r, z /= r; return *this; }
     Vec3& operator *= (const T &r)
     { x *= r, y *= r, z *= r; return *this; }
-    Vec3 crossProduct(const Vec3<T> &v) const
-    { return Vec3<T>(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x); }
-    T norm() const
-    { return x * x + y * y + z * z; }
-    T length() const
-    { return sqrt(norm()); }
+    // Vec3 crossProduct(const Vec3<T> &v) const
+    // { return Vec3<T>(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x); }
+    // T norm() const
+    // { return x * x + y * y + z * z; }
+    // T length() const
+    // { return sqrt(norm()); }
     //[comment]
     // The next two operators are sometimes called access operators or
     // accessors. The Vec coordinates can be accessed that way v[0], v[1], v[2],
@@ -90,15 +90,15 @@ public:
     //[/comment]
     const T& operator [] (uint8_t i) const { return (&x)[i]; }
     T& operator [] (uint8_t i) { return (&x)[i]; }
-    void normalize()
-    {
-        T n = norm();
-        if (n > 0)
-        {
-            T factor = 1 / sqrt(n);
-            x *= factor, y *= factor, z *= factor;
-        }
-	}
+    // void normalize()
+    // {
+    //     T n = norm();
+    //     if (n > 0)
+    //     {
+    //         T factor = 1 / sqrt(n);
+    //         x *= factor, y *= factor, z *= factor;
+    //     }
+	// }
 
     friend Vec3 operator * (const T &r, const Vec3 &v)
     { return Vec3<T>(v.x * r, v.y * r, v.z * r); }
