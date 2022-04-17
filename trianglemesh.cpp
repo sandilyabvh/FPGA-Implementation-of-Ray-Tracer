@@ -12,6 +12,12 @@
 
 #include "trianglemesh.h"
 
+
+void print(float in[3])
+{
+    std::cout << '[' << in[0] << ' ' << in[1] << ' ' << in[2] << ']' << std::endl;
+}
+
 /*
 * Function to implement cross product
 * result = in1 x in2
@@ -43,11 +49,6 @@ void customSubtract(float in1[3], float in2[3], float result[3])
     {
         result[i] = in1[i] - in2[i];
     }
-}
-
-void print(float in[3])
-{
-    std::cout << '[' << in[0] << ' ' << in[1] << ' ' << in[2] << ']' << std::endl;
 }
 
 void copy3(float in[3], float out[3])
@@ -139,6 +140,7 @@ void getSurfaceProperties(
     copy3(mesh.P[mesh.trisIndex[triIndex * 3]], v0);
     copy3(mesh.P[mesh.trisIndex[triIndex * 3 + 1]], v1);
     copy3(mesh.P[mesh.trisIndex[triIndex * 3 + 2]], v2);
+
     float subv1v0[3], subv2v0[3];
     customSubtract(v1, v0, subv1v0);
     customSubtract(v2, v0, subv2v0);
@@ -160,7 +162,7 @@ void getSurfaceProperties(
 void getPrimitive(TriangleMesh mesh, float v0Arr[3], float v1Arr[3], float v2Arr[3], uint32_t index)
 {
     uint32_t j = index*3;
-//    std::cout << mesh.P[mesh.trisIndex[j]][0] << "   " << mesh.P[mesh.trisIndex[j]][1] << "   " << mesh.P[mesh.trisIndex[j]][2]<< "\n";
+//    std::cout << "getPrimitive: " << mesh.P[mesh.trisIndex[j]][0] << "   " << mesh.P[mesh.trisIndex[j]][1] << "   " << mesh.P[mesh.trisIndex[j]][2]<< "\n";
 
     v0Arr[0] = mesh.P[mesh.trisIndex[j]][0];
     v0Arr[1] = mesh.P[mesh.trisIndex[j]][1];
@@ -169,19 +171,18 @@ void getPrimitive(TriangleMesh mesh, float v0Arr[3], float v1Arr[3], float v2Arr
     v1Arr[1] = mesh.P[mesh.trisIndex[j + 1]][1];
     v1Arr[2] = mesh.P[mesh.trisIndex[j + 1]][2];
     v2Arr[0] = mesh.P[mesh.trisIndex[j + 2]][0];
-    v2Arr[1] = mesh.P[mesh.trisIndex[j + 2]][0];
+    v2Arr[1] = mesh.P[mesh.trisIndex[j + 2]][1];
     v2Arr[2] = mesh.P[mesh.trisIndex[j + 2]][2];
 }
 
 bool trace(
     float orig[3], float dir[3],
     TriangleMesh mesh,
-    float tNear, uint32_t index, float uv[2])
+    float &tNear, uint32_t &index, float uv[2])
 {
     bool isIntersecting = false;
     float tNearTriangle = kInfinity;
     uint32_t indexTriangle;
-    float uvTriangleArr[2] = {0, 0};
     if (intersect(mesh, orig, dir, tNearTriangle, indexTriangle, uv) && tNearTriangle < tNear)
     {
         tNear = tNearTriangle;
@@ -198,15 +199,44 @@ bool intersect(TriangleMesh mesh, float origArr[3], float dirArr[3], float &tNea
 {
     bool isect = false;
     for (uint32_t i = 0; i < mesh.numTris; ++i) {
+    // for (uint32_t i = 0; i < 5; ++i) {
         float t = kInfinity, u, v;
         float v0Arr[3], v1Arr[3], v2Arr[3];
         getPrimitive(mesh, v0Arr, v1Arr, v2Arr, i);
+#ifdef PRINT
+            if (DEBUG_LEVEL==3)
+            {
+                std::cout << "Intersection found:\n";
+                std::cout << "Primitive Index = " << i << "\n";
+                std::cout << "Orig:\n";
+                print(origArr);
+                std::cout << "Dir:\n";
+                print(dirArr);
+                std::cout << "v0Arr:\n";
+                print(v0Arr);
+                std::cout << "v1Arr\n";
+                print(v1Arr);
+                std::cout << "v2Arr:\n";
+                print(v2Arr);
+            }
+#endif
         if (rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v) && t < tNear) {
             tNear = t;
             uv[0] = u;
             uv[1] = v;
             triIndex = i;
             isect = true;
+#ifdef PRINT
+            if (DEBUG_LEVEL==3)
+            std::cout << "Intersection result: True\n\n";
+#endif
+        }
+        else
+        {
+#ifdef PRINT
+            if (DEBUG_LEVEL==3)
+            std::cout << "Intersection result: False\n\n";
+#endif
         }
     }
 
@@ -272,11 +302,12 @@ void render(const Options options,
 #ifdef PRINT
     std::cout << "Starting render loop, i_max=" << options.width << " j_max=" << options.height << "\n";
 #endif
-    for (uint32_t j = 200; j < 230;  ++j) // options.height;
+    for (uint32_t j = 0; j < options.height;  ++j) // options.height;
     {
-        for (uint32_t i = 300; i < 350; ++i)
+        for (uint32_t i = 0; i < options.width; ++i)
         {
 #ifdef PRINT
+            if (DEBUG_LEVEL==1)
             std::cout << "Pixel i: " << i << " j :" << j << " \n";
 #endif
             // generate primary ray direction
@@ -290,6 +321,7 @@ void render(const Options options,
             float origArr[3] {orig.getX(), orig.getY(), orig.getZ()};
             *(pix++) = castRay(origArr, dirArr, mesh, options);
         }
+        fprintf(stderr, "\r%3d%c", uint32_t(j / (float)options.height * 100), '%');
     }
 
 #ifdef PRINT

@@ -51,7 +51,6 @@ public:
         // find out how many triangles we need to create for this mesh
         uint32_t k = 0, maxVertIndex = MAX_VERT_INDEX;
         Vec3f P_Vec3f, verts_Vec3f;
-
         for (uint32_t i = 0; i < maxVertIndex; ++i)
         {
             P_Vec3f.x = P[i][0];
@@ -68,6 +67,7 @@ public:
             P[i][0] = P_Vec3f.x;
             P[i][1] = P_Vec3f.y;
             P[i][2] = P_Vec3f.z;
+            // std::cout << "Primitive, index=" << i << " [" << P[i][0] << "," << P[i][1] << "," << P[i][2] << "]\n";
         }
 
         // Generate the triangle index array

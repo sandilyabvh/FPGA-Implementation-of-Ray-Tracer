@@ -50,6 +50,7 @@ void generateTriangleIndexArr (Matrix44f transformNormals,
             trisIndex[l] = vertsIndex[k];
             trisIndex[l + 1] = vertsIndex[k + j + 1];
             trisIndex[l + 2] = vertsIndex[k + j + 2];
+            // std::cout << "trisIndex: [" << trisIndex[l] << "," << trisIndex[l+1] << "," << trisIndex[l+2] << "]\n";
 
             multDirMatrix(transformNormals, normals[k], N[l]);
             multDirMatrix(transformNormals, normals[k + j + 1], N[l + 1]);

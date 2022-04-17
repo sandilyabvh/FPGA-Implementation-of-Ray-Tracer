@@ -5,8 +5,8 @@
 #include <limits>
 #include "geometry.h"
 
-#define PRINT
-#define DEBUG_LEVEL 1
+// #define PRINT
+#define DEBUG_LEVEL 3
 
 static const float kInfinity = std::numeric_limits<float>::max();
 static const float kEpsilon = 1e-8;
@@ -33,8 +33,8 @@ float deg2rad(const float deg)
 
 struct Options
 {
-    uint32_t width = 640;
-    uint32_t height = 480;
+    uint32_t width = 50;
+    uint32_t height = 50;
     float fov = 90;
     Vec3f backgroundColor = kDefaultBackgroundColor;
     Matrix44f cameraToWorld;
