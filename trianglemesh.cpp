@@ -250,7 +250,6 @@ Vec3f castRay(
 {
     Vec3f hitColor = options.backgroundColor;
     float tnear = kInfinity;
-    //Vec2f uv;
     float uv[2];
     uint32_t index = 0;
     if (trace(orig, dir, mesh, tnear, index, uv))
@@ -260,9 +259,8 @@ Vec3f castRay(
         {
             hitPoint[i] = orig[i] + dir[i] * tnear;
         }
-        //Vec3f hitNormal;
+
         float hitNormal[2];
-        // Vec2f hitTexCoordinates;
         float hitTexCoordinates[2];
         getSurfaceProperties(mesh, hitPoint, dir, index, uv, hitNormal, hitTexCoordinates);
         float neg_dir[3] = {-dir[0], -dir[1], -dir[2]};

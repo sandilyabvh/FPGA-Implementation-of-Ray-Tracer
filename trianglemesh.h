@@ -110,12 +110,12 @@ bool intersect(TriangleMesh mesh,
 
 void getSurfaceProperties(
     TriangleMesh mesh,
-    const Vec3f hitPoint,
-    const Vec3f viewDirection,
-    const uint32_t triIndex,
-    const Vec2f uv,
-    Vec3f hitNormal,
-    Vec2f hitTextureCoordinates);
+    float hitPoint[3],
+    float viewDirection[3],
+    const uint32_t &triIndex,
+    float uv[2],
+    float hitNormal[3],
+    float hitTextureCoordinates[2]);
 
 #endif
 
