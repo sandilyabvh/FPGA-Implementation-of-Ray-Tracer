@@ -64,6 +64,10 @@ public:
 
             // Transforming vertices to world space
             objectToWorld.multVecMatrix(verts_Vec3f, P_Vec3f);
+
+            P[i][0] = P_Vec3f.x;
+            P[i][1] = P_Vec3f.y;
+            P[i][2] = P_Vec3f.z;
         }
 
         // Generate the triangle index array

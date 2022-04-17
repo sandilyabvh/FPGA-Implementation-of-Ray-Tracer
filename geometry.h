@@ -328,7 +328,7 @@ public:
     // 1 especially when the matrix is projective matrix (perspective projection matrix).
 
     template<typename S>
-	void multVecMatrix(const Vec3<S> src, Vec3<S> dst) const
+	void multVecMatrix(const Vec3<S> &src, Vec3<S> &dst) const
 	{
 		 S a, b, c, w;
 

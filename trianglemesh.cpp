@@ -160,6 +160,8 @@ void getSurfaceProperties(
 void getPrimitive(TriangleMesh mesh, float v0Arr[3], float v1Arr[3], float v2Arr[3], uint32_t index)
 {
     uint32_t j = index*3;
+//    std::cout << mesh.P[mesh.trisIndex[j]][0] << "   " << mesh.P[mesh.trisIndex[j]][1] << "   " << mesh.P[mesh.trisIndex[j]][2]<< "\n";
+
     v0Arr[0] = mesh.P[mesh.trisIndex[j]][0];
     v0Arr[1] = mesh.P[mesh.trisIndex[j]][1];
     v0Arr[2] = mesh.P[mesh.trisIndex[j]][2];
@@ -270,9 +272,9 @@ void render(const Options options,
 #ifdef PRINT
     std::cout << "Starting render loop, i_max=" << options.width << " j_max=" << options.height << "\n";
 #endif
-    for (uint32_t j = 0; j < options.height; ++j)
+    for (uint32_t j = 200; j < 230;  ++j) // options.height;
     {
-        for (uint32_t i = 0; i < options.width; ++i)
+        for (uint32_t i = 300; i < 350; ++i)
         {
 #ifdef PRINT
             std::cout << "Pixel i: " << i << " j :" << j << " \n";
