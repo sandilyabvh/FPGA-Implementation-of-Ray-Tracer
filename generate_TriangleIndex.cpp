@@ -1,6 +1,6 @@
 #include "hls_math.h"
 #include "geometry.h"
-#include "common.h"
+//#include "common.h"
 
 float customNorm3(float x[3])
 {
@@ -17,7 +17,7 @@ void customNormalize3(float x[3])
     }
 }
 
-void multDirMatrix(Matrix44f x, const float src[3], float dst[3])
+void multDirMatrix(float x[4][4], const float src[3], float dst[3])
 {
     float a, b, c;
 
@@ -30,7 +30,7 @@ void multDirMatrix(Matrix44f x, const float src[3], float dst[3])
     dst[2] = c;
 }
 
-void generateTriangleIndexArr (Matrix44f transformNormals,
+void generateTriangleIndexArr (float transformNormals[4][4],
     const uint32_t faceIndex[NUM_FACES],
     uint32_t trisIndex[NUM_TRIS * 3],
     const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],

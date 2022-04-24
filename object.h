@@ -5,9 +5,13 @@ class Object
 {
  public:
     // Setting up the object-to-world and world-to-object matrix
-    Object(const Matrix44f &o2w) : objectToWorld(o2w), worldToObject(o2w.inverse()) {}
+    Object(float o2w[4][4])
+ 	 {
+    	memcpy(objectToWorld, o2w, 4 * 4 * sizeof(float));
+    	customInverse(o2w, objectToWorld);
+ 	 }
     ~Object() {}
-    Matrix44f objectToWorld, worldToObject;
+    float objectToWorld[4][4], worldToObject[4][4];
 };
 
 #endif

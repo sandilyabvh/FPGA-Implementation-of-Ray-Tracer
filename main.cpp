@@ -15,9 +15,7 @@
 
 using namespace std;
 
-template <> const Matrix44f Matrix44f::kIdentity = Matrix44f();
-
-TriangleMesh loadPolyMeshFromFile(const char *file, const Matrix44f o2w)
+TriangleMesh loadPolyMeshFromFile(const char *file, float o2w[4][4])
 {
     std::ifstream ifs;
     uint32_t numFaces = NUM_FACES;
@@ -98,12 +96,12 @@ int main(int argc, char **argv)
 {
     // setting up options
     Options options;
-    options.cameraToWorld = Matrix44f(0.931056, 0, 0.364877, 0, 0.177666, 0.873446, -0.45335, 0, -0.3187, 0.48692, 0.813227, 0, -41.229214, 81.862351, 112.456908, 1);
+//    options.cameraToWorld = {0.931056, 0, 0.364877, 0, 0.177666, 0.873446, -0.45335, 0, -0.3187, 0.48692, 0.813227, 0, -41.229214, 81.862351, 112.456908, 1};
     options.fov = 18;
 
     // loading geometry
     std::vector<Object> objects;
-    Matrix44f objectToWorld = Matrix44f(1.624241, 0, 2.522269, 0, 0, 3, 0, 0, -2.522269, 0, 1.624241, 0, 0, 0, 0, 1); // Matrix44f::kIdentity;
+    float objectToWorld[4][4] = {1.624241, 0, 2.522269, 0, 0, 3, 0, 0, -2.522269, 0, 1.624241, 0, 0, 0, 0, 1};
 
     //bool results;
     TriangleMesh mesh =	loadPolyMeshFromFile("./teapot.geo", objectToWorld);

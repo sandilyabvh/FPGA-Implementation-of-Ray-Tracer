@@ -243,12 +243,12 @@ bool intersect(TriangleMesh mesh, float origArr[3], float dirArr[3], float &tNea
     return isect;
 }
 
-Vec3f castRay(
+void castRay(
     float orig[3], float dir[3],
     TriangleMesh mesh,
-    const Options options)
+    const Options options,
+	float hitColor[3])
 {
-	float hitColor[3];
 	hitColor[0] = options.backgroundColor[0];
 	hitColor[1] = options.backgroundColor[1];
 	hitColor[2] = options.backgroundColor[2];
@@ -275,10 +275,10 @@ Vec3f castRay(
         float checker = (fmod(hitTexCoordinates[0] * M, 1.0) > 0.5) ^ (fmod(hitTexCoordinates[1] * M, 1.0) < 0.5);
         float c = 0.3 * (1 - checker) + 0.7 * checker;
 
-        hitColor = c * NdotView; //Vec3f(uv.x, uv.y, 0); // Vec3f(hitTexCoordinates.x, hitTexCoordinates.y, 0);
+        hitColor[0] = c * NdotView; //Vec3f(uv.x, uv.y, 0); // Vec3f(hitTexCoordinates.x, hitTexCoordinates.y, 0);
+        hitColor[1] = c * NdotView;
+        hitColor[2] = c * NdotView;
     }
-
-    return hitColor;
 }
 
 // The main render function. This where we iterate over all pixels in the image, generate
@@ -293,13 +293,11 @@ void render(const Options options,
     std::cout << "Starting rendering\n";
 #endif
     float framebuffer[options.width * options.height][3];
-    float * pix;
-
     float scale = tan(deg2rad(options.fov * 0.5));
     float imageAspectRatio = options.width / (float)options.height;
-    float orig[3];
-    options.cameraToWorld.multVecMatrix(Vec3f(0), orig);
-
+    float origArr[3];
+    float zeroArr[3] = { 0, 0, 0};
+    customMultVecMatrix(zeroArr, origArr, options.cameraToWorld);
 
 #ifdef PRINT
     std::cout << "Starting render loop, i_max=" << options.width << " j_max=" << options.height << "\n";
@@ -316,15 +314,13 @@ void render(const Options options,
             float x = (2 * (i + 0.5) / (float)options.width - 1) * imageAspectRatio * scale;
             float y = (1 - 2 * (j + 0.5) / (float)options.height) * scale;
 
-            Vec3f dir;
-            options.cameraToWorld.multDirMatrix(Vec3f(x, y, -1), dir);
-            float dirArr[3] = {dir.getX(), dir.getY(), dir.getZ()};
+            float srcRayDir[3] = {x, y, -1};
+            float dirArr[3];
+
+            customMultDirMatrix(srcRayDir, dirArr, options.cameraToWorld);
+
             customNormalize3(dirArr);
-            float origArr[3] {orig.getX(), orig.getY(), orig.getZ()};
-            *pix = castRay(origArr, dirArr, mesh, options);
-            framebuffer[j*options.width + i] = pix[0];
-            framebuffer[j*options.width + i] = pix[1];
-            framebuffer[j*options.width + i] = pix[2];
+            castRay(origArr, dirArr, mesh, options, &framebuffer[j*options.width + i][0]);
         }
         fprintf(stderr, "\r%3d%c", uint32_t(j / (float)options.height * 100), '%');
     }
@@ -341,9 +337,9 @@ void render(const Options options,
     ofs << "P6\n" << options.width << " " << options.height << "\n255\n";
     for (uint32_t i = 0; i < options.height * options.width; ++i)
     {
-        char r = (char)(255 * clamp(0, 1, framebuffer[i].x));
-        char g = (char)(255 * clamp(0, 1, framebuffer[i].y));
-        char b = (char)(255 * clamp(0, 1, framebuffer[i].z));
+        char r = (char)(255 * clamp(0, 1, framebuffer[i][0]));
+        char g = (char)(255 * clamp(0, 1, framebuffer[i][1]));
+        char b = (char)(255 * clamp(0, 1, framebuffer[i][2]));
         ofs << r << g << b;
     }
     ofs.close();
