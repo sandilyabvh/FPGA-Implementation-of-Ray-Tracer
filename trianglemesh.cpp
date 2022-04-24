@@ -248,7 +248,10 @@ Vec3f castRay(
     TriangleMesh mesh,
     const Options options)
 {
-    Vec3f hitColor = options.backgroundColor;
+	float hitColor[0] = options.backgroundColor[0];
+	float hitColor[1] = options.backgroundColor[1];
+	float hitColor[2] = options.backgroundColor[2];
+
     float tnear = kInfinity;
     float uv[2];
     uint32_t index = 0;
@@ -288,12 +291,12 @@ void render(const Options options,
 #ifdef PRINT
     std::cout << "Starting rendering\n";
 #endif
-    Vec3f framebuffer[options.width * options.height];
-    Vec3f *pix = framebuffer;
+    float framebuffer[options.width * options.height][3];
+    float * pix;
 
     float scale = tan(deg2rad(options.fov * 0.5));
     float imageAspectRatio = options.width / (float)options.height;
-    Vec3f orig;
+    float orig[3];
     options.cameraToWorld.multVecMatrix(Vec3f(0), orig);
 
 
@@ -317,7 +320,10 @@ void render(const Options options,
             float dirArr[3] = {dir.getX(), dir.getY(), dir.getZ()};
             customNormalize3(dirArr);
             float origArr[3] {orig.getX(), orig.getY(), orig.getZ()};
-            *(pix++) = castRay(origArr, dirArr, mesh, options);
+            *pix = castRay(origArr, dirArr, mesh, options);
+            framebuffer[j*options.width + i] = pix[0];
+            framebuffer[j*options.width + i] = pix[1];
+            framebuffer[j*options.width + i] = pix[2];
         }
         fprintf(stderr, "\r%3d%c", uint32_t(j / (float)options.height * 100), '%');
     }
