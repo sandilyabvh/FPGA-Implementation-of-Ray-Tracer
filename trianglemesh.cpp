@@ -248,9 +248,10 @@ Vec3f castRay(
     TriangleMesh mesh,
     const Options options)
 {
-	float hitColor[0] = options.backgroundColor[0];
-	float hitColor[1] = options.backgroundColor[1];
-	float hitColor[2] = options.backgroundColor[2];
+	float hitColor[3];
+	hitColor[0] = options.backgroundColor[0];
+	hitColor[1] = options.backgroundColor[1];
+	hitColor[2] = options.backgroundColor[2];
 
     float tnear = kInfinity;
     float uv[2];
