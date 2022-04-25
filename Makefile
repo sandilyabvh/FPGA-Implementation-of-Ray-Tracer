@@ -1,3 +1,6 @@
+
+SHELL := /bin/bash
+
 AUTOPILOT_ROOT := /tools/software/xilinx/Vitis_HLS/2021.2
 
 ASSEMBLE_SRC_ROOT := .
@@ -18,6 +21,16 @@ all:
 
 clean:
 	rm -f *.o ray_trace
+	rm -f *.ppm
+	rm -rf *_hls
+	rm -f *.log
 
 run:
 	./ray_trace
+
+synth:
+	source /tools/software/xilinx/setup_env.sh
+	source /tools/software/xilinx/Vitis_HLS/2021.1/settings64.sh
+	alias vitis_hls="/tools/software/xilinx/Vitis_HLS/2021.1/bin/vitis_hls"
+	alias vivado="/tools/software/xilinx/Vivado/2021.1/bin/vivado"
+	lastyear vitis_hls -f raytrace_synth.tcl

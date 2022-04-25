@@ -6,7 +6,6 @@
 
 typedef struct triangle_mesh
 {
-    // member variables
     uint32_t numTris;                         // number of triangles
     float P[MAX_VERT_INDEX][3];               // triangles vertex position
     uint32_t trisIndex[NUM_TRIS * 3];         // vertex index array
@@ -15,7 +14,10 @@ typedef struct triangle_mesh
     float objectToWorld[4][4], worldToObject[4][4];
 } triangle_mesh_t;
 
-void render(triangle_mesh_t mesh,
+void render(
+    float P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    float texCoordinates[NUM_TRIS * 3][2],
     float framebuffer[WIDTH * HEIGHT][3],
     float cameraToWorld[4][4],
     float backgroundColor[3]);

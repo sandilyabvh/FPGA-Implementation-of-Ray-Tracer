@@ -144,11 +144,9 @@ void loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, float o2w[4][
     build_mesh(mesh, o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
 }
 
-// [comment]
 // In the main function of the program, we create the scene (create objects and lights)
 // as well as set the options for the render (image widht and height, maximum recursion
 // depth, field-of-view, etc.). We then call the render function().
-// [/comment]
 int main(int argc, char **argv)
 {
     // loading geometry
@@ -173,7 +171,7 @@ int main(int argc, char **argv)
     loadPolyMeshFromFile(mesh, "./teapot.geo", objectToWorld);
 
     // finally, render
-    render(mesh, framebuffer, cameraToWorld, backgroundColor);
+    render(mesh.P, mesh.trisIndex, mesh.texCoordinates, framebuffer, cameraToWorld, backgroundColor);
 
     // save framebuffer to file
     char buff[256];

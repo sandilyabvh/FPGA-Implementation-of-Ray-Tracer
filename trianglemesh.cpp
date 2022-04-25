@@ -65,9 +65,9 @@ bool rayTriangleIntersect(
 }
 
 void getSurfaceProperties(
-    triangle_mesh_t mesh,
-    float hitPoint[3],
-    float viewDirection[3],
+    float P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    float texCoordinates[NUM_TRIS * 3][2],
     const uint32_t &triIndex,
     float uv[2],
     float hitNormal[3],
@@ -78,7 +78,7 @@ void getSurfaceProperties(
     float v0[3], v1[3], v2[3];
     for (int i = 0; i < 3; ++i)
     {
-        copy3(mesh.P[mesh.trisIndex[triIndex*3 + i]], v[i]);
+        copy3(P[trisIndex[triIndex*3 + i]], v[i]);
     }
 
     float subv1v0[3], subv2v0[3];
@@ -89,9 +89,9 @@ void getSurfaceProperties(
 
     // texture coordinates
     float st0[2], st1[2], st2[3];
-    copy2(mesh.texCoordinates[triIndex * 3], st0);
-    copy2(mesh.texCoordinates[triIndex * 3 + 1], st1);
-    copy2(mesh.texCoordinates[triIndex * 3 + 2], st2);
+    copy2(texCoordinates[triIndex * 3], st0);
+    copy2(texCoordinates[triIndex * 3 + 1], st1);
+    copy2(texCoordinates[triIndex * 3 + 2], st2);
     // TODO: Check this
     for (int i = 0; i < 2; ++i)
     {
@@ -99,26 +99,35 @@ void getSurfaceProperties(
     }
 }
 
-void getPrimitive(triangle_mesh_t mesh, float v0Arr[3], float v1Arr[3], float v2Arr[3], uint32_t index)
+void getPrimitive(
+    float P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    float v0Arr[3], float v1Arr[3], float v2Arr[3],
+    uint32_t index)
 {
     uint32_t j = index*3;
 
     for (int i = 0; i < 3; ++i)
     {
-        v0Arr[i] = mesh.P[mesh.trisIndex[j]][i];
-        v1Arr[i] = mesh.P[mesh.trisIndex[j + 1]][i];
-        v2Arr[i] = mesh.P[mesh.trisIndex[j + 2]][i];
+        v0Arr[i] = P[trisIndex[j]][i];
+        v1Arr[i] = P[trisIndex[j + 1]][i];
+        v2Arr[i] = P[trisIndex[j + 2]][i];
     }
 }
 
 // Test if the ray interesests this triangle mesh
-bool intersect(triangle_mesh_t mesh, float origArr[3], float dirArr[3], float &tNear, uint32_t &triIndex, float uv[2])
+bool intersect(
+    float P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    float origArr[3], float dirArr[3],
+    float &tNear, uint32_t &triIndex,
+    float uv[2])
 {
     bool isect = false;
     for (uint32_t i = 0; i < NUM_TRIS; ++i) {
         float t = kInfinity, u, v;
         float v0Arr[3], v1Arr[3], v2Arr[3];
-        getPrimitive(mesh, v0Arr, v1Arr, v2Arr, i);
+        getPrimitive(P, trisIndex, v0Arr, v1Arr, v2Arr, i);
         if (rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v) && t < tNear) {
             tNear = t;
             uv[0] = u;
@@ -133,13 +142,14 @@ bool intersect(triangle_mesh_t mesh, float origArr[3], float dirArr[3], float &t
 
 bool trace(
     float orig[3], float dir[3],
-    triangle_mesh_t mesh,
+    float P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
     float &tNear, uint32_t &index, float uv[2])
 {
     bool isIntersecting = false;
     float tNearTriangle = kInfinity;
     uint32_t indexTriangle;
-    if (intersect(mesh, orig, dir, tNearTriangle, indexTriangle, uv) && tNearTriangle < tNear)
+    if (intersect(P, trisIndex, orig, dir, tNearTriangle, indexTriangle, uv) && tNearTriangle < tNear)
     {
         tNear = tNearTriangle;
         index = indexTriangle;
@@ -152,7 +162,9 @@ bool trace(
 
 void castRay(
     float orig[3], float dir[3],
-    triangle_mesh_t mesh,
+    float P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    float texCoordinates[NUM_TRIS * 3][2],
     float hitColor[3],
     float backgroundColor[3])
 {
@@ -164,7 +176,7 @@ void castRay(
     float tnear = kInfinity;
     float uv[2];
     uint32_t index = 0;
-    if (trace(orig, dir, mesh, tnear, index, uv))
+    if (trace(orig, dir, P, trisIndex, tnear, index, uv))
     {
         float hitPoint[3];
         for (int i = 0; i < 3; ++i)
@@ -174,7 +186,7 @@ void castRay(
 
         float hitNormal[2];
         float hitTexCoordinates[2];
-        getSurfaceProperties(mesh, hitPoint, dir, index, uv, hitNormal, hitTexCoordinates);
+        getSurfaceProperties(P, trisIndex, texCoordinates, index, uv, hitNormal, hitTexCoordinates);
         float neg_dir[3] = {-dir[0], -dir[1], -dir[2]};
         float normal_dir_dot;
         customDotProduct(hitNormal, neg_dir, normal_dir_dot);
@@ -193,7 +205,10 @@ void castRay(
 // The main render function. This where we iterate over all pixels in the image, generate
 // primary rays and cast these rays into the scene. The content of the framebuffer is
 // saved to a file.
-void render(triangle_mesh_t mesh,
+void render(
+    float P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    float texCoordinates[NUM_TRIS * 3][2],
     float framebuffer[WIDTH * HEIGHT][3],
     float cameraToWorld[4][4],
     float backgroundColor[3])
@@ -218,8 +233,8 @@ void render(triangle_mesh_t mesh,
             customMultDirMatrix(srcRayDir, dirArr, cameraToWorld);
 
             customNormalize3(dirArr);
-            castRay(origArr, dirArr, mesh, &framebuffer[j*WIDTH + i][0], backgroundColor);
+            castRay(origArr, dirArr, P, trisIndex, texCoordinates, &framebuffer[j*WIDTH + i][0], backgroundColor);
         }
-        fprintf(stderr, "\r%3d%c", uint32_t(j / (float)HEIGHT * 100), '%');
+        // fprintf(stderr, "\r%3d%c", uint32_t(j / (float)HEIGHT * 100), '%');
     }
 }

@@ -9,8 +9,8 @@
 #define NUM_TRIS              (6320)
 
 
-#define WIDTH  10
-#define HEIGHT 10
+#define WIDTH  640
+#define HEIGHT 480
 #define FOV    18
 
 #endif
