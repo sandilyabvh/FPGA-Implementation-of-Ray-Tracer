@@ -74,7 +74,7 @@ bool rayTriangleIntersect(
 }
 
 void getSurfaceProperties(
-    TriangleMesh mesh,
+    triangle_mesh_t mesh,
     float hitPoint[3],
     float viewDirection[3],
     const uint32_t &triIndex,
@@ -106,7 +106,7 @@ void getSurfaceProperties(
     }
 }
 
-void getPrimitive(TriangleMesh mesh, float v0Arr[3], float v1Arr[3], float v2Arr[3], uint32_t index)
+void getPrimitive(triangle_mesh_t mesh, float v0Arr[3], float v1Arr[3], float v2Arr[3], uint32_t index)
 {
     uint32_t j = index*3;
 
@@ -119,7 +119,7 @@ void getPrimitive(TriangleMesh mesh, float v0Arr[3], float v1Arr[3], float v2Arr
 }
 
 // Test if the ray interesests this triangle mesh
-bool intersect(TriangleMesh mesh, float origArr[3], float dirArr[3], float &tNear, uint32_t &triIndex, float uv[2])
+bool intersect(triangle_mesh_t mesh, float origArr[3], float dirArr[3], float &tNear, uint32_t &triIndex, float uv[2])
 {
     bool isect = false;
     for (uint32_t i = 0; i < NUM_TRIS; ++i) {
@@ -141,7 +141,7 @@ bool intersect(TriangleMesh mesh, float origArr[3], float dirArr[3], float &tNea
 
 bool trace(
     float orig[3], float dir[3],
-    TriangleMesh mesh,
+    triangle_mesh_t mesh,
     float &tNear, uint32_t &index, float uv[2])
 {
     bool isIntersecting = false;
@@ -160,7 +160,7 @@ bool trace(
 
 void castRay(
     float orig[3], float dir[3],
-    TriangleMesh mesh,
+    triangle_mesh_t mesh,
     float hitColor[3],
     float backgroundColor[3])
 {
@@ -201,7 +201,7 @@ void castRay(
 // The main render function. This where we iterate over all pixels in the image, generate
 // primary rays and cast these rays into the scene. The content of the framebuffer is
 // saved to a file.
-void render(TriangleMesh mesh,
+void render(triangle_mesh_t mesh,
     float framebuffer[WIDTH * HEIGHT][3],
     float cameraToWorld[4][4],
     float backgroundColor[3])
@@ -276,4 +276,41 @@ void generateTriangleIndexArr(float transformNormals[4][4],
         }
         k += faceIndex[i];
     }
+}
+
+void build_mesh(
+    triangle_mesh_t &mesh,
+    float o2w[4][4],
+    const uint32_t nfaces,
+    const uint32_t faceIndex[NUM_FACES],
+    const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
+    float verts[VERTS_ARR_SIZE][3],
+    float normals[VERTS_INDEX_ARR_SIZE][3],
+    float st[VERTS_INDEX_ARR_SIZE][2]
+)
+{
+    memcpy(mesh.objectToWorld, o2w, 4 * 4 * sizeof(float));
+    customInverse(o2w, mesh.worldToObject);
+
+    // find out how many triangles we need to create for this mesh
+    uint32_t k = 0, maxVertIndex = MAX_VERT_INDEX;
+    for (uint32_t i = 0; i < maxVertIndex; ++i)
+    {
+        // Transforming vertices to world space
+        customMultVecMatrix(verts[i], mesh.P[i], mesh.objectToWorld);
+    }
+
+    // Generate the triangle index array
+    float transformNormals[4][4];
+
+    customInverse(mesh.worldToObject, transformNormals);
+
+    generateTriangleIndexArr(transformNormals,
+        faceIndex,
+        mesh.trisIndex,
+        vertsIndex,
+        normals,
+        mesh.N,
+        mesh.texCoordinates,
+        st);
 }

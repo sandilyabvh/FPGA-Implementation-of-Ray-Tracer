@@ -17,7 +17,7 @@
 
 using namespace std;
 
-TriangleMesh loadPolyMeshFromFile(const char *file, float o2w[4][4])
+triangle_mesh_t loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, float o2w[4][4])
 {
     std::ifstream ifs;
     uint32_t numFaces = NUM_FACES;
@@ -66,7 +66,8 @@ TriangleMesh loadPolyMeshFromFile(const char *file, float o2w[4][4])
         ss >> st[i][0] >> st[i][1];
     }
 
-    return TriangleMesh(o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
+    // return triangle_mesh_t(o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
+    build_mesh(mesh, o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
 }
 
 // [comment]
@@ -83,8 +84,9 @@ int main(int argc, char **argv)
     
     uint32_t frame = 0;
     float framebuffer[WIDTH * HEIGHT][3];
+    triangle_mesh_t mesh;
     //bool results;
-    TriangleMesh mesh =	loadPolyMeshFromFile("./teapot.geo", objectToWorld);
+    loadPolyMeshFromFile(mesh, "./teapot.geo", objectToWorld);
 
     // finally, render
     render(mesh, framebuffer, cameraToWorld, backgroundColor);
