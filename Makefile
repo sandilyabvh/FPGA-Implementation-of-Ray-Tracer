@@ -26,7 +26,7 @@ clean:
 	rm -f *.log
 
 run:
-	./ray_trace
+	time ./ray_trace
 
 synth:
 	source /tools/software/xilinx/setup_env.sh
