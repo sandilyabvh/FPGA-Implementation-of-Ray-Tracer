@@ -9,9 +9,11 @@
 #include <cmath>
 #include <sstream>
 #include <chrono>
+#include <stdint.h>
+
+#include "common.h"
 
 #include "trianglemesh.h"
-#include "common.h"
 
 using namespace std;
 
@@ -38,50 +40,30 @@ TriangleMesh loadPolyMeshFromFile(const char *file, float o2w[4][4])
     for (uint32_t i = 0; i < numFaces; ++i)
     {
         ss >> faceIndex[i];
-#ifdef PRINT
-        if (DEBUG_LEVEL==2)
-        cout << "faceIndex:" << faceIndex[i] << " for i:" << i << std::endl;
-#endif
     }
 
     // reading vertex index array
     for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
     {
         ss >> vertsIndex[i];
-#ifdef PRINT
-        if (DEBUG_LEVEL==2)
-        cout << "vertsIndex:" << vertsIndex[i] << " for i:" << i << std::endl;
-#endif
     }
 
     // reading vertices
     for (uint32_t i = 0; i < vertsArraySize; ++i)
     {
         ss >> verts[i][0] >> verts[i][1] >> verts[i][2];
-#ifdef PRINT
-        if (DEBUG_LEVEL==2)
-        cout << "verts[i][0]:" << verts[i][0] << " verts[i][1]:"<< verts[i][1] << " verts[i][2]:" << verts[i][2] << " for i:" << i << std::endl;
-#endif
     }
 
     // reading normals
     for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
     {
         ss >> normals[i][0] >> normals[i][1] >> normals[i][2];
-#ifdef PRINT
-        if (DEBUG_LEVEL==2)
-        cout << "normals[i][0]:" << normals[i][0] << " normals[i][1]:"<< normals[i][1] << " normals[i][2]:" << normals[i][2] << " for i:" << i << std::endl;
-#endif
     }
 
     // reading st coordinates
     for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
     {
         ss >> st[i][0] >> st[i][1];
-#ifdef PRINT
-        if (DEBUG_LEVEL==2)
-        cout << "st[i][0]:" << verts[i][0] << " st[i][1]:"<< st[i][1] << " st[i][2]:" << st[i][2] << " for i:" << i << std::endl;
-#endif
     }
 
     return TriangleMesh(o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
@@ -94,25 +76,33 @@ TriangleMesh loadPolyMeshFromFile(const char *file, float o2w[4][4])
 // [/comment]
 int main(int argc, char **argv)
 {
-    // setting up options
-    Options options;
-//    options.cameraToWorld = {0.931056, 0, 0.364877, 0, 0.177666, 0.873446, -0.45335, 0, -0.3187, 0.48692, 0.813227, 0, -41.229214, 81.862351, 112.456908, 1};
-    options.fov = 18;
-
     // loading geometry
-    std::vector<Object> objects;
     float objectToWorld[4][4] = {1.624241, 0, 2.522269, 0, 0, 3, 0, 0, -2.522269, 0, 1.624241, 0, 0, 0, 0, 1};
-
+    float backgroundColor[3] = {0.235294, 0.67451, 0.843137};
+    float cameraToWorld[4][4] = {{0.931056, 0, 0.364877, 0}, {0.177666, 0.873446, -0.45335, 0}, {-0.3187, 0.48692, 0.813227, 0}, {-41.229214, 81.862351, 112.456908, 1}};
+    
+    uint32_t frame = 0;
+    float framebuffer[WIDTH * HEIGHT][3];
     //bool results;
     TriangleMesh mesh =	loadPolyMeshFromFile("./teapot.geo", objectToWorld);
 
-
-#ifdef PRINT
-    std::cout << "Triangle Mesh setup DONE...\n";
-#endif
-
     // finally, render
-    render(options, mesh, 0);
+    render(mesh, framebuffer, cameraToWorld, backgroundColor);
+
+    // save framebuffer to file
+    char buff[256];
+    sprintf(buff, "out.%04d.ppm", frame);
+    std::ofstream ofs;
+    ofs.open(buff);
+    ofs << "P6\n" << WIDTH << " " << HEIGHT << "\n255\n";
+    for (uint32_t i = 0; i < HEIGHT * WIDTH; ++i)
+    {
+        char r = (char)(255 * clamp(0, 1, framebuffer[i][0]));
+        char g = (char)(255 * clamp(0, 1, framebuffer[i][1]));
+        char b = (char)(255 * clamp(0, 1, framebuffer[i][2]));
+        ofs << r << g << b;
+    }
+    ofs.close();
 
     return 0;
 }

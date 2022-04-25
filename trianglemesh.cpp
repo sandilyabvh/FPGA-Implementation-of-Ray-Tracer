@@ -11,61 +11,8 @@
 #include <chrono>
 
 #include "trianglemesh.h"
+#include "common.h"
 
-
-void print(float in[3])
-{
-    std::cout << '[' << in[0] << ' ' << in[1] << ' ' << in[2] << ']' << std::endl;
-}
-
-/*
-* Function to implement cross product
-* result = in1 x in2
-*/
-void customCrossProduct(float in1[3], float in2[3], float result[3])
-{
-    for (int i = 0; i < 3; ++i)
-    {
-        result[i] = in1[(i+1)%3] * in2[(i+2)%3] - in1[(i+2)%3] * in2[(i+1)%3];
-    }
-}
-
-/*
-* Function to implement dot product
-* result = in1 . in2
-*/
-void customDotProduct(float in1[3], float in2[3], float &result)
-{
-    result = in1[0] * in2[0] + in1[1] * in2[1] + in1[2] * in2[2];
-}
-
-/*
-* Function to implement subration
-* result = in1 - in2
-*/
-void customSubtract(float in1[3], float in2[3], float result[3])
-{
-    for (int i = 0; i < 3; ++i)
-    {
-        result[i] = in1[i] - in2[i];
-    }
-}
-
-void copy3(float in[3], float out[3])
-{
-    for (int i = 0; i < 3; ++i)
-    {
-        out[i] = in[i];
-    }
-}
-
-void copy2(float in[2], float out[2])
-{
-    for (int i = 0; i < 2; ++i)
-    {
-        out[i] = in[i];
-    }
-}
 
 // Using index0 = x, index1 = y, index2 = z
 bool rayTriangleIntersect(
@@ -162,17 +109,34 @@ void getSurfaceProperties(
 void getPrimitive(TriangleMesh mesh, float v0Arr[3], float v1Arr[3], float v2Arr[3], uint32_t index)
 {
     uint32_t j = index*3;
-//    std::cout << "getPrimitive: " << mesh.P[mesh.trisIndex[j]][0] << "   " << mesh.P[mesh.trisIndex[j]][1] << "   " << mesh.P[mesh.trisIndex[j]][2]<< "\n";
 
-    v0Arr[0] = mesh.P[mesh.trisIndex[j]][0];
-    v0Arr[1] = mesh.P[mesh.trisIndex[j]][1];
-    v0Arr[2] = mesh.P[mesh.trisIndex[j]][2];
-    v1Arr[0] = mesh.P[mesh.trisIndex[j + 1]][0];
-    v1Arr[1] = mesh.P[mesh.trisIndex[j + 1]][1];
-    v1Arr[2] = mesh.P[mesh.trisIndex[j + 1]][2];
-    v2Arr[0] = mesh.P[mesh.trisIndex[j + 2]][0];
-    v2Arr[1] = mesh.P[mesh.trisIndex[j + 2]][1];
-    v2Arr[2] = mesh.P[mesh.trisIndex[j + 2]][2];
+    for (int i = 0; i < 3; ++i)
+    {
+        v0Arr[i] = mesh.P[mesh.trisIndex[j]][i];
+        v1Arr[i] = mesh.P[mesh.trisIndex[j + 1]][i];
+        v2Arr[i] = mesh.P[mesh.trisIndex[j + 2]][i];
+    }
+}
+
+// Test if the ray interesests this triangle mesh
+bool intersect(TriangleMesh mesh, float origArr[3], float dirArr[3], float &tNear, uint32_t &triIndex, float uv[2])
+{
+    bool isect = false;
+    for (uint32_t i = 0; i < NUM_TRIS; ++i) {
+    // for (uint32_t i = 0; i < 5; ++i) {
+        float t = kInfinity, u, v;
+        float v0Arr[3], v1Arr[3], v2Arr[3];
+        getPrimitive(mesh, v0Arr, v1Arr, v2Arr, i);
+        if (rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v) && t < tNear) {
+            tNear = t;
+            uv[0] = u;
+            uv[1] = v;
+            triIndex = i;
+            isect = true;
+        }
+    }
+
+    return isect;
 }
 
 bool trace(
@@ -194,64 +158,16 @@ bool trace(
     return isIntersecting;
 }
 
-// Test if the ray interesests this triangle mesh
-bool intersect(TriangleMesh mesh, float origArr[3], float dirArr[3], float &tNear, uint32_t &triIndex, float uv[2])
-{
-    bool isect = false;
-    for (uint32_t i = 0; i < mesh.numTris; ++i) {
-    // for (uint32_t i = 0; i < 5; ++i) {
-        float t = kInfinity, u, v;
-        float v0Arr[3], v1Arr[3], v2Arr[3];
-        getPrimitive(mesh, v0Arr, v1Arr, v2Arr, i);
-#ifdef PRINT
-            if (DEBUG_LEVEL==3)
-            {
-                std::cout << "Intersection found:\n";
-                std::cout << "Primitive Index = " << i << "\n";
-                std::cout << "Orig:\n";
-                print(origArr);
-                std::cout << "Dir:\n";
-                print(dirArr);
-                std::cout << "v0Arr:\n";
-                print(v0Arr);
-                std::cout << "v1Arr\n";
-                print(v1Arr);
-                std::cout << "v2Arr:\n";
-                print(v2Arr);
-            }
-#endif
-        if (rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v) && t < tNear) {
-            tNear = t;
-            uv[0] = u;
-            uv[1] = v;
-            triIndex = i;
-            isect = true;
-#ifdef PRINT
-            if (DEBUG_LEVEL==3)
-            std::cout << "Intersection result: True\n\n";
-#endif
-        }
-        else
-        {
-#ifdef PRINT
-            if (DEBUG_LEVEL==3)
-            std::cout << "Intersection result: False\n\n";
-#endif
-        }
-    }
-
-    return isect;
-}
-
 void castRay(
     float orig[3], float dir[3],
     TriangleMesh mesh,
-    const Options options,
-	float hitColor[3])
+    float hitColor[3],
+    float backgroundColor[3])
 {
-	hitColor[0] = options.backgroundColor[0];
-	hitColor[1] = options.backgroundColor[1];
-	hitColor[2] = options.backgroundColor[2];
+    for (int i = 0; i < 3; ++i)
+    {
+        hitColor[i] = backgroundColor[i];
+    }
 
     float tnear = kInfinity;
     float uv[2];
@@ -275,72 +191,89 @@ void castRay(
         float checker = (fmod(hitTexCoordinates[0] * M, 1.0) > 0.5) ^ (fmod(hitTexCoordinates[1] * M, 1.0) < 0.5);
         float c = 0.3 * (1 - checker) + 0.7 * checker;
 
-        hitColor[0] = c * NdotView; //Vec3f(uv.x, uv.y, 0); // Vec3f(hitTexCoordinates.x, hitTexCoordinates.y, 0);
-        hitColor[1] = c * NdotView;
-        hitColor[2] = c * NdotView;
+        for (int i = 0; i < 3; ++i)
+        {
+            hitColor[i] = c * NdotView;
+        }
     }
 }
 
 // The main render function. This where we iterate over all pixels in the image, generate
 // primary rays and cast these rays into the scene. The content of the framebuffer is
 // saved to a file.
-void render(const Options options,
-    TriangleMesh mesh,
-    const uint32_t frame)
+void render(TriangleMesh mesh,
+    float framebuffer[WIDTH * HEIGHT][3],
+    float cameraToWorld[4][4],
+    float backgroundColor[3])
 {
-
-#ifdef PRINT
-    std::cout << "Starting rendering\n";
-#endif
-    float framebuffer[options.width * options.height][3];
-    float scale = tan(deg2rad(options.fov * 0.5));
-    float imageAspectRatio = options.width / (float)options.height;
+    float scale = tan(deg2rad(FOV * 0.5));
+    float imageAspectRatio = WIDTH / (float)HEIGHT;
     float origArr[3];
-    float zeroArr[3] = { 0, 0, 0};
-    customMultVecMatrix(zeroArr, origArr, options.cameraToWorld);
+    float zeroArr[3] = {0, 0, 0};
+    customMultVecMatrix(zeroArr, origArr, cameraToWorld);
 
-#ifdef PRINT
-    std::cout << "Starting render loop, i_max=" << options.width << " j_max=" << options.height << "\n";
-#endif
-    for (uint32_t j = 0; j < options.height;  ++j) // options.height;
+    for (uint32_t j = 0; j < HEIGHT;  ++j) // HEIGHT;
     {
-        for (uint32_t i = 0; i < options.width; ++i)
+        for (uint32_t i = 0; i < WIDTH; ++i)
         {
-#ifdef PRINT
-            if (DEBUG_LEVEL==1)
-            std::cout << "Pixel i: " << i << " j :" << j << " \n";
-#endif
             // generate primary ray direction
-            float x = (2 * (i + 0.5) / (float)options.width - 1) * imageAspectRatio * scale;
-            float y = (1 - 2 * (j + 0.5) / (float)options.height) * scale;
+            float x = (2 * (i + 0.5) / (float)WIDTH - 1) * imageAspectRatio * scale;
+            float y = (1 - 2 * (j + 0.5) / (float)HEIGHT) * scale;
 
             float srcRayDir[3] = {x, y, -1};
             float dirArr[3];
 
-            customMultDirMatrix(srcRayDir, dirArr, options.cameraToWorld);
+            customMultDirMatrix(srcRayDir, dirArr, cameraToWorld);
 
             customNormalize3(dirArr);
-            castRay(origArr, dirArr, mesh, options, &framebuffer[j*options.width + i][0]);
+            castRay(origArr, dirArr, mesh, &framebuffer[j*WIDTH + i][0], backgroundColor);
         }
-        fprintf(stderr, "\r%3d%c", uint32_t(j / (float)options.height * 100), '%');
+        fprintf(stderr, "\r%3d%c", uint32_t(j / (float)HEIGHT * 100), '%');
     }
+}
 
-#ifdef PRINT
-    std::cout << "Writing to file \n";
-#endif
+void generateTriangleIndexArr(float transformNormals[4][4],
+    const uint32_t faceIndex[NUM_FACES],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
+    float normals[VERTS_INDEX_ARR_SIZE][3],
+    float N[NUM_TRIS * 3][3],
+    float texCoordinates[NUM_TRIS * 3][2],
+    float st[VERTS_INDEX_ARR_SIZE][2])
+{
+    uint32_t l = 0;
 
-    // save framebuffer to file
-    char buff[256];
-    sprintf(buff, "out.%04d.ppm", frame);
-    std::ofstream ofs;
-    ofs.open(buff);
-    ofs << "P6\n" << options.width << " " << options.height << "\n255\n";
-    for (uint32_t i = 0; i < options.height * options.width; ++i)
+    for (uint32_t i = 0, k = 0; i < NUM_FACES; ++i)
     {
-        char r = (char)(255 * clamp(0, 1, framebuffer[i][0]));
-        char g = (char)(255 * clamp(0, 1, framebuffer[i][1]));
-        char b = (char)(255 * clamp(0, 1, framebuffer[i][2]));
-        ofs << r << g << b;
+        // for each  face
+        for (uint32_t j = 0; j < faceIndex[i] - 2; ++j)
+        {
+            // for each triangle in the face
+            trisIndex[l] = vertsIndex[k];
+            trisIndex[l + 1] = vertsIndex[k + j + 1];
+            trisIndex[l + 2] = vertsIndex[k + j + 2];
+            // std::cout << "trisIndex: [" << trisIndex[l] << "," << trisIndex[l+1] << "," << trisIndex[l+2] << "]\n";
+
+            customMultDirMatrix(normals[k], N[l], transformNormals);
+            customMultDirMatrix(normals[k + j + 1], N[l + 1], transformNormals);
+            customMultDirMatrix(normals[k + j + 2], N[l + 2], transformNormals);
+
+            for (int ii = 0; ii < 3; ++ii)
+            {
+                customNormalize3(N[l + ii]);
+            }
+
+            texCoordinates[l][0] = st[k][0];
+            texCoordinates[l][1] = st[k][1];
+
+            texCoordinates[l + 1][0] = st[k + j + 1][0];
+            texCoordinates[l + 1][1] = st[k + j + 1][1];
+
+            texCoordinates[l + 2][0] = st[k + j + 2][0];
+            texCoordinates[l + 2][1] = st[k + j + 2][1];
+
+            l += 3;
+        }
+        k += faceIndex[i];
     }
-    ofs.close();
 }

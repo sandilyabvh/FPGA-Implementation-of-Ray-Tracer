@@ -1,58 +1,78 @@
 #include "common.h"
 
-void customMultVecMatrix(const float src[3], float dst[3], const float x[4][4])
+void customMultVecMatrix(float src[3], float dst[3], float x[4][4])
 {
 	 float a, b, c, w;
+     float val[4];
 
-	 a = src[0] * x[0][0] + src[1] * x[1][0] + src[2] * x[2][0] + x[3][0];
-	 b = src[0] * x[0][1] + src[1] * x[1][1] + src[2] * x[2][1] + x[3][1];
-	 c = src[0] * x[0][2] + src[1] * x[1][2] + src[2] * x[2][2] + x[3][2];
-	 w = src[0] * x[0][3] + src[1] * x[1][3] + src[2] * x[2][3] + x[3][3];
+    for (int i = 0; i < 4; ++i)
+    {
+        float temp_val = 0;
+        for (int j = 0; j < 3; ++j)
+        {
+            temp_val += src[j] * x[j][i];
+        }
+        val[i] = temp_val + x[3][i];
+    }
 
-	 dst[0] = a / w;
-	 dst[1] = b / w;
-	 dst[2] = c / w;
+    for (int i = 0; i < 3; ++i)
+    {
+        dst[i] = val[i] / val[3];
+    }
 }
 
-void customMultDirMatrix(const float src[3], float dst[3], const float x[4][4])
+void customMultDirMatrix(float src[3], float dst[3], float x[4][4])
 {
     float a, b, c;
+    float val[3];
 
-    a = src[0] * x[0][0] + src[1] * x[1][0] + src[2] * x[2][0];
-    b = src[0] * x[0][1] + src[1] * x[1][1] + src[2] * x[2][1];
-    c = src[0] * x[0][2] + src[1] * x[1][2] + src[2] * x[2][2];
+    for (int i = 0; i < 3; ++i)
+    {
+        float temp_val = 0;
+        for (int j = 0; j < 3; ++j)
+        {
+            temp_val += src[j] * x[j][i];
+        }
+        val[i] = temp_val;
+    }
 
-    dst[0] = a;
-    dst[1] = b;
-    dst[2] = c;
+    for (int i = 0; i < 3; ++i)
+    {
+        dst[i] = val[i];
+    }
 }
 
 
 // \brief transpose itself
-void customTranspose (float mat[4][4])
+void customTranspose(float mat[4][4])
 {
-	float tmp[4][4];
-	for (int i = 0; i < 4; i++)
-	{
-		for ( int j = 0; j < 4; j++)
-		{
-			tmp[i][j] = mat[j][i];
-		}
-	}
+    float tmp[4][4];
+    for (int i = 0; i < 4; i++)
+    {
+        for ( int j = 0; j < 4; j++)
+        {
+            tmp[i][j] = mat[j][i];
+        }
+    }
 
-	for (int i = 0; i < 4; i++)
-	{
-		for ( int j = 0; j < 4; j++)
-		{
-			mat[i][j] = tmp[i][j];
-		}
-	}
+    for (int i = 0; i < 4; i++)
+    {
+        for ( int j = 0; j < 4; j++)
+        {
+            mat[i][j] = tmp[i][j];
+        }
+    }
 }
 
 void customInverse(float mat[4][4], float inverseMat[4][4])
 {
     int i, j, k;
-    float identity[4][4] = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
+    float identity[4][4] = {
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    };
 
     // Forward elimination
     for (i = 0; i < 3 ; i++)
@@ -63,25 +83,27 @@ void customInverse(float mat[4][4], float inverseMat[4][4])
         if (pivotsize < 0)
             pivotsize = -pivotsize;
 
-		for (j = i + 1; j < 4; j++)
-		{
-			float tmp = mat[j][i];
+        for (j = i + 1; j < 4; j++)
+        {
+            float tmp = mat[j][i];
 
-			if (tmp < 0)
-				tmp = -tmp;
+            if (tmp < 0)
+            {
+                tmp = -tmp;
+            }
 
-			if (tmp > pivotsize)
-			{
-				pivot = j;
-				pivotsize = tmp;
-			}
-		}
+            if (tmp > pivotsize)
+            {
+                pivot = j;
+                pivotsize = tmp;
+            }
+        }
 
         if (pivotsize == 0)
         {
             // Cannot invert singular matrix
-        	memcpy(inverseMat, identity, 4 * 4 * sizeof(float));
-        	return;
+            customCopy44(identity, inverseMat);
+            return;
         }
 
         if (pivot != i)
@@ -120,7 +142,7 @@ void customInverse(float mat[4][4], float inverseMat[4][4])
         if ((f = mat[i][i]) == 0)
         {
             // Cannot invert singular matrix
-        	memcpy(inverseMat, identity, 4 * 4 * sizeof(float));
+            customCopy44(identity, inverseMat);
         	return;
         }
 
@@ -140,5 +162,81 @@ void customInverse(float mat[4][4], float inverseMat[4][4])
                 inverseMat[j][k] -= f * inverseMat[i][k];
             }
         }
+    }
+}
+
+
+void customCopy44(float in[4][4], float out[4][4])
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
+            out[i][j] = in[i][j];
+        }
+    }
+}
+
+/*
+* Function to implement cross product
+* result = in1 x in2
+*/
+void customCrossProduct(float in1[3], float in2[3], float result[3])
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        result[i] = in1[(i+1)%3] * in2[(i+2)%3] - in1[(i+2)%3] * in2[(i+1)%3];
+    }
+}
+
+/*
+* Function to implement dot product
+* result = in1 . in2
+*/
+void customDotProduct(float in1[3], float in2[3], float &result)
+{
+    result = in1[0] * in2[0] + in1[1] * in2[1] + in1[2] * in2[2];
+}
+
+/*
+* Function to implement subration
+* result = in1 - in2
+*/
+void customSubtract(float in1[3], float in2[3], float result[3])
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        result[i] = in1[i] - in2[i];
+    }
+}
+
+void copy3(float in[3], float out[3])
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        out[i] = in[i];
+    }
+}
+
+void copy2(float in[2], float out[2])
+{
+    for (int i = 0; i < 2; ++i)
+    {
+        out[i] = in[i];
+    }
+}
+
+float customNorm3(float x[3])
+{
+    return x[0] * x[0] + x[1] * x[1] + x[2] * x[2];
+}
+
+void customNormalize3(float x[3])
+{
+    float n = customNorm3(x);
+    if (n > 0.0)
+    {
+        float factor = 1 / sqrt(n);
+        x[0] *= factor, x[1] *= factor, x[2] *= factor;
     }
 }

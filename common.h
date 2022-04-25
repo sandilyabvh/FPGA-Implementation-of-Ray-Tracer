@@ -6,8 +6,9 @@
 #include <string.h>
 #include "geometry.h"
 
-//#define PRINT
-#define DEBUG_LEVEL 3
+#define WIDTH  20
+#define HEIGHT 20
+#define FOV    18
 
 static const float kInfinity = std::numeric_limits<float>::max();
 static const float kEpsilon = 1e-8;
@@ -17,8 +18,6 @@ static const float kEpsilon = 1e-8;
 float customNorm3(float x[3]);
 
 void customNormalize3(float x[3]);
-
-void multDirMatrix(float x[4][4], const float src[3], float dst[3]);
 
 inline
 float clamp(const float &lo, const float &hi, const float &v)
@@ -32,31 +31,44 @@ float deg2rad(const float deg)
     return deg * M_PI / 180;
 }
 
-struct Options
-{
-    uint32_t width = 50;
-    uint32_t height = 50;
-    float fov = 90;
-    float backgroundColor[3] = {0.235294, 0.67451, 0.843137};
-    float cameraToWorld[4][4] = {{0.931056, 0, 0.364877, 0}, {0.177666, 0.873446, -0.45335, 0}, {-0.3187, 0.48692, 0.813227, 0}, {-41.229214, 81.862351, 112.456908, 1}};
-};
+// struct Options
+// {
+// };
 
-void generateTriangleIndexArr (float transformNormals[4][4],
-    const uint32_t faceIndex[NUM_FACES],
-    uint32_t trisIndex[NUM_TRIS * 3],
-    const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
-    float normals[VERTS_INDEX_ARR_SIZE][3],
-    float N[NUM_TRIS * 3][3],
-    float texCoordinates[NUM_TRIS * 3][2],
-    float st[VERTS_INDEX_ARR_SIZE][2]);
+void customMultVecMatrix(float src[3], float dst[3], float x[4][4]);
 
-void customMultVecMatrix(const float src[3], float dst[3], const float x[4][4]);
-
-void customMultDirMatrix(const float src[3], float dst[3], const float x[4][4]);
+void customMultDirMatrix(float src[3], float dst[3], float x[4][4]);
 
 // \brief transpose itself
 void customTranspose (float mat[4][4]);
 
 void customInverse(float mat[4][4], float inverseMat[4][4]);
+
+void customCopy44(float in[4][4], float out[4][4]);
+
+
+/*
+* Function to implement cross product
+* result = in1 x in2
+*/
+void customCrossProduct(float in1[3], float in2[3], float result[3]);
+
+/*
+* Function to implement dot product
+* result = in1 . in2
+*/
+void customDotProduct(float in1[3], float in2[3], float &result);
+
+/*
+* Function to implement subration
+* result = in1 - in2
+*/
+void customSubtract(float in1[3], float in2[3], float result[3]);
+
+
+void copy3(float in[3], float out[3]);
+
+
+void copy2(float in[2], float out[2]);
 
 #endif
