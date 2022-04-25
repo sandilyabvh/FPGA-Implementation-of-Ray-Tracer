@@ -26,29 +26,29 @@ public:
         float normals[VERTS_INDEX_ARR_SIZE][3],
         float st[VERTS_INDEX_ARR_SIZE][2])
     {
-        memcpy(objectToWorld, o2w, 4 * 4 * sizeof(float));
-        customInverse(o2w, worldToObject);
+        memcpy(this->objectToWorld, o2w, 4 * 4 * sizeof(float));
+        customInverse(o2w, this->worldToObject);
 
         // find out how many triangles we need to create for this mesh
         uint32_t k = 0, maxVertIndex = MAX_VERT_INDEX;
         for (uint32_t i = 0; i < maxVertIndex; ++i)
         {
             // Transforming vertices to world space
-            customMultVecMatrix(verts[i], P[i], objectToWorld);
+            customMultVecMatrix(verts[i], this->P[i], this->objectToWorld);
         }
 
         // Generate the triangle index array
         float transformNormals[4][4];
 
-        customInverse(worldToObject, transformNormals);
+        customInverse(this->worldToObject, transformNormals);
 
         generateTriangleIndexArr(transformNormals,
             faceIndex,
-            trisIndex,
+            this->trisIndex,
             vertsIndex,
             normals,
-            N,
-            texCoordinates,
+            this->N,
+            this->texCoordinates,
             st);
     }
 

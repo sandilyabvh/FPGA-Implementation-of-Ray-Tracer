@@ -6,8 +6,8 @@
 #include <string.h>
 #include "geometry.h"
 
-#define WIDTH  20
-#define HEIGHT 20
+#define WIDTH  10
+#define HEIGHT 10
 #define FOV    18
 
 static const float kInfinity = std::numeric_limits<float>::max();

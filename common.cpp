@@ -42,8 +42,6 @@ void customMultDirMatrix(float src[3], float dst[3], float x[4][4])
     }
 }
 
-
-// \brief transpose itself
 void customTranspose(float mat[4][4])
 {
     float tmp[4][4];
@@ -165,7 +163,6 @@ void customInverse(float mat[4][4], float inverseMat[4][4])
     }
 }
 
-
 void customCopy44(float in[4][4], float out[4][4])
 {
     for (int i = 0; i < 4; ++i)
@@ -240,3 +237,4 @@ void customNormalize3(float x[3])
         x[0] *= factor, x[1] *= factor, x[2] *= factor;
     }
 }
+
