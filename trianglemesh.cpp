@@ -1,14 +1,5 @@
-#include <cstdio>
-#include <cstdlib>
-#include <memory>
-#include <vector>
-#include <utility>
-#include <cstdint>
-#include <iostream>
-#include <fstream>
 #include <cmath>
-#include <sstream>
-#include <chrono>
+#include <algorithm>
 
 #include "trianglemesh.h"
 #include "common.h"
@@ -83,14 +74,16 @@ void getSurfaceProperties(
     float hitTextureCoordinates[2])
 {
     // face normal
+    float v[3][3];
     float v0[3], v1[3], v2[3];
-    copy3(mesh.P[mesh.trisIndex[triIndex * 3]], v0);
-    copy3(mesh.P[mesh.trisIndex[triIndex * 3 + 1]], v1);
-    copy3(mesh.P[mesh.trisIndex[triIndex * 3 + 2]], v2);
+    for (int i = 0; i < 3; ++i)
+    {
+        copy3(mesh.P[mesh.trisIndex[triIndex*3 + i]], v[i]);
+    }
 
     float subv1v0[3], subv2v0[3];
-    customSubtract(v1, v0, subv1v0);
-    customSubtract(v2, v0, subv2v0);
+    customSubtract(v[1], v[0], subv1v0);
+    customSubtract(v[2], v[0], subv2v0);
     customCrossProduct(subv1v0, subv2v0, hitNormal);
     customNormalize3(hitNormal);
 
@@ -123,7 +116,6 @@ bool intersect(triangle_mesh_t mesh, float origArr[3], float dirArr[3], float &t
 {
     bool isect = false;
     for (uint32_t i = 0; i < NUM_TRIS; ++i) {
-    // for (uint32_t i = 0; i < 5; ++i) {
         float t = kInfinity, u, v;
         float v0Arr[3], v1Arr[3], v2Arr[3];
         getPrimitive(mesh, v0Arr, v1Arr, v2Arr, i);
@@ -206,7 +198,7 @@ void render(triangle_mesh_t mesh,
     float cameraToWorld[4][4],
     float backgroundColor[3])
 {
-    float scale = tan(deg2rad(FOV * 0.5));
+    float scale = tan(customDeg2Rad(FOV * 0.5));
     float imageAspectRatio = WIDTH / (float)HEIGHT;
     float origArr[3];
     float zeroArr[3] = {0, 0, 0};
@@ -230,87 +222,4 @@ void render(triangle_mesh_t mesh,
         }
         fprintf(stderr, "\r%3d%c", uint32_t(j / (float)HEIGHT * 100), '%');
     }
-}
-
-void generateTriangleIndexArr(float transformNormals[4][4],
-    const uint32_t faceIndex[NUM_FACES],
-    uint32_t trisIndex[NUM_TRIS * 3],
-    const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
-    float normals[VERTS_INDEX_ARR_SIZE][3],
-    float N[NUM_TRIS * 3][3],
-    float texCoordinates[NUM_TRIS * 3][2],
-    float st[VERTS_INDEX_ARR_SIZE][2])
-{
-    uint32_t l = 0;
-
-    for (uint32_t i = 0, k = 0; i < NUM_FACES; ++i)
-    {
-        // for each  face
-        for (uint32_t j = 0; j < faceIndex[i] - 2; ++j)
-        {
-            // for each triangle in the face
-            trisIndex[l] = vertsIndex[k];
-            trisIndex[l + 1] = vertsIndex[k + j + 1];
-            trisIndex[l + 2] = vertsIndex[k + j + 2];
-            // std::cout << "trisIndex: [" << trisIndex[l] << "," << trisIndex[l+1] << "," << trisIndex[l+2] << "]\n";
-
-            customMultDirMatrix(normals[k], N[l], transformNormals);
-            customMultDirMatrix(normals[k + j + 1], N[l + 1], transformNormals);
-            customMultDirMatrix(normals[k + j + 2], N[l + 2], transformNormals);
-
-            for (int ii = 0; ii < 3; ++ii)
-            {
-                customNormalize3(N[l + ii]);
-            }
-
-            texCoordinates[l][0] = st[k][0];
-            texCoordinates[l][1] = st[k][1];
-
-            texCoordinates[l + 1][0] = st[k + j + 1][0];
-            texCoordinates[l + 1][1] = st[k + j + 1][1];
-
-            texCoordinates[l + 2][0] = st[k + j + 2][0];
-            texCoordinates[l + 2][1] = st[k + j + 2][1];
-
-            l += 3;
-        }
-        k += faceIndex[i];
-    }
-}
-
-void build_mesh(
-    triangle_mesh_t &mesh,
-    float o2w[4][4],
-    const uint32_t nfaces,
-    const uint32_t faceIndex[NUM_FACES],
-    const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
-    float verts[VERTS_ARR_SIZE][3],
-    float normals[VERTS_INDEX_ARR_SIZE][3],
-    float st[VERTS_INDEX_ARR_SIZE][2]
-)
-{
-    memcpy(mesh.objectToWorld, o2w, 4 * 4 * sizeof(float));
-    customInverse(o2w, mesh.worldToObject);
-
-    // find out how many triangles we need to create for this mesh
-    uint32_t k = 0, maxVertIndex = MAX_VERT_INDEX;
-    for (uint32_t i = 0; i < maxVertIndex; ++i)
-    {
-        // Transforming vertices to world space
-        customMultVecMatrix(verts[i], mesh.P[i], mesh.objectToWorld);
-    }
-
-    // Generate the triangle index array
-    float transformNormals[4][4];
-
-    customInverse(mesh.worldToObject, transformNormals);
-
-    generateTriangleIndexArr(transformNormals,
-        faceIndex,
-        mesh.trisIndex,
-        vertsIndex,
-        normals,
-        mesh.N,
-        mesh.texCoordinates,
-        st);
 }

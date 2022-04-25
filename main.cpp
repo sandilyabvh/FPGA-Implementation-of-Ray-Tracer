@@ -1,23 +1,97 @@
-#include <cstdio>
-#include <cstdlib>
-#include <memory>
-#include <vector>
-#include <utility>
-#include <cstdint>
-#include <iostream>
 #include <fstream>
-#include <cmath>
 #include <sstream>
-#include <chrono>
 #include <stdint.h>
 
 #include "common.h"
-
+#include "tb_common.h"
 #include "trianglemesh.h"
 
 using namespace std;
 
-triangle_mesh_t loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, float o2w[4][4])
+void generateTriangleIndexArr(float transformNormals[4][4],
+    const uint32_t faceIndex[NUM_FACES],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
+    float normals[VERTS_INDEX_ARR_SIZE][3],
+    float N[NUM_TRIS * 3][3],
+    float texCoordinates[NUM_TRIS * 3][2],
+    float st[VERTS_INDEX_ARR_SIZE][2])
+{
+    uint32_t l = 0;
+
+    for (uint32_t i = 0, k = 0; i < NUM_FACES; ++i)
+    {
+        // for each  face
+        for (uint32_t j = 0; j < faceIndex[i] - 2; ++j)
+        {
+            // for each triangle in the face
+            trisIndex[l] = vertsIndex[k];
+            trisIndex[l + 1] = vertsIndex[k + j + 1];
+            trisIndex[l + 2] = vertsIndex[k + j + 2];
+            // std::cout << "trisIndex: [" << trisIndex[l] << "," << trisIndex[l+1] << "," << trisIndex[l+2] << "]\n";
+
+            customMultDirMatrix(normals[k], N[l], transformNormals);
+            customMultDirMatrix(normals[k + j + 1], N[l + 1], transformNormals);
+            customMultDirMatrix(normals[k + j + 2], N[l + 2], transformNormals);
+
+            for (int ii = 0; ii < 3; ++ii)
+            {
+                customNormalize3(N[l + ii]);
+            }
+
+            texCoordinates[l][0] = st[k][0];
+            texCoordinates[l][1] = st[k][1];
+
+            texCoordinates[l + 1][0] = st[k + j + 1][0];
+            texCoordinates[l + 1][1] = st[k + j + 1][1];
+
+            texCoordinates[l + 2][0] = st[k + j + 2][0];
+            texCoordinates[l + 2][1] = st[k + j + 2][1];
+
+            l += 3;
+        }
+        k += faceIndex[i];
+    }
+}
+
+void build_mesh(
+    triangle_mesh_t &mesh,
+    float o2w[4][4],
+    const uint32_t nfaces,
+    const uint32_t faceIndex[NUM_FACES],
+    const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
+    float verts[VERTS_ARR_SIZE][3],
+    float normals[VERTS_INDEX_ARR_SIZE][3],
+    float st[VERTS_INDEX_ARR_SIZE][2]
+)
+{
+    customCopy44(o2w, mesh.objectToWorld);
+    customInverse(o2w, mesh.worldToObject);
+
+    // find out how many triangles we need to create for this mesh
+    uint32_t k = 0, maxVertIndex = MAX_VERT_INDEX;
+    for (uint32_t i = 0; i < maxVertIndex; ++i)
+    {
+        // Transforming vertices to world space
+        customMultVecMatrix(verts[i], mesh.P[i], mesh.objectToWorld);
+    }
+
+    // Generate the triangle index array
+    float transformNormals[4][4];
+
+    customInverse(mesh.worldToObject, transformNormals);
+
+    generateTriangleIndexArr(transformNormals,
+        faceIndex,
+        mesh.trisIndex,
+        vertsIndex,
+        normals,
+        mesh.N,
+        mesh.texCoordinates,
+        st);
+}
+
+void loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, float o2w[4][4])
 {
     std::ifstream ifs;
     uint32_t numFaces = NUM_FACES;
@@ -78,14 +152,24 @@ triangle_mesh_t loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, fl
 int main(int argc, char **argv)
 {
     // loading geometry
-    float objectToWorld[4][4] = {1.624241, 0, 2.522269, 0, 0, 3, 0, 0, -2.522269, 0, 1.624241, 0, 0, 0, 0, 1};
+    float objectToWorld[4][4] = {
+        {1.624241, 0, 2.522269, 0},
+        {0, 3, 0, 0},
+        {-2.522269, 0, 1.624241, 0},
+        {0, 0, 0, 1}
+    };
     float backgroundColor[3] = {0.235294, 0.67451, 0.843137};
-    float cameraToWorld[4][4] = {{0.931056, 0, 0.364877, 0}, {0.177666, 0.873446, -0.45335, 0}, {-0.3187, 0.48692, 0.813227, 0}, {-41.229214, 81.862351, 112.456908, 1}};
+    float cameraToWorld[4][4] = {
+        {0.931056, 0, 0.364877, 0},
+        {0.177666, 0.873446, -0.45335, 0},
+        {-0.3187, 0.48692, 0.813227, 0},
+        {-41.229214, 81.862351, 112.456908, 1}
+    };
     
     uint32_t frame = 0;
     float framebuffer[WIDTH * HEIGHT][3];
     triangle_mesh_t mesh;
-    //bool results;
+
     loadPolyMeshFromFile(mesh, "./teapot.geo", objectToWorld);
 
     // finally, render
@@ -99,9 +183,9 @@ int main(int argc, char **argv)
     ofs << "P6\n" << WIDTH << " " << HEIGHT << "\n255\n";
     for (uint32_t i = 0; i < HEIGHT * WIDTH; ++i)
     {
-        char r = (char)(255 * clamp(0, 1, framebuffer[i][0]));
-        char g = (char)(255 * clamp(0, 1, framebuffer[i][1]));
-        char b = (char)(255 * clamp(0, 1, framebuffer[i][2]));
+        char r = (char)(255 * customClamp(0, 1, framebuffer[i][0]));
+        char g = (char)(255 * customClamp(0, 1, framebuffer[i][1]));
+        char b = (char)(255 * customClamp(0, 1, framebuffer[i][2]));
         ofs << r << g << b;
     }
     ofs.close();
