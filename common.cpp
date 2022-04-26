@@ -5,7 +5,7 @@
 void customMultVecMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 {
 	fixed_t val[4];
-
+    
 #pragma HLS pipeline
     for (int i = 0; i < 4; ++i)
     {
@@ -118,7 +118,6 @@ void customNormalize3(fixed_t x[3])
     if (n > 0.0)
     {
         fixed_t factor = 1 / sqrt(n);
-#pragma HLS pipeline
         for (int i = 0; i < 3; ++i)
         {
             x[i] *= factor;

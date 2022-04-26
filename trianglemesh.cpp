@@ -11,7 +11,7 @@ bool rayTriangleIntersect(
     fixed_t v0[3], fixed_t v1[3], fixed_t v2[3],
     fixed_t &t, fixed_t &u, fixed_t &v)
 {
-
+//#pragma HLS pipeline
     // v0v1 = v1 - v0;
     fixed_t v0v1[3];
     customSubtract(v1, v0, v0v1);
@@ -78,6 +78,7 @@ void getSurfaceProperties(
     fixed_t v0[3], v1[3], v2[3];
     for (int i = 0; i < 3; ++i)
     {
+#pragma HLS pipeline
         copy3(P[trisIndex[triIndex*3 + i]], v[i]);
     }
 
@@ -95,6 +96,7 @@ void getSurfaceProperties(
     // TODO: Check this
     for (int i = 0; i < 2; ++i)
     {
+#pragma HLS pipeline
         hitTextureCoordinates[i] = (1 - uv[0] - uv[1]) * st0[i] + uv[0] * st1[i] + uv[1] * st2[i];
     }
 }
@@ -105,10 +107,12 @@ void getPrimitive(
     fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
     uint32_t index)
 {
+//#pragma HLS pipeline
+//#pragma HLS array_partition variable=P dim=1
     uint32_t j = index*3;
-
     for (int i = 0; i < 3; ++i)
     {
+//#pragma HLS pipeline
         v0Arr[i] = P[trisIndex[j]][i];
         v1Arr[i] = P[trisIndex[j + 1]][i];
         v2Arr[i] = P[trisIndex[j + 2]][i];
@@ -170,6 +174,7 @@ void castRay(
 {
     for (int i = 0; i < 3; ++i)
     {
+//#pragma HLS pipeline
         hitColor[i] = backgroundColor[i];
     }
 
@@ -181,6 +186,7 @@ void castRay(
         fixed_t hitPoint[3];
         for (int i = 0; i < 3; ++i)
         {
+//#pragma HLS pipeline
             hitPoint[i] = orig[i] + dir[i] * tnear;
         }
 
@@ -206,13 +212,56 @@ void castRay(
 // primary rays and cast these rays into the scene. The content of the framebuffer is
 // saved to a file.
 void render(
-	fixed_t P[MAX_VERT_INDEX][3],
-    uint32_t trisIndex[NUM_TRIS * 3],
+	fixed_t P_DRAM[MAX_VERT_INDEX][3],
+    uint32_t trisIndex_DRAM[NUM_TRIS * 3],
 	fixed_t texCoordinates[NUM_TRIS * 3][2],
 	fixed_t framebuffer[WIDTH * HEIGHT][3],
-	fixed_t cameraToWorld[4][4],
+	fixed_t cameraToWorld_DRAM[4][4],
 	fixed_t backgroundColor[3])
 {
+
+//#pragma HLS interface m_axi port=P depth=3241*3 offset=slave bundle = P
+//#pragma HLS interface m_axi port=trisIndex depth=6320 offset=slave bundle = trisIndex
+//#pragma HLS interface m_axi port=texCoordinates depth=6320 offset=slave bundle = texCoordinates
+//#pragma HLS interface m_axi port=framebuffer depth=640 offset=slave bundle = framebuffer
+//#pragma HLS interface m_axi depth=4*4 port=cameraToWorld_DRAM offset=slave bundle=c2w
+//#pragma HLS interface m_axi port=backgroundColor depth=3 offset=slave bundle = backgroundColor
+//#pragma HLS interface s_axilite register port=return
+
+#pragma HLS interface m_axi depth=3241*3 port=P_DRAM offset=slave bundle=p
+#pragma HLS interface m_axi depth=6320*3 port=trisIndex_DRAM offset=slave bundle=trindx
+#pragma HLS interface m_axi depth=16 port=cameraToWorld_DRAM offset=slave bundle=c2w
+#pragma HLS interface s_axilite port=return
+
+    //Copy cameraToWorld from DRAM
+	fixed_t cameraToWorld[4][4];
+    for(int i=0; i<4; i++)
+    {
+        for(int j=0; j<4; j++)
+        {
+            cameraToWorld[i][j] = cameraToWorld_DRAM[i][j];
+        }
+    }
+ 	fixed_t P[MAX_VERT_INDEX][3];  
+    for(int i=0; i<MAX_VERT_INDEX; i++)
+    {
+        for(int j=0; j<3; j++)
+        {
+            P[i][j] = P_DRAM[i][j];
+        }
+    }
+    uint32_t trisIndex[NUM_TRIS * 3];   
+    for(int i=0; i<NUM_TRIS*3; i++)
+    {
+        trisIndex[i] = trisIndex_DRAM[i];
+    }
+
+#pragma HLS array_partition variable=cameraToWorld dim=1 complete
+#pragma HLS array_partition variable=cameraToWorld dim=2 complete
+#pragma HLS array_partition variable=P dim=1 factor=7 cyclic
+#pragma HLS array_partition variable=trisIndex dim=1 factor=10 cyclic
+#pragma HLS array_partition variable=P dim=2 complete
+
     fixed_t scale = (fixed_t)tan(customDeg2Rad(FOV * 0.5));
     fixed_t imageAspectRatio = WIDTH / (fixed_t)HEIGHT;
     fixed_t origArr[3];
@@ -221,6 +270,7 @@ void render(
 
     for (uint32_t j = 0; j < HEIGHT;  ++j) // HEIGHT;
     {
+//#pragma HLS pipeline
         for (uint32_t i = 0; i < WIDTH; ++i)
         {
             // generate primary ray direction
