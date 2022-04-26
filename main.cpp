@@ -154,7 +154,7 @@ void loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, fixed_t o2w[4
     {
         ss >> st[i][0] >> st[i][1];
         //Convert type
-        for (uint32_t j = 0; j < 3; j++)
+        for (uint32_t j = 0; j < 2; j++)
         {
         	fixp_st[i][j] = (fixed_t) st[i][j];
         }
