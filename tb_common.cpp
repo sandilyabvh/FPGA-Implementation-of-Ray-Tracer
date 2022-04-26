@@ -1,10 +1,10 @@
 
 #include "tb_common.h"
 
-void customInverse(float mat[4][4], float inverseMat[4][4])
+void customInverse(fixed_t mat[4][4], fixed_t inverseMat[4][4])
 {
     int i, j, k;
-    float identity[4][4] = {
+    fixed_t identity[4][4] = {
         {1, 0, 0, 0},
         {0, 1, 0, 0},
         {0, 0, 1, 0},
@@ -15,14 +15,14 @@ void customInverse(float mat[4][4], float inverseMat[4][4])
     for (i = 0; i < 3 ; i++)
     {
         int pivot = i;
-        float pivotsize = mat[i][i];
+        fixed_t pivotsize = mat[i][i];
 
         if (pivotsize < 0)
             pivotsize = -pivotsize;
 
         for (j = i + 1; j < 4; j++)
         {
-            float tmp = mat[j][i];
+            fixed_t tmp = mat[j][i];
 
             if (tmp < 0)
             {
@@ -47,7 +47,7 @@ void customInverse(float mat[4][4], float inverseMat[4][4])
         {
             for (j = 0; j < 4; j++)
             {
-                float tmp;
+                fixed_t tmp;
 
                 tmp = mat[i][j];
                 mat[i][j] = mat[pivot][j];
@@ -61,7 +61,7 @@ void customInverse(float mat[4][4], float inverseMat[4][4])
 
         for (j = i + 1; j < 4; j++)
         {
-            float f = mat[j][i] / mat[i][i];
+            fixed_t f = mat[j][i] / mat[i][i];
 
             for (k = 0; k < 4; k++)
             {
@@ -74,7 +74,7 @@ void customInverse(float mat[4][4], float inverseMat[4][4])
     // Backward substitution
     for (i = 3; i >= 0; --i)
     {
-        float f;
+        fixed_t f;
 
         if ((f = mat[i][i]) == 0)
         {
@@ -102,7 +102,7 @@ void customInverse(float mat[4][4], float inverseMat[4][4])
     }
 }
 
-void customCopy44(float in[4][4], float out[4][4])
+void customCopy44(fixed_t in[4][4], fixed_t out[4][4])
 {
     for (int i = 0; i < 4; ++i)
     {

@@ -8,14 +8,14 @@
 
 using namespace std;
 
-void generateTriangleIndexArr(float transformNormals[4][4],
+void generateTriangleIndexArr(fixed_t transformNormals[4][4],
     const uint32_t faceIndex[NUM_FACES],
     uint32_t trisIndex[NUM_TRIS * 3],
     const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
-    float normals[VERTS_INDEX_ARR_SIZE][3],
-    float N[NUM_TRIS * 3][3],
-    float texCoordinates[NUM_TRIS * 3][2],
-    float st[VERTS_INDEX_ARR_SIZE][2])
+	fixed_t normals[VERTS_INDEX_ARR_SIZE][3],
+	fixed_t N[NUM_TRIS * 3][3],
+	fixed_t texCoordinates[NUM_TRIS * 3][2],
+	fixed_t st[VERTS_INDEX_ARR_SIZE][2])
 {
     uint32_t l = 0;
 
@@ -56,13 +56,13 @@ void generateTriangleIndexArr(float transformNormals[4][4],
 
 void build_mesh(
     triangle_mesh_t &mesh,
-    float o2w[4][4],
+	fixed_t o2w[4][4],
     const uint32_t nfaces,
     const uint32_t faceIndex[NUM_FACES],
     const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
-    float verts[VERTS_ARR_SIZE][3],
-    float normals[VERTS_INDEX_ARR_SIZE][3],
-    float st[VERTS_INDEX_ARR_SIZE][2]
+	fixed_t verts[VERTS_ARR_SIZE][3],
+	fixed_t normals[VERTS_INDEX_ARR_SIZE][3],
+	fixed_t st[VERTS_INDEX_ARR_SIZE][2]
 )
 {
     customCopy44(o2w, mesh.objectToWorld);
@@ -77,7 +77,7 @@ void build_mesh(
     }
 
     // Generate the triangle index array
-    float transformNormals[4][4];
+    fixed_t transformNormals[4][4];
 
     customInverse(mesh.worldToObject, transformNormals);
 
@@ -91,18 +91,23 @@ void build_mesh(
         st);
 }
 
-void loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, float o2w[4][4])
+void loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, fixed_t o2w[4][4])
 {
     std::ifstream ifs;
     uint32_t numFaces = NUM_FACES;
     uint32_t vertsIndexArraySize = VERTS_INDEX_ARR_SIZE;
     uint32_t vertsArraySize = VERTS_ARR_SIZE;
-
     uint32_t faceIndex[NUM_FACES];
     uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE];
+
     float verts[VERTS_ARR_SIZE][3];
+    fixed_t fixp_verts[VERTS_ARR_SIZE][3];
+
     float normals[VERTS_INDEX_ARR_SIZE][3];
+    fixed_t fixp_normals[VERTS_INDEX_ARR_SIZE][3];
+
     float st[VERTS_INDEX_ARR_SIZE][2];
+    fixed_t fixp_st[VERTS_INDEX_ARR_SIZE][2];
 
     ifs.open(file);
     if (ifs.fail()) throw;
@@ -126,22 +131,37 @@ void loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, float o2w[4][
     for (uint32_t i = 0; i < vertsArraySize; ++i)
     {
         ss >> verts[i][0] >> verts[i][1] >> verts[i][2];
+        //Convert type
+        for (uint32_t j = 0; j < 3; j++)
+        {
+        	fixp_verts[i][j] = (fixed_t) verts[i][j];
+        }
     }
 
     // reading normals
     for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
     {
         ss >> normals[i][0] >> normals[i][1] >> normals[i][2];
+        //Convert type
+        for (uint32_t j = 0; j < 3; j++)
+        {
+        	fixp_normals[i][j] = (fixed_t) normals[i][j];
+        }
     }
 
     // reading st coordinates
     for (uint32_t i = 0; i < vertsIndexArraySize; ++i)
     {
         ss >> st[i][0] >> st[i][1];
+        //Convert type
+        for (uint32_t j = 0; j < 3; j++)
+        {
+        	fixp_st[i][j] = (fixed_t) st[i][j];
+        }
     }
 
     // return triangle_mesh_t(o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
-    build_mesh(mesh, o2w, numFaces, faceIndex, vertsIndex, verts, normals, st);
+    build_mesh(mesh, o2w, numFaces, faceIndex, vertsIndex, fixp_verts, fixp_normals, fixp_st);
 }
 
 // In the main function of the program, we create the scene (create objects and lights)
@@ -150,14 +170,14 @@ void loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, float o2w[4][
 int main(int argc, char **argv)
 {
     // loading geometry
-    float objectToWorld[4][4] = {
+	fixed_t objectToWorld[4][4] = {
         {1.624241, 0, 2.522269, 0},
         {0, 3, 0, 0},
         {-2.522269, 0, 1.624241, 0},
         {0, 0, 0, 1}
     };
-    float backgroundColor[3] = {0.235294, 0.67451, 0.843137};
-    float cameraToWorld[4][4] = {
+	fixed_t backgroundColor[3] = {0.235294, 0.67451, 0.843137};
+	fixed_t cameraToWorld[4][4] = {
         {0.931056, 0, 0.364877, 0},
         {0.177666, 0.873446, -0.45335, 0},
         {-0.3187, 0.48692, 0.813227, 0},
@@ -165,7 +185,7 @@ int main(int argc, char **argv)
     };
     
     uint32_t frame = 0;
-    float framebuffer[WIDTH * HEIGHT][3];
+    fixed_t framebuffer[WIDTH * HEIGHT][3];
     triangle_mesh_t mesh;
 
     loadPolyMeshFromFile(mesh, "./teapot.geo", objectToWorld);

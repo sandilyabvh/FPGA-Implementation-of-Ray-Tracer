@@ -7,28 +7,28 @@
 
 // Using index0 = x, index1 = y, index2 = z
 bool rayTriangleIntersect(
-    float orig[3], float dir[3],
-    float v0[3], float v1[3], float v2[3],
-    float &t, float &u, float &v)
+    fixed_t orig[3], fixed_t dir[3],
+    fixed_t v0[3], fixed_t v1[3], fixed_t v2[3],
+    fixed_t &t, fixed_t &u, fixed_t &v)
 {
 
     // v0v1 = v1 - v0;
-    float v0v1[3];
+    fixed_t v0v1[3];
     customSubtract(v1, v0, v0v1);
 
     // v0v2 = v2 - v0;
-    float v0v2[3];
+    fixed_t v0v2[3];
     customSubtract(v2, v0, v0v2);
 
     // pvec = dir x v0v2;
-    float pvec[3];
+    fixed_t pvec[3];
     customCrossProduct(dir, v0v2, pvec);
 
     // det = v0v1.pvec;
-    float det;
+    fixed_t det;
     customDotProduct(v0v1, pvec, det);
 
-    float detTest = det;
+    fixed_t detTest = det;
     if (detTest < 0)
     {
         detTest = detTest * (-1);
@@ -37,27 +37,27 @@ bool rayTriangleIntersect(
     // ray and triangle are parallel if det is close to 0
     if (detTest < kEpsilon) return false;
 
-    float invDet = 1 / det;
+    fixed_t invDet = 1 / det;
 
-    float tvec[3];
+    fixed_t tvec[3];
     customSubtract(orig, v0, tvec);
 
-    float tempResult;
+    fixed_t tempResult;
     customDotProduct(tvec, pvec, tempResult);
     u = tempResult * invDet;
 
     if (u < 0 || u > 1) return false;
 
-    float qvec[3];
+    fixed_t qvec[3];
     customCrossProduct(tvec, v0v1, qvec);
 
-    float tempResult1;
+    fixed_t tempResult1;
     customDotProduct(dir, qvec, tempResult1);
     v = tempResult1 * invDet;
 
     if (v < 0 || u + v > 1) return false;
 
-    float tempResult3;
+    fixed_t tempResult3;
     customDotProduct(v0v2, qvec, tempResult3);
     t = tempResult3 * invDet;
 
@@ -65,30 +65,30 @@ bool rayTriangleIntersect(
 }
 
 void getSurfaceProperties(
-    float P[MAX_VERT_INDEX][3],
+    fixed_t P[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
-    float texCoordinates[NUM_TRIS * 3][2],
+    fixed_t texCoordinates[NUM_TRIS * 3][2],
     const uint32_t &triIndex,
-    float uv[2],
-    float hitNormal[3],
-    float hitTextureCoordinates[2])
+    fixed_t uv[2],
+    fixed_t hitNormal[3],
+    fixed_t hitTextureCoordinates[2])
 {
     // face normal
-    float v[3][3];
-    float v0[3], v1[3], v2[3];
+    fixed_t v[3][3];
+    fixed_t v0[3], v1[3], v2[3];
     for (int i = 0; i < 3; ++i)
     {
         copy3(P[trisIndex[triIndex*3 + i]], v[i]);
     }
 
-    float subv1v0[3], subv2v0[3];
+    fixed_t subv1v0[3], subv2v0[3];
     customSubtract(v[1], v[0], subv1v0);
     customSubtract(v[2], v[0], subv2v0);
     customCrossProduct(subv1v0, subv2v0, hitNormal);
     customNormalize3(hitNormal);
 
     // texture coordinates
-    float st0[2], st1[2], st2[3];
+    fixed_t st0[2], st1[2], st2[3];
     copy2(texCoordinates[triIndex * 3], st0);
     copy2(texCoordinates[triIndex * 3 + 1], st1);
     copy2(texCoordinates[triIndex * 3 + 2], st2);
@@ -100,9 +100,9 @@ void getSurfaceProperties(
 }
 
 void getPrimitive(
-    float P[MAX_VERT_INDEX][3],
+    fixed_t P[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
-    float v0Arr[3], float v1Arr[3], float v2Arr[3],
+    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
     uint32_t index)
 {
     uint32_t j = index*3;
@@ -117,16 +117,16 @@ void getPrimitive(
 
 // Test if the ray interesests this triangle mesh
 bool intersect(
-    float P[MAX_VERT_INDEX][3],
+    fixed_t P[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
-    float origArr[3], float dirArr[3],
-    float &tNear, uint32_t &triIndex,
-    float uv[2])
+    fixed_t origArr[3], fixed_t dirArr[3],
+    fixed_t &tNear, uint32_t &triIndex,
+    fixed_t uv[2])
 {
     bool isect = false;
     for (uint32_t i = 0; i < NUM_TRIS; ++i) {
-        float t = kInfinity, u, v;
-        float v0Arr[3], v1Arr[3], v2Arr[3];
+        fixed_t t = kInfinity, u, v;
+        fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
         getPrimitive(P, trisIndex, v0Arr, v1Arr, v2Arr, i);
         if (rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v) && t < tNear) {
             tNear = t;
@@ -141,13 +141,13 @@ bool intersect(
 }
 
 bool trace(
-    float orig[3], float dir[3],
-    float P[MAX_VERT_INDEX][3],
+    fixed_t orig[3], fixed_t dir[3],
+    fixed_t P[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
-    float &tNear, uint32_t &index, float uv[2])
+    fixed_t &tNear, uint32_t &index, fixed_t uv[2])
 {
     bool isIntersecting = false;
-    float tNearTriangle = kInfinity;
+    fixed_t tNearTriangle = kInfinity;
     uint32_t indexTriangle;
     if (intersect(P, trisIndex, orig, dir, tNearTriangle, indexTriangle, uv) && tNearTriangle < tNear)
     {
@@ -161,39 +161,39 @@ bool trace(
 }
 
 void castRay(
-    float orig[3], float dir[3],
-    float P[MAX_VERT_INDEX][3],
+    fixed_t orig[3], fixed_t dir[3],
+    fixed_t P[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
-    float texCoordinates[NUM_TRIS * 3][2],
-    float hitColor[3],
-    float backgroundColor[3])
+    fixed_t texCoordinates[NUM_TRIS * 3][2],
+    fixed_t hitColor[3],
+    fixed_t backgroundColor[3])
 {
     for (int i = 0; i < 3; ++i)
     {
         hitColor[i] = backgroundColor[i];
     }
 
-    float tnear = kInfinity;
-    float uv[2];
+    fixed_t tnear = kInfinity;
+    fixed_t uv[2];
     uint32_t index = 0;
     if (trace(orig, dir, P, trisIndex, tnear, index, uv))
     {
-        float hitPoint[3];
+        fixed_t hitPoint[3];
         for (int i = 0; i < 3; ++i)
         {
             hitPoint[i] = orig[i] + dir[i] * tnear;
         }
 
-        float hitNormal[2];
-        float hitTexCoordinates[2];
+        fixed_t hitNormal[3];
+        fixed_t hitTexCoordinates[2];
         getSurfaceProperties(P, trisIndex, texCoordinates, index, uv, hitNormal, hitTexCoordinates);
-        float neg_dir[3] = {-dir[0], -dir[1], -dir[2]};
-        float normal_dir_dot;
+        fixed_t neg_dir[3] = {-dir[0], -dir[1], -dir[2]};
+        fixed_t normal_dir_dot;
         customDotProduct(hitNormal, neg_dir, normal_dir_dot);
-        float NdotView = std::max(0.f, normal_dir_dot);
+        fixed_t NdotView = (normal_dir_dot > (fixed_t)0.0) ? normal_dir_dot : (fixed_t)0.0;
         const int M = 4;
-        float checker = (fmod(hitTexCoordinates[0] * M, 1.0) > 0.5) ^ (fmod(hitTexCoordinates[1] * M, 1.0) < 0.5);
-        float c = 0.3 * (1 - checker) + 0.7 * checker;
+        fixed_t checker = (fmod(hitTexCoordinates[0] * M, 1.0) > 0.5) ^ (fmod(hitTexCoordinates[1] * M, 1.0) < 0.5);
+        fixed_t c = (fixed_t)0.3 * (1 - checker) + (fixed_t)0.7 * checker;
 
         for (int i = 0; i < 3; ++i)
         {
@@ -206,17 +206,17 @@ void castRay(
 // primary rays and cast these rays into the scene. The content of the framebuffer is
 // saved to a file.
 void render(
-    float P[MAX_VERT_INDEX][3],
+	fixed_t P[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
-    float texCoordinates[NUM_TRIS * 3][2],
-    float framebuffer[WIDTH * HEIGHT][3],
-    float cameraToWorld[4][4],
-    float backgroundColor[3])
+	fixed_t texCoordinates[NUM_TRIS * 3][2],
+	fixed_t framebuffer[WIDTH * HEIGHT][3],
+	fixed_t cameraToWorld[4][4],
+	fixed_t backgroundColor[3])
 {
-    float scale = tan(customDeg2Rad(FOV * 0.5));
-    float imageAspectRatio = WIDTH / (float)HEIGHT;
-    float origArr[3];
-    float zeroArr[3] = {0, 0, 0};
+    fixed_t scale = (fixed_t)tan(customDeg2Rad(FOV * 0.5));
+    fixed_t imageAspectRatio = WIDTH / (fixed_t)HEIGHT;
+    fixed_t origArr[3];
+    fixed_t zeroArr[3] = {0, 0, 0};
     customMultVecMatrix(zeroArr, origArr, cameraToWorld);
 
     for (uint32_t j = 0; j < HEIGHT;  ++j) // HEIGHT;
@@ -224,11 +224,11 @@ void render(
         for (uint32_t i = 0; i < WIDTH; ++i)
         {
             // generate primary ray direction
-            float x = (2 * (i + 0.5) / (float)WIDTH - 1) * imageAspectRatio * scale;
-            float y = (1 - 2 * (j + 0.5) / (float)HEIGHT) * scale;
+            fixed_t x = (2 * (i + (fixed_t)0.5) / (fixed_t)WIDTH - 1) * imageAspectRatio * scale;
+            fixed_t y = (1 - 2 * (j + (fixed_t)0.5) / (fixed_t)HEIGHT) * scale;
 
-            float srcRayDir[3] = {x, y, -1};
-            float dirArr[3];
+            fixed_t srcRayDir[3] = {x, y, -1};
+            fixed_t dirArr[3];
 
             customMultDirMatrix(srcRayDir, dirArr, cameraToWorld);
 

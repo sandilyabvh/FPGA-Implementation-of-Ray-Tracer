@@ -7,20 +7,20 @@
 typedef struct triangle_mesh
 {
     uint32_t numTris;                         // number of triangles
-    float P[MAX_VERT_INDEX][3];               // triangles vertex position
+    fixed_t P[MAX_VERT_INDEX][3];               // triangles vertex position
     uint32_t trisIndex[NUM_TRIS * 3];         // vertex index array
-    float N[NUM_TRIS * 3][3];                 // triangles vertex normals
-    float texCoordinates[NUM_TRIS * 3][2];    // triangles texture coordinates
-    float objectToWorld[4][4], worldToObject[4][4];
+    fixed_t N[NUM_TRIS * 3][3];                 // triangles vertex normals
+    fixed_t texCoordinates[NUM_TRIS * 3][2];    // triangles texture coordinates
+    fixed_t objectToWorld[4][4], worldToObject[4][4];
 } triangle_mesh_t;
 
 void render(
-    float P[MAX_VERT_INDEX][3],
+	fixed_t P[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
-    float texCoordinates[NUM_TRIS * 3][2],
-    float framebuffer[WIDTH * HEIGHT][3],
-    float cameraToWorld[4][4],
-    float backgroundColor[3]);
+	fixed_t texCoordinates[NUM_TRIS * 3][2],
+	fixed_t framebuffer[WIDTH * HEIGHT][3],
+	fixed_t cameraToWorld[4][4],
+	fixed_t backgroundColor[3]);
 
 #endif
 

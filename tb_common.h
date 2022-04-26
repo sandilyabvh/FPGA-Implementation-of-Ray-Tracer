@@ -1,15 +1,16 @@
 #ifndef _TB_COMMON_H_
 #define _TB_COMMON_H_
 
+#include "geometry.h"
 #include <algorithm>
 
-inline float customClamp(const float &lo, const float &hi, const float &v)
+inline fixed_t customClamp(const fixed_t &lo, const fixed_t &hi, const fixed_t &v)
 {
     return std::max(lo, std::min(hi, v));
 }
 
-void customInverse(float mat[4][4], float inverseMat[4][4]);
+void customInverse(fixed_t mat[4][4], fixed_t inverseMat[4][4]);
 
-void customCopy44(float in[4][4], float out[4][4]);
+void customCopy44(fixed_t in[4][4], fixed_t out[4][4]);
 
 #endif
