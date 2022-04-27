@@ -12,14 +12,16 @@
 #define NUM_TRIS              (6320)
 
 
-#define WIDTH  640
-#define HEIGHT 480
-#define FOV    18
+// #define WIDTH  640
+// #define HEIGHT 480
+#define WIDTH  100
+#define HEIGHT 100
+#define FOV    20
 
 #ifdef  CSIM_DEBUG
     typedef float fixed_t;
 #else
-    typedef ap_fixed<16,2> fixed_t;
+    typedef ap_fixed<32,8> fixed_t;
 #endif
 
 

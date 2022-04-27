@@ -20,7 +20,11 @@ void render(
 	fixed_t texCoordinates[NUM_TRIS * 3][2],
 	fixed_t framebuffer[WIDTH * HEIGHT][3],
 	fixed_t cameraToWorld[4][4],
-	fixed_t backgroundColor[3]);
+	fixed_t backgroundColor[3],
+    fixed_t frame_width,
+    fixed_t frame_height,
+    fixed_t frame_scale
+    );
 
 #endif
 

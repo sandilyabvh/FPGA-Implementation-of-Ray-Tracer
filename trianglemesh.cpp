@@ -1,5 +1,6 @@
 #include <cmath>
 #include <algorithm>
+#include <hls_math.h>
 
 #include "trianglemesh.h"
 #include "common.h"
@@ -34,10 +35,13 @@ bool rayTriangleIntersect(
         detTest = detTest * (-1);
     }
 
+    // TODO: Check for possible issues in the kEpsilon handling, could be out of fixed point range
     // ray and triangle are parallel if det is close to 0
     if (detTest < kEpsilon) return false;
+    // NOTE: Fixed point returns 0 in scenarios
+    if (detTest == 0) return false;
 
-    fixed_t invDet = 1 / det;
+    fixed_t invDet = (fixed_t)1/ det;//1 / det;
 
     fixed_t tvec[3];
     customSubtract(orig, v0, tvec);
@@ -197,9 +201,10 @@ void castRay(
         fixed_t normal_dir_dot;
         customDotProduct(hitNormal, neg_dir, normal_dir_dot);
         fixed_t NdotView = (normal_dir_dot > (fixed_t)0.0) ? normal_dir_dot : (fixed_t)0.0;
-        const int M = 4;
-        fixed_t checker = (fmod(hitTexCoordinates[0] * M, 1.0) > 0.5) ^ (fmod(hitTexCoordinates[1] * M, 1.0) < 0.5);
-        fixed_t c = (fixed_t)0.3 * (1 - checker) + (fixed_t)0.7 * checker;
+        fixed_t M = 4.0;
+        // fixed_t checker = (fmod(hitTexCoordinates[0] * M, 1.0) > 0.5) ^ (fmod(hitTexCoordinates[1] * M, 1.0) < 0.5);
+        fixed_t checker = (customFmod(hitTexCoordinates[0] * M) > (fixed_t)0.5) ^ (customFmod(hitTexCoordinates[1] * M) < (fixed_t)0.5);
+        fixed_t c = (fixed_t)0.3 * ((fixed_t)1.0 - checker) + (fixed_t)0.7 * checker;
 
         for (int i = 0; i < 3; ++i)
         {
@@ -217,7 +222,10 @@ void render(
 	fixed_t texCoordinates[NUM_TRIS * 3][2],
 	fixed_t framebuffer[WIDTH * HEIGHT][3],
 	fixed_t cameraToWorld_DRAM[4][4],
-	fixed_t backgroundColor[3])
+	fixed_t backgroundColor[3],
+    fixed_t frame_width,
+    fixed_t frame_height,
+    fixed_t frame_scale)
 {
 
 //#pragma HLS interface m_axi port=P depth=3241*3 offset=slave bundle = P
@@ -262,8 +270,8 @@ void render(
 #pragma HLS array_partition variable=trisIndex dim=1 factor=10 cyclic
 #pragma HLS array_partition variable=P dim=2 complete
 
-    fixed_t scale = (fixed_t)tan(customDeg2Rad(FOV * 0.5));
-    fixed_t imageAspectRatio = WIDTH / (fixed_t)HEIGHT;
+    fixed_t scale = frame_scale;
+    fixed_t imageAspectRatio = frame_width / frame_height;
     fixed_t origArr[3];
     fixed_t zeroArr[3] = {0, 0, 0};
     customMultVecMatrix(zeroArr, origArr, cameraToWorld);
@@ -274,8 +282,8 @@ void render(
         for (uint32_t i = 0; i < WIDTH; ++i)
         {
             // generate primary ray direction
-            fixed_t x = (2 * (i + (fixed_t)0.5) / (fixed_t)WIDTH - 1) * imageAspectRatio * scale;
-            fixed_t y = (1 - 2 * (j + (fixed_t)0.5) / (fixed_t)HEIGHT) * scale;
+            fixed_t x = (2 * (i + (fixed_t)0.5) / frame_width - 1) * imageAspectRatio * scale;
+            fixed_t y = (1 - 2 * (j + (fixed_t)0.5) / frame_height) * scale;
 
             fixed_t srcRayDir[3] = {x, y, -1};
             fixed_t dirArr[3];

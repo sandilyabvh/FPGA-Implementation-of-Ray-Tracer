@@ -117,7 +117,12 @@ void customNormalize3(fixed_t x[3])
     fixed_t n = customNorm3(x);
     if (n > 0.0)
     {
-        fixed_t factor = 1 / sqrt(n);
+        fixed_t factor;
+        #ifdef CSIM_DEBUG
+            factor = 1 / sqrt(n);
+        #else
+            factor = 1 / hls::sqrt(n);
+        #endif
         for (int i = 0; i < 3; ++i)
         {
             x[i] *= factor;
@@ -125,3 +130,7 @@ void customNormalize3(fixed_t x[3])
     }
 }
 
+fixed_t customFmod(fixed_t x)
+{
+    return x - (int)x;
+}

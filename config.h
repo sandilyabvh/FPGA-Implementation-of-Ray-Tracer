@@ -1,1 +1,0 @@
-#define CSIM_DEBUG
