@@ -4,8 +4,8 @@
 
 void customMultVecMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 {
-	fixed_t val[4];
-    
+    fixed_t val[4];
+
 #pragma HLS pipeline
     for (int i = 0; i < 4; ++i)
     {
@@ -26,12 +26,12 @@ void customMultVecMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 
 void customMultDirMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 {
-	fixed_t val[3];
+    fixed_t val[3];
 
 #pragma HLS pipeline
     for (int i = 0; i < 3; ++i)
     {
-    	fixed_t temp_val = 0;
+        fixed_t temp_val = 0;
         for (int j = 0; j < 3; ++j)
         {
             temp_val += src[j] * x[j][i];

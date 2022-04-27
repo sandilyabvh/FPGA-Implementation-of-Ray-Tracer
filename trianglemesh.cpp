@@ -217,12 +217,12 @@ void castRay(
 // primary rays and cast these rays into the scene. The content of the framebuffer is
 // saved to a file.
 void render(
-	fixed_t P_DRAM[MAX_VERT_INDEX][3],
+    fixed_t P_DRAM[MAX_VERT_INDEX][3],
     uint32_t trisIndex_DRAM[NUM_TRIS * 3],
-	fixed_t texCoordinates[NUM_TRIS * 3][2],
-	fixed_t framebuffer[WIDTH * HEIGHT][3],
-	fixed_t cameraToWorld_DRAM[4][4],
-	fixed_t backgroundColor[3],
+    fixed_t texCoordinates[NUM_TRIS * 3][2],
+    fixed_t framebuffer[WIDTH * HEIGHT][3],
+    fixed_t cameraToWorld_DRAM[4][4],
+    fixed_t backgroundColor[3],
     fixed_t frame_width,
     fixed_t frame_height,
     fixed_t frame_scale)
@@ -242,7 +242,7 @@ void render(
 #pragma HLS interface s_axilite port=return
 
     //Copy cameraToWorld from DRAM
-	fixed_t cameraToWorld[4][4];
+    fixed_t cameraToWorld[4][4];
     for(int i=0; i<4; i++)
     {
         for(int j=0; j<4; j++)

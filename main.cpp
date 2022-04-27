@@ -12,10 +12,10 @@ void generateTriangleIndexArr(fixed_t transformNormals[4][4],
     const uint32_t faceIndex[NUM_FACES],
     uint32_t trisIndex[NUM_TRIS * 3],
     const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
-	fixed_t normals[VERTS_INDEX_ARR_SIZE][3],
-	fixed_t N[NUM_TRIS * 3][3],
-	fixed_t texCoordinates[NUM_TRIS * 3][2],
-	fixed_t st[VERTS_INDEX_ARR_SIZE][2])
+    fixed_t normals[VERTS_INDEX_ARR_SIZE][3],
+    fixed_t N[NUM_TRIS * 3][3],
+    fixed_t texCoordinates[NUM_TRIS * 3][2],
+    fixed_t st[VERTS_INDEX_ARR_SIZE][2])
 {
     uint32_t l = 0;
 
@@ -56,13 +56,13 @@ void generateTriangleIndexArr(fixed_t transformNormals[4][4],
 
 void build_mesh(
     triangle_mesh_t &mesh,
-	fixed_t o2w[4][4],
+    fixed_t o2w[4][4],
     const uint32_t nfaces,
     const uint32_t faceIndex[NUM_FACES],
     const uint32_t vertsIndex[VERTS_INDEX_ARR_SIZE],
-	fixed_t verts[VERTS_ARR_SIZE][3],
-	fixed_t normals[VERTS_INDEX_ARR_SIZE][3],
-	fixed_t st[VERTS_INDEX_ARR_SIZE][2]
+    fixed_t verts[VERTS_ARR_SIZE][3],
+    fixed_t normals[VERTS_INDEX_ARR_SIZE][3],
+    fixed_t st[VERTS_INDEX_ARR_SIZE][2]
 )
 {
     customCopy44(o2w, mesh.objectToWorld);
@@ -170,14 +170,14 @@ void loadPolyMeshFromFile(triangle_mesh_t &mesh, const char *file, fixed_t o2w[4
 int main(int argc, char **argv)
 {
     // loading geometry
-	fixed_t objectToWorld[4][4] = {
+    fixed_t objectToWorld[4][4] = {
         {1.624241, 0, 2.522269, 0},
         {0, 3, 0, 0},
         {-2.522269, 0, 1.624241, 0},
         {0, 0, 0, 1}
     };
-	fixed_t backgroundColor[3] = {0.235294, 0.67451, 0.843137};
-	fixed_t cameraToWorld[4][4] = {
+    fixed_t backgroundColor[3] = {0.235294, 0.67451, 0.843137};
+    fixed_t cameraToWorld[4][4] = {
         {0.931056, 0, 0.364877, 0},
         {0.177666, 0.873446, -0.45335, 0},
         {-0.3187, 0.48692, 0.813227, 0},
