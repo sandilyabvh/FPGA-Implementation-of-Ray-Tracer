@@ -14,14 +14,16 @@
 
 // #define WIDTH  640
 // #define HEIGHT 480
-#define WIDTH  100
-#define HEIGHT 100
+#define WIDTH  320
+#define HEIGHT 240
 #define FOV    20
+
+#define PRINT
 
 #ifdef  CSIM_DEBUG
     typedef float fixed_t;
 #else
-    typedef ap_fixed<32,8> fixed_t;
+    typedef ap_fixed<64,32> fixed_t;
 #endif
 
 

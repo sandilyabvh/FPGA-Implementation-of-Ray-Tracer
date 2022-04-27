@@ -194,14 +194,13 @@ int main(int argc, char **argv)
     frame_width = (float)WIDTH;
     frame_height = (float)HEIGHT;
     frame_fov = (float)FOV;
-    std::cout << frame_width << " " << frame_height << " " << frame_fov << std::endl;
+
     fixed_t frame_width_ft, frame_height_ft, frame_fov_ft;
     frame_width_ft = (fixed_t)frame_width;
     frame_height_ft = (fixed_t)frame_height;
 
     float frame_scale = tan(frame_fov * 0.5 * M_PI / 180);
     fixed_t frame_scale_ft = (fixed_t)frame_scale;
-    std::cout << frame_width_ft << " " << frame_height_ft << " " << frame_scale_ft << " " << frame_scale << std::endl;
 
     // finally, render
     render(mesh.P, mesh.trisIndex, mesh.texCoordinates, framebuffer, cameraToWorld, backgroundColor,

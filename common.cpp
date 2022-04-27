@@ -119,9 +119,9 @@ void customNormalize3(fixed_t x[3])
     {
         fixed_t factor;
         #ifdef CSIM_DEBUG
-            factor = 1 / sqrt(n);
+            factor = 1.0 / sqrt(n);
         #else
-            factor = 1 / hls::sqrt(n);
+            factor = (fixed_t)1.0 / hls::sqrt(n);
         #endif
         for (int i = 0; i < 3; ++i)
         {

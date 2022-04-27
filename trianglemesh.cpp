@@ -79,7 +79,6 @@ void getSurfaceProperties(
 {
     // face normal
     fixed_t v[3][3];
-    fixed_t v0[3], v1[3], v2[3];
     for (int i = 0; i < 3; ++i)
     {
 #pragma HLS pipeline
@@ -133,10 +132,12 @@ bool intersect(
 {
     bool isect = false;
     for (uint32_t i = 0; i < NUM_TRIS; ++i) {
+    // for (uint32_t i = 0; i < 50; ++i) {
         fixed_t t = kInfinity, u, v;
         fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
         getPrimitive(P, trisIndex, v0Arr, v1Arr, v2Arr, i);
-        if (rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v) && t < tNear) {
+        bool testVal = rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v);
+        if (testVal && t < tNear) {
             tNear = t;
             uv[0] = u;
             uv[1] = v;
@@ -202,7 +203,6 @@ void castRay(
         customDotProduct(hitNormal, neg_dir, normal_dir_dot);
         fixed_t NdotView = (normal_dir_dot > (fixed_t)0.0) ? normal_dir_dot : (fixed_t)0.0;
         fixed_t M = 4.0;
-        // fixed_t checker = (fmod(hitTexCoordinates[0] * M, 1.0) > 0.5) ^ (fmod(hitTexCoordinates[1] * M, 1.0) < 0.5);
         fixed_t checker = (customFmod(hitTexCoordinates[0] * M) > (fixed_t)0.5) ^ (customFmod(hitTexCoordinates[1] * M) < (fixed_t)0.5);
         fixed_t c = (fixed_t)0.3 * ((fixed_t)1.0 - checker) + (fixed_t)0.7 * checker;
 
