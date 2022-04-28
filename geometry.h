@@ -11,10 +11,10 @@
 #define MAX_VERT_INDEX        (3241)
 #define NUM_TRIS              (6320)
 
-// #define WIDTH  320
-// #define HEIGHT 240
-#define WIDTH  20
-#define HEIGHT 20
+#define WIDTH  320
+#define HEIGHT 240
+// #define WIDTH  20
+// #define HEIGHT 20
 #define FOV    20
 
 #define PRINT

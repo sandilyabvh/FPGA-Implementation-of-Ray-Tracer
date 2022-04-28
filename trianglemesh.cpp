@@ -80,7 +80,7 @@ void getSurfaceProperties(
     fixed_t v[3][3];
     for (int i = 0; i < 3; ++i)
     {
-#pragma HLS pipeline
+#pragma HLS unroll
         copy3(P[trisIndex[triIndex*3 + i]], v[i]);
     }
 
@@ -95,10 +95,10 @@ void getSurfaceProperties(
     copy2(texCoordinates[triIndex * 3], st0);
     copy2(texCoordinates[triIndex * 3 + 1], st1);
     copy2(texCoordinates[triIndex * 3 + 2], st2);
-    // TODO: Check this
+
     for (int i = 0; i < 2; ++i)
     {
-#pragma HLS pipeline
+#pragma HLS unroll
         hitTextureCoordinates[i] = (1 - uv[0] - uv[1]) * st0[i] + uv[0] * st1[i] + uv[1] * st2[i];
     }
 }
@@ -130,7 +130,9 @@ bool intersect(
     fixed_t uv[2])
 {
     bool isect = false;
-    for (uint32_t i = 0; i < NUM_TRIS; ++i) {
+    for (uint32_t i = 0; i < NUM_TRIS; ++i)
+    {
+// #pragma HLS pipeline
         fixed_t t = kInfinity, u, v;
         fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
         getPrimitive(P, trisIndex, v0Arr, v1Arr, v2Arr, i);
@@ -234,10 +236,10 @@ void render(
 //#pragma HLS interface m_axi port=backgroundColor depth=3 offset=slave bundle = backgroundColor
 //#pragma HLS interface s_axilite register port=return
 
-// #pragma HLS interface m_axi depth=3241*3 port=P_DRAM offset=slave bundle=p
-// #pragma HLS interface m_axi depth=6320*3 port=trisIndex_DRAM offset=slave bundle=trindx
-// #pragma HLS interface m_axi depth=16 port=cameraToWorld_DRAM offset=slave bundle=c2w
-// #pragma HLS interface s_axilite port=return
+#pragma HLS interface m_axi depth=3241*3 port=P_DRAM offset=slave bundle=p
+#pragma HLS interface m_axi depth=6320*3 port=trisIndex_DRAM offset=slave bundle=trindx
+#pragma HLS interface m_axi depth=16 port=cameraToWorld_DRAM offset=slave bundle=c2w
+#pragma HLS interface s_axilite port=return
 
     //Copy cameraToWorld from DRAM
     fixed_t cameraToWorld[4][4];
@@ -263,11 +265,11 @@ void render(
     }
 
 // #pragma HLS array_partition variable=cameraToWorld dim=1 complete
-// #pragma HLS array_partition variable=cameraToWorld dim=2 complete
+#pragma HLS array_partition variable=cameraToWorld dim=2 complete
 // #pragma HLS array_partition variable=P dim=1 factor=7 cyclic
-// #pragma HLS array_partition variable=P dim=1 factor=3 cyclic
-// #pragma HLS array_partition variable=trisIndex dim=1 factor=10 cyclic
-// #pragma HLS array_partition variable=P dim=2 complete
+// #pragma HLS array_partition variable=P dim=0 complete
+#pragma HLS array_partition variable=trisIndex dim=0 factor=3 cyclic
+#pragma HLS array_partition variable=P dim=2 complete
 
     fixed_t scale = frame_scale;
     fixed_t imageAspectRatio = frame_width / frame_height;
