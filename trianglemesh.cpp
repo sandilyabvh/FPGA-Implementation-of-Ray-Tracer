@@ -26,6 +26,7 @@ bool rayTriangleIntersect(
 
     // det = v0v1.pvec;
     fixed_t det;
+    
     customDotProduct(v0v1, pvec, det);
 
     fixed_t detTest = det;
