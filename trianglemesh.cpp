@@ -111,25 +111,11 @@ void getPrimitive(
 {
     uint32_t j = index*3;
 
-    // Increase access speed
-    fixed_t vArr[3][3];
     for (int i = 0; i < 3; ++i)
     {
-#pragma HLS pipeline
-        for (int k = 0; k < 3; ++k)
-        {
-#pragma HLS unroll
-            vArr[k][i] = P[trisIndex[j+k]][i];
-        }
-        // v0Arr[i] = P[trisIndex[j]][i];
-        // v1Arr[i] = P[trisIndex[j + 1]][i];
-        // v2Arr[i] = P[trisIndex[j + 2]][i];
-    }
-    for (int i = 0; i < 3; ++i)
-    {
-        v0Arr[i] = vArr[0][i];
-        v1Arr[i] = vArr[1][i];
-        v2Arr[i] = vArr[2][i];
+        v0Arr[i] = P[trisIndex[j]][i];
+        v1Arr[i] = P[trisIndex[j + 1]][i];
+        v2Arr[i] = P[trisIndex[j + 2]][i];
     }
 }
 
