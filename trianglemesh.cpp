@@ -80,7 +80,7 @@ void getSurfaceProperties(
     fixed_t v[3][3];
     for (int i = 0; i < 3; ++i)
     {
-#pragma HLS unroll
+//#pragma HLS unroll
         copy3(P[trisIndex[triIndex*3 + i]], v[i]);
     }
 
@@ -98,7 +98,7 @@ void getSurfaceProperties(
 
     for (int i = 0; i < 2; ++i)
     {
-#pragma HLS unroll
+//#pragma HLS unroll
         hitTextureCoordinates[i] = (1 - uv[0] - uv[1]) * st0[i] + uv[0] * st1[i] + uv[1] * st2[i];
     }
 }
@@ -114,7 +114,7 @@ void getPrimitive(
     uint32_t j = index*3;
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS pipeline
+//#pragma HLS unroll
         v0Arr[i] = P[trisIndex[j]][i];
         v1Arr[i] = P[trisIndex[j + 1]][i];
         v2Arr[i] = P[trisIndex[j + 2]][i];
@@ -162,7 +162,6 @@ bool trace(
     {
         tNear = tNearTriangle;
         index = indexTriangle;
-
         isIntersecting = true;
     }
 
@@ -228,28 +227,11 @@ void render(
     fixed_t frame_scale)
 {
 
-//#pragma HLS interface m_axi port=P depth=3241*3 offset=slave bundle = P
-//#pragma HLS interface m_axi port=trisIndex depth=6320 offset=slave bundle = trisIndex
-//#pragma HLS interface m_axi port=texCoordinates depth=6320 offset=slave bundle = texCoordinates
-//#pragma HLS interface m_axi port=framebuffer depth=640 offset=slave bundle = framebuffer
-//#pragma HLS interface m_axi depth=4*4 port=cameraToWorld_DRAM offset=slave bundle=c2w
-//#pragma HLS interface m_axi port=backgroundColor depth=3 offset=slave bundle = backgroundColor
-//#pragma HLS interface s_axilite register port=return
-
 #pragma HLS interface m_axi depth=3241*3 port=P_DRAM offset=slave bundle=p
 #pragma HLS interface m_axi depth=6320*3 port=trisIndex_DRAM offset=slave bundle=trindx
 #pragma HLS interface m_axi depth=16 port=cameraToWorld_DRAM offset=slave bundle=c2w
 #pragma HLS interface s_axilite port=return
 
-    //Copy cameraToWorld from DRAM
-    fixed_t cameraToWorld[4][4];
-    for(int i=0; i<4; i++)
-    {
-        for(int j=0; j<4; j++)
-        {
-            cameraToWorld[i][j] = cameraToWorld_DRAM[i][j];
-        }
-    }
  	fixed_t P[MAX_VERT_INDEX][3];  
     for(int i=0; i<MAX_VERT_INDEX; i++)
     {
@@ -263,16 +245,23 @@ void render(
     {
         trisIndex[i] = trisIndex_DRAM[i];
     }
+    fixed_t cameraToWorld[4][4];
+    for(int i=0; i<4; i++)
+    {
+        for(int j=0; j<4; j++)
+        {
+            cameraToWorld[i][j] = cameraToWorld_DRAM[i][j];
+        }
+    }
 
-// #pragma HLS array_partition variable=cameraToWorld dim=1 complete
-#pragma HLS array_partition variable=cameraToWorld dim=2 complete
-// #pragma HLS array_partition variable=P dim=1 factor=7 cyclic
-// #pragma HLS array_partition variable=P dim=0 complete
-#pragma HLS array_partition variable=trisIndex dim=0 factor=3 cyclic
+#pragma HLS array_partition variable=P dim=1 factor=7 cyclic
 #pragma HLS array_partition variable=P dim=2 complete
+#pragma HLS array_partition variable=trisIndex dim=1 factor=2 cyclic
+#pragma HLS array_partition variable=cameraToWorld dim=1 complete
+//#pragma HLS array_partition variable=cameraToWorld dim=2 complete
 
     fixed_t scale = frame_scale;
-    fixed_t imageAspectRatio = frame_width / frame_height;
+    fixed_t imageAspectRatio = 1.33;//frame_width / frame_height;
     fixed_t origArr[3];
     fixed_t zeroArr[3] = {0, 0, 0};
     customMultVecMatrix(zeroArr, origArr, cameraToWorld);
