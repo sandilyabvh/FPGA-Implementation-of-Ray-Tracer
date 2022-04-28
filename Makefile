@@ -23,6 +23,7 @@ clean:
 	rm -f *.o ray_trace
 	rm -f *.ppm
 	rm -rf *_hls
+	rm -f *.log
 
 run:
 	time ./ray_trace

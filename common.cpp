@@ -1,12 +1,13 @@
 #include "common.h"
 #include "hls_math.h"
 #include "ap_fixed.h"
+#include "fxp_sqrt.h"
 
 void customMultVecMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 {
     fixed_t val[4];
 
-#pragma HLS pipeline
+// #pragma HLS pipeline
     for (int i = 0; i < 4; ++i)
     {
     	fixed_t temp_val = 0;
@@ -17,7 +18,7 @@ void customMultVecMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
         val[i] = temp_val + x[3][i];
     }
 
-#pragma HLS pipeline
+// #pragma HLS pipeline
     for (int i = 0; i < 3; ++i)
     {
         dst[i] = val[i] / val[3];
@@ -28,7 +29,7 @@ void customMultDirMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 {
     fixed_t val[3];
 
-#pragma HLS pipeline
+// #pragma HLS pipeline
     for (int i = 0; i < 3; ++i)
     {
         fixed_t temp_val = 0;
@@ -52,9 +53,9 @@ void customMultDirMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 */
 void customCrossProduct(fixed_t in1[3], fixed_t in2[3], fixed_t result[3])
 {
-#pragma HLS pipeline
     for (int i = 0; i < 3; ++i)
     {
+#pragma HLS unroll
         result[i] = in1[(i+1)%3] * in2[(i+2)%3] - in1[(i+2)%3] * in2[(i+1)%3];
     }
 }
@@ -66,9 +67,9 @@ void customCrossProduct(fixed_t in1[3], fixed_t in2[3], fixed_t result[3])
 void customDotProduct(fixed_t in1[3], fixed_t in2[3], fixed_t &result)
 {
 	fixed_t temp_val = 0;
-#pragma HLS pipeline
     for (int i = 0; i < 3; ++i)
     {
+#pragma HLS unroll
         temp_val += in1[i] * in2[i];
     }
     result = temp_val;
@@ -80,16 +81,16 @@ void customDotProduct(fixed_t in1[3], fixed_t in2[3], fixed_t &result)
 */
 void customSubtract(fixed_t in1[3], fixed_t in2[3], fixed_t result[3])
 {
-#pragma HLS pipeline
     for (int i = 0; i < 3; ++i)
     {
+#pragma HLS unroll
         result[i] = in1[i] - in2[i];
     }
 }
 
 void copy3(fixed_t in[3], fixed_t out[3])
 {
-#pragma HLS pipeline
+// #pragma HLS pipeline
     for (int i = 0; i < 3; ++i)
     {
         out[i] = in[i];
@@ -98,7 +99,7 @@ void copy3(fixed_t in[3], fixed_t out[3])
 
 void copy2(fixed_t in[2], fixed_t out[2])
 {
-#pragma HLS pipeline
+// #pragma HLS pipeline
     for (int i = 0; i < 2; ++i)
     {
         out[i] = in[i];
@@ -115,13 +116,17 @@ fixed_t customNorm3(fixed_t x[3])
 void customNormalize3(fixed_t x[3])
 {
     fixed_t n = customNorm3(x);
-    if (n > 0.0)
+    if (n > (fixed_t)0.0)
     {
         fixed_t factor;
         #ifdef CSIM_DEBUG
             factor = 1.0 / sqrt(n);
         #else
-            factor = (fixed_t)1.0 / hls::sqrt(n);
+            // factor = (fixed_t)1.0 / hls::sqrt(n);
+            ufixed_t sqrt_val;
+            ufixed_t u_n = (ufixed_t)n;
+            fxp_sqrt(sqrt_val, u_n);
+            factor = (fixed_t)1.0 / (fixed_t)sqrt_val;
         #endif
         for (int i = 0; i < 3; ++i)
         {

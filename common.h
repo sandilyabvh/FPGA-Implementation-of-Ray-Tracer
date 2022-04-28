@@ -8,7 +8,7 @@
 #include "ap_fixed.h"
 #include "geometry.h"
 
-static const fixed_t kInfinity = (fixed_t)pow(2,16);//std::numeric_limits<fixed_t>::max();
+static const fixed_t kInfinity = pow(2,10);//std::numeric_limits<fixed_t>::max();
 // NOTE: This decides the accuracy/precision of intersection checks
 static const fixed_t kEpsilon = (fixed_t)1e-5;
 

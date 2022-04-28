@@ -12,8 +12,7 @@ bool rayTriangleIntersect(
     fixed_t v0[3], fixed_t v1[3], fixed_t v2[3],
     fixed_t &t, fixed_t &u, fixed_t &v)
 {
-//#pragma HLS pipeline
-    // v0v1 = v1 - v0;
+    // v0v1 = v1 - v0
     fixed_t v0v1[3];
     customSubtract(v1, v0, v0v1);
 
@@ -35,13 +34,7 @@ bool rayTriangleIntersect(
         detTest = detTest * (-1);
     }
 
-    // TODO: Check for possible issues in the kEpsilon handling, could be out of fixed point range
-    // ray and triangle are parallel if det is close to 0
-    if (detTest < kEpsilon) return false;
-    // NOTE: Fixed point returns 0 in scenarios
-    if (detTest == 0) return false;
-
-    fixed_t invDet = (fixed_t)1/ det;//1 / det;
+    fixed_t invDet = (fixed_t)1/ det;
 
     fixed_t tvec[3];
     customSubtract(orig, v0, tvec);
@@ -50,7 +43,6 @@ bool rayTriangleIntersect(
     customDotProduct(tvec, pvec, tempResult);
     u = tempResult * invDet;
 
-    if (u < 0 || u > 1) return false;
 
     fixed_t qvec[3];
     customCrossProduct(tvec, v0v1, qvec);
@@ -59,13 +51,20 @@ bool rayTriangleIntersect(
     customDotProduct(dir, qvec, tempResult1);
     v = tempResult1 * invDet;
 
-    if (v < 0 || u + v > 1) return false;
-
     fixed_t tempResult3;
     customDotProduct(v0v2, qvec, tempResult3);
     t = tempResult3 * invDet;
 
-    return true;
+    // NOTE: Moved all returns at the end to fix imbalance in usage
+    // TODO: Check for possible issues in the kEpsilon handling, could be out of fixed point range
+    // ray and triangle are parallel if det is close to 0
+    bool flag1 = (detTest < kEpsilon) || (detTest == 0);
+    bool flag2 = u < 0 || u > 1;
+    bool flag3 = v < 0 || u + v > 1;
+    if (flag1) return false;
+    else if (flag2) return false;
+    else if (flag3) return false;
+    else return true;
 }
 
 void getSurfaceProperties(
@@ -132,7 +131,6 @@ bool intersect(
 {
     bool isect = false;
     for (uint32_t i = 0; i < NUM_TRIS; ++i) {
-    // for (uint32_t i = 0; i < 50; ++i) {
         fixed_t t = kInfinity, u, v;
         fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
         getPrimitive(P, trisIndex, v0Arr, v1Arr, v2Arr, i);
@@ -236,10 +234,10 @@ void render(
 //#pragma HLS interface m_axi port=backgroundColor depth=3 offset=slave bundle = backgroundColor
 //#pragma HLS interface s_axilite register port=return
 
-#pragma HLS interface m_axi depth=3241*3 port=P_DRAM offset=slave bundle=p
-#pragma HLS interface m_axi depth=6320*3 port=trisIndex_DRAM offset=slave bundle=trindx
-#pragma HLS interface m_axi depth=16 port=cameraToWorld_DRAM offset=slave bundle=c2w
-#pragma HLS interface s_axilite port=return
+// #pragma HLS interface m_axi depth=3241*3 port=P_DRAM offset=slave bundle=p
+// #pragma HLS interface m_axi depth=6320*3 port=trisIndex_DRAM offset=slave bundle=trindx
+// #pragma HLS interface m_axi depth=16 port=cameraToWorld_DRAM offset=slave bundle=c2w
+// #pragma HLS interface s_axilite port=return
 
     //Copy cameraToWorld from DRAM
     fixed_t cameraToWorld[4][4];
@@ -264,11 +262,12 @@ void render(
         trisIndex[i] = trisIndex_DRAM[i];
     }
 
-#pragma HLS array_partition variable=cameraToWorld dim=1 complete
-#pragma HLS array_partition variable=cameraToWorld dim=2 complete
-#pragma HLS array_partition variable=P dim=1 factor=7 cyclic
-#pragma HLS array_partition variable=trisIndex dim=1 factor=10 cyclic
-#pragma HLS array_partition variable=P dim=2 complete
+// #pragma HLS array_partition variable=cameraToWorld dim=1 complete
+// #pragma HLS array_partition variable=cameraToWorld dim=2 complete
+// #pragma HLS array_partition variable=P dim=1 factor=7 cyclic
+// #pragma HLS array_partition variable=P dim=1 factor=3 cyclic
+// #pragma HLS array_partition variable=trisIndex dim=1 factor=10 cyclic
+// #pragma HLS array_partition variable=P dim=2 complete
 
     fixed_t scale = frame_scale;
     fixed_t imageAspectRatio = frame_width / frame_height;

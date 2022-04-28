@@ -11,11 +11,10 @@
 #define MAX_VERT_INDEX        (3241)
 #define NUM_TRIS              (6320)
 
-
-// #define WIDTH  640
-// #define HEIGHT 480
-#define WIDTH  320
-#define HEIGHT 240
+// #define WIDTH  320
+// #define HEIGHT 240
+#define WIDTH  20
+#define HEIGHT 20
 #define FOV    20
 
 #define PRINT
@@ -23,7 +22,8 @@
 #ifdef  CSIM_DEBUG
     typedef float fixed_t;
 #else
-    typedef ap_fixed<64,32> fixed_t;
+    typedef ap_fixed<48,16> fixed_t;
+    typedef ap_ufixed<48,16> ufixed_t;
 #endif
 
 
