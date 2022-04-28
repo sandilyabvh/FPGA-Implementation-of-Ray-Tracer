@@ -109,17 +109,31 @@ void getPrimitive(
     fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
     uint32_t index)
 {
-//#pragma HLS pipeline
-//#pragma HLS array_partition variable=P dim=1
     uint32_t j = index*3;
+
+    // Increase access speed
+    fixed_t vArr[3][3];
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS pipeline
-        v0Arr[i] = P[trisIndex[j]][i];
-        v1Arr[i] = P[trisIndex[j + 1]][i];
-        v2Arr[i] = P[trisIndex[j + 2]][i];
+#pragma HLS pipeline
+        for (int k = 0; k < 3; ++k)
+        {
+#pragma HLS unroll
+            vArr[k][i] = P[trisIndex[j+k]][i];
+        }
+        // v0Arr[i] = P[trisIndex[j]][i];
+        // v1Arr[i] = P[trisIndex[j + 1]][i];
+        // v2Arr[i] = P[trisIndex[j + 2]][i];
+    }
+    for (int i = 0; i < 3; ++i)
+    {
+        v0Arr[i] = vArr[0][i];
+        v1Arr[i] = vArr[1][i];
+        v2Arr[i] = vArr[2][i];
     }
 }
+
+#define TILE_SIZE 5
 
 // Test if the ray interesests this triangle mesh
 bool intersect(
@@ -179,7 +193,6 @@ void castRay(
 {
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS pipeline
         hitColor[i] = backgroundColor[i];
     }
 
@@ -191,7 +204,7 @@ void castRay(
         fixed_t hitPoint[3];
         for (int i = 0; i < 3; ++i)
         {
-//#pragma HLS pipeline
+// #pragma HLS pipeline
             hitPoint[i] = orig[i] + dir[i] * tnear;
         }
 
@@ -219,57 +232,43 @@ void castRay(
 void render(
     fixed_t P_DRAM[MAX_VERT_INDEX][3],
     uint32_t trisIndex_DRAM[NUM_TRIS * 3],
-    fixed_t texCoordinates[NUM_TRIS * 3][2],
-    fixed_t framebuffer[WIDTH * HEIGHT][3],
+    fixed_t texCoordinates_DRAM[NUM_TRIS * 3][2],
+    fixed_t framebuffer_DRAM[WIDTH * HEIGHT][3],
     fixed_t cameraToWorld_DRAM[4][4],
-    fixed_t backgroundColor[3],
+    fixed_t backgroundColor_DRAM[3],
     fixed_t frame_width,
     fixed_t frame_height,
     fixed_t frame_scale)
 {
 
-//#pragma HLS interface m_axi port=P depth=3241*3 offset=slave bundle = P
-//#pragma HLS interface m_axi port=trisIndex depth=6320 offset=slave bundle = trisIndex
-//#pragma HLS interface m_axi port=texCoordinates depth=6320 offset=slave bundle = texCoordinates
-//#pragma HLS interface m_axi port=framebuffer depth=640 offset=slave bundle = framebuffer
-//#pragma HLS interface m_axi depth=4*4 port=cameraToWorld_DRAM offset=slave bundle=c2w
-//#pragma HLS interface m_axi port=backgroundColor depth=3 offset=slave bundle = backgroundColor
-//#pragma HLS interface s_axilite register port=return
-
-#pragma HLS interface m_axi depth=3241*3 port=P_DRAM offset=slave bundle=p
-#pragma HLS interface m_axi depth=6320*3 port=trisIndex_DRAM offset=slave bundle=trindx
-#pragma HLS interface m_axi depth=16 port=cameraToWorld_DRAM offset=slave bundle=c2w
+#pragma HLS interface m_axi depth=3241*3    port=P_DRAM                 offset=slave bundle=p
+#pragma HLS interface m_axi depth=6320*3    port=trisIndex_DRAM         offset=slave bundle=trindx
+#pragma HLS interface m_axi depth=16        port=cameraToWorld_DRAM     offset=slave bundle=c2w
+#pragma HLS interface m_axi depth=6320*3*2  port=texCoordinates_DRAM    offset=slave bundle=txc
+#pragma HLS interface m_axi depth=3         port=backgroundColor_DRAM   offset=slave bundle=bkclr
+#pragma HLS interface m_axi depth=320*240*3 port=framebuffer_DRAM       offset=slave bundle=fb
 #pragma HLS interface s_axilite port=return
 
-    //Copy cameraToWorld from DRAM
+    fixed_t backgroundColor[3];
+    fixed_t texCoordinates[NUM_TRIS*3][2];
     fixed_t cameraToWorld[4][4];
-    for(int i=0; i<4; i++)
-    {
-        for(int j=0; j<4; j++)
-        {
-            cameraToWorld[i][j] = cameraToWorld_DRAM[i][j];
-        }
-    }
- 	fixed_t P[MAX_VERT_INDEX][3];  
-    for(int i=0; i<MAX_VERT_INDEX; i++)
-    {
-        for(int j=0; j<3; j++)
-        {
-            P[i][j] = P_DRAM[i][j];
-        }
-    }
-    uint32_t trisIndex[NUM_TRIS * 3];   
-    for(int i=0; i<NUM_TRIS*3; i++)
-    {
-        trisIndex[i] = trisIndex_DRAM[i];
-    }
+    fixed_t P[MAX_VERT_INDEX][3];
+    uint32_t trisIndex[NUM_TRIS * 3];
+    fixed_t framebuffer[WIDTH * HEIGHT][3];
 
-// #pragma HLS array_partition variable=cameraToWorld dim=1 complete
-#pragma HLS array_partition variable=cameraToWorld dim=2 complete
-// #pragma HLS array_partition variable=P dim=1 factor=7 cyclic
-// #pragma HLS array_partition variable=P dim=0 complete
-#pragma HLS array_partition variable=trisIndex dim=0 factor=3 cyclic
-#pragma HLS array_partition variable=P dim=2 complete
+#pragma HLS array_partition variable=cameraToWorld   dim=2 complete
+#pragma HLS array_partition variable=trisIndex       dim=0 factor=3 cyclic
+#pragma HLS array_partition variable=P               dim=2 complete
+#pragma HLS array_partition variable=framebuffer     dim=2 complete
+#pragma HLS array_partition variable=backgroundColor dim=0 complete
+#pragma HLS array_partition variable=texCoordinates  dim=1 factor=3 cyclic
+
+    // Copy backgroundColor from DRAM
+    copy3(backgroundColor_DRAM, backgroundColor);
+    copyTexCoordinates(texCoordinates_DRAM, texCoordinates);
+    copyCameraToWorld(cameraToWorld_DRAM, cameraToWorld);
+    copyP(P_DRAM, P);
+    copyTrisIndex(trisIndex_DRAM, trisIndex);
 
     fixed_t scale = frame_scale;
     fixed_t imageAspectRatio = frame_width / frame_height;
@@ -277,9 +276,8 @@ void render(
     fixed_t zeroArr[3] = {0, 0, 0};
     customMultVecMatrix(zeroArr, origArr, cameraToWorld);
 
-    for (uint32_t j = 0; j < HEIGHT;  ++j) // HEIGHT;
+    for (uint32_t j = 0; j < HEIGHT;  ++j)
     {
-//#pragma HLS pipeline
         for (uint32_t i = 0; i < WIDTH; ++i)
         {
             // generate primary ray direction
@@ -296,4 +294,8 @@ void render(
         }
         // fprintf(stderr, "\r%3d%c", uint32_t(j / (float)HEIGHT * 100), '%');
     }
+
+    // Copy framebuffer into DRAM
+    copyFrameBuffer(framebuffer, framebuffer_DRAM);
+
 }

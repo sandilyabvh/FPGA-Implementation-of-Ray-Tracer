@@ -142,3 +142,68 @@ fixed_t customFmod(fixed_t x)
 {
     return x - (int)x;
 }
+
+/*
+* Copy functions for DRAM interactions
+*/
+void copyCameraToWorld(
+    fixed_t cameraToWorld_DRAM[4][4],
+    fixed_t cameraToWorld[4][4])
+{
+    for(int i=0; i<4; i++)
+    {
+        for(int j=0; j<4; j++)
+        {
+            cameraToWorld[i][j] = cameraToWorld_DRAM[i][j];
+        }
+    }
+}
+
+void copyTexCoordinates(
+    fixed_t texCoordinates_DRAM[NUM_TRIS*3][2],
+    fixed_t texCoordinates[NUM_TRIS*3][2])
+{
+    for (int i = 0; i < NUM_TRIS*3; ++i)
+    {
+        for (int j = 0; j < 2; ++j)
+        {
+            texCoordinates[i][j] = texCoordinates_DRAM[i][j];
+        }
+    }
+}
+
+void copyP(
+    fixed_t P_DRAM[MAX_VERT_INDEX][3],
+    fixed_t P[MAX_VERT_INDEX][3])
+{
+    for(int i=0; i<MAX_VERT_INDEX; i++)
+    {
+        for(int j=0; j<3; j++)
+        {
+            P[i][j] = P_DRAM[i][j];
+        }
+    }
+}
+
+void copyTrisIndex(
+    uint32_t trisIndex_DRAM[NUM_TRIS * 3],
+    uint32_t trisIndex[NUM_TRIS * 3])
+{
+    for(int i=0; i<NUM_TRIS*3; i++)
+    {
+        trisIndex[i] = trisIndex_DRAM[i];
+    }
+}
+
+void copyFrameBuffer(
+    fixed_t framebuffer[WIDTH * HEIGHT][3],
+    fixed_t framebuffer_DRAM[WIDTH * HEIGHT][3])
+{
+    for (int i = 0; i < WIDTH*HEIGHT; ++i)
+    {
+        for (int k = 0; k < 3; ++k)
+        {
+            framebuffer_DRAM[i][k] = framebuffer[i][k];
+        }
+    }
+}

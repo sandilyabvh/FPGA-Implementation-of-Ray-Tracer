@@ -46,4 +46,27 @@ void copy2(fixed_t in[2], fixed_t out[2]);
 
 fixed_t customFmod(fixed_t x);
 
+/*
+* Copy functions for DRAM interactions
+*/
+void copyCameraToWorld(
+    fixed_t cameraToWorld_DRAM[4][4],
+    fixed_t cameraToWorld[4][4]);
+
+void copyTexCoordinates(
+    fixed_t texCoordinates_DRAM[NUM_TRIS*3][2],
+    fixed_t texCoordinates[NUM_TRIS*3][2]);
+
+void copyP(
+    fixed_t P_DRAM[MAX_VERT_INDEX][3],
+    fixed_t P[MAX_VERT_INDEX][3]);
+
+void copyTrisIndex(
+    uint32_t trisIndex_DRAM[NUM_TRIS * 3],
+    uint32_t trisIndex[NUM_TRIS * 3]);
+
+void copyFrameBuffer(
+    fixed_t framebuffer[WIDTH * HEIGHT][3],
+    fixed_t framebuffer_DRAM[WIDTH * HEIGHT][3]);
+
 #endif
