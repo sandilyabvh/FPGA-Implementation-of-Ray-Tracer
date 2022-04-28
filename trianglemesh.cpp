@@ -77,16 +77,13 @@ void getSurfaceProperties(
     fixed_t hitTextureCoordinates[2])
 {
     // face normal
-    fixed_t v[3][3];
-    for (int i = 0; i < 3; ++i)
-    {
-#pragma HLS unroll
-        copy3(P[trisIndex[triIndex*3 + i]], v[i]);
-    }
+    fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
+
+    getPrimitive(P, trisIndex, v0Arr, v1Arr, v2Arr, triIndex);
 
     fixed_t subv1v0[3], subv2v0[3];
-    customSubtract(v[1], v[0], subv1v0);
-    customSubtract(v[2], v[0], subv2v0);
+    customSubtract(v1Arr, v0Arr, subv1v0);
+    customSubtract(v2Arr, v0Arr, subv2v0);
     customCrossProduct(subv1v0, subv2v0, hitNormal);
     customNormalize3(hitNormal);
 
@@ -103,23 +100,7 @@ void getSurfaceProperties(
     }
 }
 
-void getPrimitive(
-    fixed_t P[MAX_VERT_INDEX][3],
-    uint32_t trisIndex[NUM_TRIS * 3],
-    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
-    uint32_t index)
-{
-    uint32_t j = index*3;
-
-    for (int i = 0; i < 3; ++i)
-    {
-        v0Arr[i] = P[trisIndex[j]][i];
-        v1Arr[i] = P[trisIndex[j + 1]][i];
-        v2Arr[i] = P[trisIndex[j + 2]][i];
-    }
-}
-
-#define TILE_SIZE 5
+#define TILE_SIZE 20
 
 // Test if the ray interesests this triangle mesh
 bool intersect(
@@ -130,19 +111,23 @@ bool intersect(
     fixed_t uv[2])
 {
     bool isect = false;
-    for (uint32_t i = 0; i < NUM_TRIS; ++i)
+    bool flag[TILE_SIZE];
+    fixed_t tArr[TILE_SIZE], uArr[TILE_SIZE], vArr[TILE_SIZE];
+    TRIS_LOOP_1: for (uint32_t i = 0; i < NUM_TRIS; i += TILE_SIZE)
     {
-// #pragma HLS pipeline
-        fixed_t t = kInfinity, u, v;
-        fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
-        getPrimitive(P, trisIndex, v0Arr, v1Arr, v2Arr, i);
-        bool testVal = rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v);
-        if (testVal && t < tNear) {
-            tNear = t;
-            uv[0] = u;
-            uv[1] = v;
-            triIndex = i;
-            isect = true;
+        TRIS_LOOP_2: for (uint32_t j = 0; j < TILE_SIZE; ++j)
+        {
+            fixed_t t = kInfinity, u, v;
+            fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
+            getPrimitive(P, trisIndex, v0Arr, v1Arr, v2Arr, i+j);
+            flag[j] = rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, tArr[j], uArr[j], vArr[j]);
+            if (flag[j] && tArr[j] < tNear) {
+                tNear = tArr[j];
+                uv[0] = uArr[j];
+                uv[1] = vArr[j];
+                triIndex = i+j;
+                isect = true;
+            }
         }
     }
 
@@ -151,14 +136,14 @@ bool intersect(
 
 bool trace(
     fixed_t orig[3], fixed_t dir[3],
-    fixed_t P[MAX_VERT_INDEX][3],
+    fixed_t P_DRAM[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
     fixed_t &tNear, uint32_t &index, fixed_t uv[2])
 {
     bool isIntersecting = false;
     fixed_t tNearTriangle = kInfinity;
     uint32_t indexTriangle;
-    if (intersect(P, trisIndex, orig, dir, tNearTriangle, indexTriangle, uv) && tNearTriangle < tNear)
+    if (intersect(P_DRAM, trisIndex, orig, dir, tNearTriangle, indexTriangle, uv) && tNearTriangle < tNear)
     {
         tNear = tNearTriangle;
         index = indexTriangle;
@@ -172,9 +157,9 @@ bool trace(
 void castRay(
     int &i, int &j, fixed_t &frame_width, fixed_t &frame_height, fixed_t &imageAspectRatio, fixed_t &scale,
     fixed_t orig[3],
-    fixed_t P[MAX_VERT_INDEX][3],
+    fixed_t P_DRAM[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
-    fixed_t texCoordinates[NUM_TRIS * 3][2],
+    fixed_t texCoordinates_DRAM[NUM_TRIS * 3][2],
     fixed_t hitColor[3],
     fixed_t backgroundColor[3],
     fixed_t cameraToWorld[4][4])
@@ -199,7 +184,7 @@ void castRay(
     fixed_t tnear = kInfinity;
     fixed_t uv[2];
     uint32_t index = 0;
-    if (trace(orig, dir, P, trisIndex, tnear, index, uv))
+    if (trace(orig, dir, P_DRAM, trisIndex, tnear, index, uv))
     {
         fixed_t hitPoint[3];
         for (int i = 0; i < 3; ++i)
@@ -210,7 +195,7 @@ void castRay(
 
         fixed_t hitNormal[3];
         fixed_t hitTexCoordinates[2];
-        getSurfaceProperties(P, trisIndex, texCoordinates, index, uv, hitNormal, hitTexCoordinates);
+        getSurfaceProperties(P_DRAM, trisIndex, texCoordinates_DRAM, index, uv, hitNormal, hitTexCoordinates);
         fixed_t neg_dir[3] = {-dir[0], -dir[1], -dir[2]};
         fixed_t normal_dir_dot;
         customDotProduct(hitNormal, neg_dir, normal_dir_dot);
@@ -257,17 +242,17 @@ void render(
     fixed_t framebuffer[WIDTH * HEIGHT][3];
 
 #pragma HLS array_partition variable=cameraToWorld   dim=2 complete
-#pragma HLS array_partition variable=trisIndex       dim=0 factor=3 cyclic
-#pragma HLS array_partition variable=P               dim=2 complete
-#pragma HLS array_partition variable=framebuffer     dim=2 complete
+#pragma HLS array_partition variable=trisIndex       dim=1 factor=50  cyclic
+// #pragma HLS array_partition variable=P               dim=1 factor=50 cyclic
+// #pragma HLS array_partition variable=framebuffer     dim=2 complete
 #pragma HLS array_partition variable=backgroundColor dim=0 complete
-#pragma HLS array_partition variable=texCoordinates  dim=1 factor=3 cyclic
+// #pragma HLS array_partition variable=texCoordinates  dim=1 factor=3 cyclic
 
     // Copy backgroundColor from DRAM
     copy3(backgroundColor_DRAM, backgroundColor);
-    copyTexCoordinates(texCoordinates_DRAM, texCoordinates);
+    // copyTexCoordinates(texCoordinates_DRAM, texCoordinates);
     copyCameraToWorld(cameraToWorld_DRAM, cameraToWorld);
-    copyP(P_DRAM, P);
+    // copyP(P_DRAM, P);
     copyTrisIndex(trisIndex_DRAM, trisIndex);
 
     fixed_t scale = frame_scale;
@@ -276,18 +261,18 @@ void render(
     fixed_t zeroArr[3] = {0, 0, 0};
     customMultVecMatrix(zeroArr, origArr, cameraToWorld);
 
-    for (int j = 0; j < HEIGHT;  ++j)
+    HEIGHT_LOOP: for (int j = 0; j < HEIGHT;  ++j)
     {
-        for (int i = 0; i < WIDTH; ++i)
+        WIDTH_LOOP: for (int i = 0; i < WIDTH; ++i)
         {
             castRay(i, j, frame_width, frame_height, imageAspectRatio, scale, origArr,
-            P, trisIndex, texCoordinates, &framebuffer[j*WIDTH + i][0], backgroundColor,
+            P_DRAM, trisIndex, texCoordinates_DRAM, &framebuffer_DRAM[j*WIDTH + i][0], backgroundColor,
             cameraToWorld);
         }
         // fprintf(stderr, "\r%3d%c", uint32_t(j / (float)HEIGHT * 100), '%');
     }
 
     // Copy framebuffer into DRAM
-    copyFrameBuffer(framebuffer, framebuffer_DRAM);
+    // copyFrameBuffer(framebuffer, framebuffer_DRAM);
 
 }

@@ -69,4 +69,13 @@ void copyFrameBuffer(
     fixed_t framebuffer[WIDTH * HEIGHT][3],
     fixed_t framebuffer_DRAM[WIDTH * HEIGHT][3]);
 
+/*
+* Optimized access to primitive and tex buffers
+*/
+void getPrimitive(
+    fixed_t P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
+    uint32_t index);
+
 #endif
