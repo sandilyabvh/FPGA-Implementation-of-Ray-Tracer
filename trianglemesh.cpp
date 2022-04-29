@@ -12,6 +12,8 @@ bool rayTriangleIntersect(
     fixed_t v0[3], fixed_t v1[3], fixed_t v2[3],
     fixed_t &t, fixed_t &u, fixed_t &v)
 {
+// #pragma HLS expression_balance off
+
     // v0v1 = v1 - v0
     fixed_t v0v1[3];
     customSubtract(v1, v0, v0v1);
@@ -69,24 +71,25 @@ bool rayTriangleIntersect(
 }
 
 void getSurfaceProperties(
-    fixed_t P1[NUM_TRIS][3],
-    fixed_t P2[NUM_TRIS][3],
-    fixed_t P3[NUM_TRIS][3],
+    // fixed_t P1[NUM_TRIS][3],
+    // fixed_t P2[NUM_TRIS][3],
+    // fixed_t P3[NUM_TRIS][3],
     fixed_t texCoordinates[NUM_TRIS * 3][2],
     const uint32_t &triIndex,
     fixed_t uv[2],
     fixed_t hitNormal[3],
-    fixed_t hitTextureCoordinates[2])
+    fixed_t hitTextureCoordinates[2],
+    fixed_t v0Arr_intersect[3], fixed_t v1Arr_intersect[3], fixed_t v2Arr_intersect[3])
 {
     // face normal
-    fixed_t v0[3], v1[3], v2[3];
-    copy3(&P1[triIndex][0], v0);
-    copy3(&P2[triIndex][0], v1);
-    copy3(&P3[triIndex][0], v2);
+    // fixed_t v0[3], v1[3], v2[3];
+    // copy3(&P1[triIndex][0], v0);
+    // copy3(&P2[triIndex][0], v1);
+    // copy3(&P3[triIndex][0], v2);
 
     fixed_t subv1v0[3], subv2v0[3];
-    customSubtract(v1, v0, subv1v0);
-    customSubtract(v2, v0, subv2v0);
+    customSubtract(v1Arr_intersect, v0Arr_intersect, subv1v0);
+    customSubtract(v2Arr_intersect, v0Arr_intersect, subv2v0);
     customCrossProduct(subv1v0, subv2v0, hitNormal);
     customNormalize3(hitNormal);
 
@@ -109,12 +112,12 @@ bool intersect(
     fixed_t P3[NUM_TRIS][3],
     fixed_t origArr[3], fixed_t dirArr[3],
     fixed_t &tNear, uint32_t &triIndex,
-    fixed_t uv[2])
+    fixed_t uv[2],
+    fixed_t v0Arr_intersect[3], fixed_t v1Arr_intersect[3], fixed_t v2Arr_intersect[3])
 {
     bool isect = false;
-    for (uint32_t i = 0; i < NUM_TRIS; ++i)
+    NUM_TRIS_LOOP: for (uint32_t i = 0; i < NUM_TRIS; ++i)
     {
-// #pragma HLS pipeline
         fixed_t t = kInfinity, u, v;
         fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
         copy3(&P1[i][0], v0Arr);
@@ -125,6 +128,9 @@ bool intersect(
             tNear = t;
             uv[0] = u;
             uv[1] = v;
+            copy3(v0Arr, v0Arr_intersect);
+            copy3(v1Arr, v1Arr_intersect);
+            copy3(v2Arr, v2Arr_intersect);
             triIndex = i;
             isect = true;
         }
@@ -138,12 +144,14 @@ bool trace(
     fixed_t P1[NUM_TRIS][3],
     fixed_t P2[NUM_TRIS][3],
     fixed_t P3[NUM_TRIS][3],
-    fixed_t &tNear, uint32_t &index, fixed_t uv[2])
+    fixed_t &tNear, uint32_t &index, fixed_t uv[2],
+    fixed_t v0Arr_intersect[3], fixed_t v1Arr_intersect[3], fixed_t v2Arr_intersect[3])
 {
     bool isIntersecting = false;
     fixed_t tNearTriangle = kInfinity;
     uint32_t indexTriangle;
-    if (intersect(P1, P2, P3, orig, dir, tNearTriangle, indexTriangle, uv) && tNearTriangle < tNear)
+    if (intersect(P1, P2, P3, orig, dir, tNearTriangle, indexTriangle, uv, 
+        v0Arr_intersect, v1Arr_intersect, v2Arr_intersect) && tNearTriangle < tNear)
     {
         tNear = tNearTriangle;
         index = indexTriangle;
@@ -178,25 +186,25 @@ void castRay(
 
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS pipeline
         hitColor[i] = backgroundColor[i];
     }
 
     fixed_t tnear = kInfinity;
     fixed_t uv[2];
     uint32_t index = 0;
-    if (trace(orig, dir, P1, P2, P3, tnear, index, uv))
+    fixed_t v0Arr_intersect[3], v1Arr_intersect[3], v2Arr_intersect[3];
+    if (trace(orig, dir, P1, P2, P3, tnear, index, uv, v0Arr_intersect, v1Arr_intersect, v2Arr_intersect))
     {
         fixed_t hitPoint[3];
         for (int i = 0; i < 3; ++i)
         {
-//#pragma HLS pipeline
             hitPoint[i] = orig[i] + dir[i] * tnear;
         }
 
         fixed_t hitNormal[3];
         fixed_t hitTexCoordinates[2];
-        getSurfaceProperties(P1, P2, P3, texCoordinates, index, uv, hitNormal, hitTexCoordinates);
+        getSurfaceProperties(texCoordinates, index, uv, hitNormal, hitTexCoordinates,
+            v0Arr_intersect, v1Arr_intersect, v2Arr_intersect);
         fixed_t neg_dir[3] = {-dir[0], -dir[1], -dir[2]};
         fixed_t normal_dir_dot;
         customDotProduct(hitNormal, neg_dir, normal_dir_dot);
@@ -243,23 +251,11 @@ void render(
 #pragma HLS array_partition variable=P1 dim=2 complete
 #pragma HLS array_partition variable=P2 dim=2 complete
 #pragma HLS array_partition variable=P3 dim=2 complete
-#pragma HLS array_partition variable=cameraToWorld dim=1 complete
 //#pragma HLS array_partition variable=cameraToWorld dim=2 complete
 
-    for(int i=0; i<NUM_TRIS; i++)
-    {
-        copy3(&P1_DRAM[i][0], &P1[i][0]);
-        copy3(&P2_DRAM[i][0], &P2[i][0]);
-        copy3(&P3_DRAM[i][0], &P3[i][0]);
-    }
 
-    for(int i=0; i<4; i++)
-    {
-        for(int j=0; j<4; j++)
-        {
-            cameraToWorld[i][j] = cameraToWorld_DRAM[i][j];
-        }
-    }
+    copyP(P1_DRAM, P2_DRAM, P3_DRAM, P1, P2, P3);
+    copyCTW(cameraToWorld_DRAM, cameraToWorld);
 
     fixed_t scale = frame_scale;
     fixed_t imageAspectRatio = 1.33;//frame_width / frame_height;
@@ -267,9 +263,9 @@ void render(
     fixed_t zeroArr[3] = {0, 0, 0};
     customMultVecMatrix(zeroArr, origArr, cameraToWorld);
 
-    for (uint32_t j = 0; j < HEIGHT;  ++j)
+    HEIGHT_LOOP: for (uint32_t j = 0; j < HEIGHT;  ++j)
     {
-        for (uint32_t i = 0; i < WIDTH; ++i)
+        WIDTH_LOOP: for (uint32_t i = 0; i < WIDTH; ++i)
         {
             castRay(
                 i, j, frame_width, frame_height, imageAspectRatio, scale,

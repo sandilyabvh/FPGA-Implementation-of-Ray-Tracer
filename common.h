@@ -46,10 +46,22 @@ void copy2(fixed_t in[2], fixed_t out[2]);
 
 fixed_t customFmod(fixed_t x);
 
-void getPrimitive(
-    fixed_t P[MAX_VERT_INDEX][3],
-    uint32_t trisIndex[NUM_TRIS * 3],
-    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
-    uint32_t index);
+// COPY FUNCTIONS:
+
+void copyP(
+    fixed_t P1_DRAM[NUM_TRIS][3],
+    fixed_t P2_DRAM[NUM_TRIS][3],
+    fixed_t P3_DRAM[NUM_TRIS][3],
+    fixed_t P1[NUM_TRIS][3],
+    fixed_t P2[NUM_TRIS][3],
+    fixed_t P3[NUM_TRIS][3]);
+
+void copyCTW(
+    fixed_t cameraToWorld_DRAM[4][4],
+    fixed_t cameraToWorld[4][4]);
+
+void copyTex(
+    fixed_t texCoordinates_DRAM[NUM_TRIS * 3][2],
+    fixed_t texCoordinates[NUM_TRIS * 3][2]);
 
 #endif

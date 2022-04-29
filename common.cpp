@@ -5,17 +5,20 @@
 
 void customMultVecMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 {
+#pragma HLS BIND_OP variable=src op=mul impl=fabric
+#pragma HLS BIND_OP variable=src op=add impl=fabric
+#pragma HLS BIND_OP variable=x   op=mul impl=fabric
+#pragma HLS BIND_OP variable=x   op=add impl=fabric
     fixed_t val[4];
     fixed_t temp_val[4][3];
+#pragma HLS BIND_OP variable=temp_val op=add impl=fabric
+#pragma HLS BIND_OP variable=temp_val op=fdiv impl=fabric
+#pragma HLS BIND_OP variable=temp_val op=hdiv impl=fabric
+#pragma HLS BIND_OP variable=temp_val op=ddiv impl=fabric
     for (int i = 0; i < 4; ++i)
     {
-#pragma HLS pipeline
-        temp_val[i][0] = 0;
-        temp_val[i][1] = 0;
-        temp_val[i][2] = 0;
         for (int j = 0; j < 3; ++j)
         {
-//#pragma HLS unroll
             temp_val[i][j] = src[j] * x[j][i];
         }
         val[i] = temp_val[i][0]+temp_val[i][1]+temp_val[i][2]+x[3][i];
@@ -23,22 +26,23 @@ void customMultVecMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS unroll
         dst[i] = val[i] / val[3];
     }
 }
 
 void customMultDirMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 {
+#pragma HLS BIND_OP variable=src op=mul impl=fabric
+#pragma HLS BIND_OP variable=src op=add impl=fabric
+#pragma HLS BIND_OP variable=x   op=mul impl=fabric
+#pragma HLS BIND_OP variable=x   op=add impl=fabric
     fixed_t val[3];
 
     for (int i = 0; i < 3; ++i)
     {
-#pragma HLS pipeline
         fixed_t temp_val = 0;
         for (int j = 0; j < 3; ++j)
         {
-//#pragma HLS unroll
             temp_val += src[j] * x[j][i];
         }
         val[i] = temp_val;
@@ -47,7 +51,6 @@ void customMultDirMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS unroll
         dst[i] = val[i];
     }
 }
@@ -58,9 +61,12 @@ void customMultDirMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 */
 void customCrossProduct(fixed_t in1[3], fixed_t in2[3], fixed_t result[3])
 {
+#pragma HLS BIND_OP variable=in1 op=mul impl=fabric
+#pragma HLS BIND_OP variable=in1 op=add impl=fabric
+#pragma HLS BIND_OP variable=in2 op=mul impl=fabric
+#pragma HLS BIND_OP variable=in2 op=add impl=fabric
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS unroll
         result[i] = in1[(i+1)%3] * in2[(i+2)%3] - in1[(i+2)%3] * in2[(i+1)%3];
     }
 }
@@ -71,10 +77,13 @@ void customCrossProduct(fixed_t in1[3], fixed_t in2[3], fixed_t result[3])
 */
 void customDotProduct(fixed_t in1[3], fixed_t in2[3], fixed_t &result)
 {
+#pragma HLS BIND_OP variable=in1 op=mul impl=fabric
+#pragma HLS BIND_OP variable=in1 op=add impl=fabric
+#pragma HLS BIND_OP variable=in2 op=mul impl=fabric
+#pragma HLS BIND_OP variable=in2 op=add impl=fabric
     fixed_t temp_val = 0;
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS unroll
         temp_val += in1[i] * in2[i];
     }
     result = temp_val;
@@ -86,9 +95,10 @@ void customDotProduct(fixed_t in1[3], fixed_t in2[3], fixed_t &result)
 */
 void customSubtract(fixed_t in1[3], fixed_t in2[3], fixed_t result[3])
 {
+#pragma HLS BIND_OP variable=in1 op=sub impl=fabric
+#pragma HLS BIND_OP variable=in2 op=sub impl=fabric
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS unroll
         result[i] = in1[i] - in2[i];
     }
 }
@@ -97,7 +107,6 @@ void copy3(fixed_t in[3], fixed_t out[3])
 {
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS unroll
         out[i] = in[i];
     }
 }
@@ -106,7 +115,6 @@ void copy2(fixed_t in[2], fixed_t out[2])
 {
     for (int i = 0; i < 2; ++i)
     {
-//#pragma HLS unroll
         out[i] = in[i];
     }
 }
@@ -122,6 +130,8 @@ void customNormalize3(fixed_t x[3])
 {
     fixed_t n = customNorm3(x);
     fixed_t factor;
+#pragma HLS BIND_OP variable=factor op=mul impl=fabric
+#pragma HLS BIND_OP variable=x      op=mul impl=fabric
     #ifdef CSIM_DEBUG
         factor = 1.0;
         if(n>0.0)
@@ -139,30 +149,59 @@ void customNormalize3(fixed_t x[3])
     #endif
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS unroll
         x[i] *= factor;
     }
 }
 
 fixed_t customFmod(fixed_t x)
 {
+#pragma HLS BIND_OP variable=x op=sub impl=fabric
     return x - (int)x;
 }
 
-void getPrimitive(
-    fixed_t P[MAX_VERT_INDEX][3],
-    uint32_t trisIndex[NUM_TRIS * 3],
-    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
-    uint32_t index)
+// COPY FUNCTIONS:
+
+void copyP(
+    fixed_t P1_DRAM[NUM_TRIS][3],
+    fixed_t P2_DRAM[NUM_TRIS][3],
+    fixed_t P3_DRAM[NUM_TRIS][3],
+    fixed_t P1[NUM_TRIS][3],
+    fixed_t P2[NUM_TRIS][3],
+    fixed_t P3[NUM_TRIS][3])
 {
-//#pragma HLS pipeline
-//#pragma HLS array_partition variable=P dim=1
-    uint32_t j = index*3;
-    for (int i = 0; i < 3; ++i)
+    PRIM_READ1: for(int i=0; i<NUM_TRIS; i++)
     {
-//#pragma HLS unroll
-        v0Arr[i] = P[trisIndex[j]][i];
-        v1Arr[i] = P[trisIndex[j + 1]][i];
-        v2Arr[i] = P[trisIndex[j + 2]][i];
+        copy3(&P1_DRAM[i][0], &P1[i][0]);
+    }
+    PRIM_READ2: for(int i=0; i<NUM_TRIS; i++)
+    {
+        copy3(&P2_DRAM[i][0], &P2[i][0]);
+    }
+    PRIM_READ3: for(int i=0; i<NUM_TRIS; i++)
+    {
+        copy3(&P3_DRAM[i][0], &P3[i][0]);
+    }
+}
+
+void copyCTW(
+    fixed_t cameraToWorld_DRAM[4][4],
+    fixed_t cameraToWorld[4][4])
+{
+    CTW_READ: for(int i=0; i<4; i++)
+    {
+        for(int j=0; j<4; j++)
+        {
+            cameraToWorld[i][j] = cameraToWorld_DRAM[i][j];
+        }
+    }
+}
+
+void copyTex(
+    fixed_t texCoordinates_DRAM[NUM_TRIS * 3][2],
+    fixed_t texCoordinates[NUM_TRIS * 3][2])
+{
+    TEX_READ: for (int i = 0; i < NUM_TRIS*3; ++i)
+    {
+        copy2(&texCoordinates_DRAM[i][0], &texCoordinates[i][0]);
     }
 }

@@ -112,3 +112,18 @@ void customCopy44(fixed_t in[4][4], fixed_t out[4][4])
         }
     }
 }
+
+void getPrimitive(
+    fixed_t P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
+    uint32_t index)
+{
+    uint32_t j = index*3;
+    for (int i = 0; i < 3; ++i)
+    {
+        v0Arr[i] = P[trisIndex[j]][i];
+        v1Arr[i] = P[trisIndex[j + 1]][i];
+        v2Arr[i] = P[trisIndex[j + 2]][i];
+    }
+}
