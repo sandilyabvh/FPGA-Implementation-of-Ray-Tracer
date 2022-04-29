@@ -336,19 +336,19 @@ void render(
 #pragma HLS array_partition variable=P2_1 dim=2 complete
 #pragma HLS array_partition variable=P3_1 dim=2 complete
 #pragma HLS array_partition variable=cameraToWorld_1 dim=2 complete
-#pragma HLS array_partition variable=backgroundColor_1 dim=2 complete
+// #pragma HLS array_partition variable=backgroundColor_1 dim=2 complete
 #pragma HLS array_partition variable=return_1 dim=0 complete
 #pragma HLS array_partition variable=P1_2 dim=2 complete
 #pragma HLS array_partition variable=P2_2 dim=2 complete
 #pragma HLS array_partition variable=P3_2 dim=2 complete
 #pragma HLS array_partition variable=cameraToWorld_2 dim=2 complete
-#pragma HLS array_partition variable=backgroundColor_2 dim=2 complete
+// #pragma HLS array_partition variable=backgroundColor_2 dim=2 complete
 #pragma HLS array_partition variable=return_2 dim=0 complete
 #pragma HLS array_partition variable=P1_3 dim=2 complete
 #pragma HLS array_partition variable=P2_3 dim=2 complete
 #pragma HLS array_partition variable=P3_3 dim=2 complete
 #pragma HLS array_partition variable=cameraToWorld_3 dim=2 complete
-#pragma HLS array_partition variable=backgroundColor_3 dim=2 complete
+// #pragma HLS array_partition variable=backgroundColor_3 dim=2 complete
 #pragma HLS array_partition variable=return_3 dim=0 complete
 
 #pragma HLS array_partition variable=origArr_1 dim=0 complete
