@@ -46,4 +46,10 @@ void copy2(fixed_t in[2], fixed_t out[2]);
 
 fixed_t customFmod(fixed_t x);
 
+void getPrimitive(
+    fixed_t P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
+    uint32_t index);
+
 #endif

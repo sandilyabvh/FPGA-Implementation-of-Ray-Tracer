@@ -69,8 +69,9 @@ bool rayTriangleIntersect(
 }
 
 void getSurfaceProperties(
-    fixed_t P[MAX_VERT_INDEX][3],
-    uint32_t trisIndex[NUM_TRIS * 3],
+    fixed_t P1[NUM_TRIS][3],
+    fixed_t P2[NUM_TRIS][3],
+    fixed_t P3[NUM_TRIS][3],
     fixed_t texCoordinates[NUM_TRIS * 3][2],
     const uint32_t &triIndex,
     fixed_t uv[2],
@@ -78,16 +79,14 @@ void getSurfaceProperties(
     fixed_t hitTextureCoordinates[2])
 {
     // face normal
-    fixed_t v[3][3];
-    for (int i = 0; i < 3; ++i)
-    {
-//#pragma HLS unroll
-        copy3(P[trisIndex[triIndex*3 + i]], v[i]);
-    }
+    fixed_t v0[3], v1[3], v2[3];
+    copy3(&P1[triIndex][0], v0);
+    copy3(&P2[triIndex][0], v1);
+    copy3(&P3[triIndex][0], v2);
 
     fixed_t subv1v0[3], subv2v0[3];
-    customSubtract(v[1], v[0], subv1v0);
-    customSubtract(v[2], v[0], subv2v0);
+    customSubtract(v1, v0, subv1v0);
+    customSubtract(v2, v0, subv2v0);
     customCrossProduct(subv1v0, subv2v0, hitNormal);
     customNormalize3(hitNormal);
 
@@ -99,33 +98,15 @@ void getSurfaceProperties(
 
     for (int i = 0; i < 2; ++i)
     {
-//#pragma HLS unroll
         hitTextureCoordinates[i] = (1 - uv[0] - uv[1]) * st0[i] + uv[0] * st1[i] + uv[1] * st2[i];
-    }
-}
-
-void getPrimitive(
-    fixed_t P[MAX_VERT_INDEX][3],
-    uint32_t trisIndex[NUM_TRIS * 3],
-    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
-    uint32_t index)
-{
-//#pragma HLS pipeline
-//#pragma HLS array_partition variable=P dim=1
-    uint32_t j = index*3;
-    for (int i = 0; i < 3; ++i)
-    {
-//#pragma HLS unroll
-        v0Arr[i] = P[trisIndex[j]][i];
-        v1Arr[i] = P[trisIndex[j + 1]][i];
-        v2Arr[i] = P[trisIndex[j + 2]][i];
     }
 }
 
 // Test if the ray interesests this triangle mesh
 bool intersect(
-    fixed_t P[MAX_VERT_INDEX][3],
-    uint32_t trisIndex[NUM_TRIS * 3],
+    fixed_t P1[NUM_TRIS][3],
+    fixed_t P2[NUM_TRIS][3],
+    fixed_t P3[NUM_TRIS][3],
     fixed_t origArr[3], fixed_t dirArr[3],
     fixed_t &tNear, uint32_t &triIndex,
     fixed_t uv[2])
@@ -136,7 +117,9 @@ bool intersect(
 // #pragma HLS pipeline
         fixed_t t = kInfinity, u, v;
         fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
-        getPrimitive(P, trisIndex, v0Arr, v1Arr, v2Arr, i);
+        copy3(&P1[i][0], v0Arr);
+        copy3(&P2[i][0], v1Arr);
+        copy3(&P3[i][0], v2Arr);
         bool testVal = rayTriangleIntersect(origArr, dirArr, v0Arr, v1Arr, v2Arr, t, u, v);
         if (testVal && t < tNear) {
             tNear = t;
@@ -152,14 +135,15 @@ bool intersect(
 
 bool trace(
     fixed_t orig[3], fixed_t dir[3],
-    fixed_t P[MAX_VERT_INDEX][3],
-    uint32_t trisIndex[NUM_TRIS * 3],
+    fixed_t P1[NUM_TRIS][3],
+    fixed_t P2[NUM_TRIS][3],
+    fixed_t P3[NUM_TRIS][3],
     fixed_t &tNear, uint32_t &index, fixed_t uv[2])
 {
     bool isIntersecting = false;
     fixed_t tNearTriangle = kInfinity;
     uint32_t indexTriangle;
-    if (intersect(P, trisIndex, orig, dir, tNearTriangle, indexTriangle, uv) && tNearTriangle < tNear)
+    if (intersect(P1, P2, P3, orig, dir, tNearTriangle, indexTriangle, uv) && tNearTriangle < tNear)
     {
         tNear = tNearTriangle;
         index = indexTriangle;
@@ -172,8 +156,9 @@ bool trace(
 void castRay(
     uint32_t &i, uint32_t &j, fixed_t &frame_width, fixed_t &frame_height, fixed_t &imageAspectRatio, fixed_t &scale,
     fixed_t orig[3],
-    fixed_t P[MAX_VERT_INDEX][3],
-    uint32_t trisIndex[NUM_TRIS * 3],
+    fixed_t P1[NUM_TRIS][3],
+    fixed_t P2[NUM_TRIS][3],
+    fixed_t P3[NUM_TRIS][3],
     fixed_t texCoordinates[NUM_TRIS * 3][2],
     fixed_t hitColor[3],
     fixed_t backgroundColor[3],
@@ -200,7 +185,7 @@ void castRay(
     fixed_t tnear = kInfinity;
     fixed_t uv[2];
     uint32_t index = 0;
-    if (trace(orig, dir, P, trisIndex, tnear, index, uv))
+    if (trace(orig, dir, P1, P2, P3, tnear, index, uv))
     {
         fixed_t hitPoint[3];
         for (int i = 0; i < 3; ++i)
@@ -211,7 +196,7 @@ void castRay(
 
         fixed_t hitNormal[3];
         fixed_t hitTexCoordinates[2];
-        getSurfaceProperties(P, trisIndex, texCoordinates, index, uv, hitNormal, hitTexCoordinates);
+        getSurfaceProperties(P1, P2, P3, texCoordinates, index, uv, hitNormal, hitTexCoordinates);
         fixed_t neg_dir[3] = {-dir[0], -dir[1], -dir[2]};
         fixed_t normal_dir_dot;
         customDotProduct(hitNormal, neg_dir, normal_dir_dot);
@@ -231,8 +216,9 @@ void castRay(
 // primary rays and cast these rays into the scene. The content of the framebuffer is
 // saved to a file.
 void render(
-    fixed_t P_DRAM[MAX_VERT_INDEX][3],
-    uint32_t trisIndex_DRAM[NUM_TRIS * 3],
+    fixed_t P1_DRAM[NUM_TRIS][3],
+    fixed_t P2_DRAM[NUM_TRIS][3],
+    fixed_t P3_DRAM[NUM_TRIS][3],
     fixed_t texCoordinates[NUM_TRIS * 3][2],
     fixed_t framebuffer[WIDTH * HEIGHT][3],
     fixed_t cameraToWorld_DRAM[4][4],
@@ -242,25 +228,31 @@ void render(
     fixed_t frame_scale)
 {
 
-#pragma HLS interface m_axi depth=3241*3 port=P_DRAM offset=slave bundle=p
-#pragma HLS interface m_axi depth=6320*3 port=trisIndex_DRAM offset=slave bundle=trindx
+#pragma HLS interface m_axi depth=6320*3 port=P1_DRAM offset=slave bundle=p1
+#pragma HLS interface m_axi depth=6320*3 port=P2_DRAM offset=slave bundle=p2
+#pragma HLS interface m_axi depth=6320*3 port=P3_DRAM offset=slave bundle=p3
 #pragma HLS interface m_axi depth=16 port=cameraToWorld_DRAM offset=slave bundle=c2w
 #pragma HLS interface s_axilite port=return
 
- 	fixed_t P[MAX_VERT_INDEX][3];  
-    for(int i=0; i<MAX_VERT_INDEX; i++)
-    {
-        for(int j=0; j<3; j++)
-        {
-            P[i][j] = P_DRAM[i][j];
-        }
-    }
-    uint32_t trisIndex[NUM_TRIS * 3];   
-    for(int i=0; i<NUM_TRIS*3; i++)
-    {
-        trisIndex[i] = trisIndex_DRAM[i];
-    }
+    fixed_t P1[NUM_TRIS][3];
+    fixed_t P2[NUM_TRIS][3];
+    fixed_t P3[NUM_TRIS][3];
     fixed_t cameraToWorld[4][4];
+
+// #pragma HLS array_partition variable=P dim=1 factor=7 cyclic
+#pragma HLS array_partition variable=P1 dim=2 complete
+#pragma HLS array_partition variable=P2 dim=2 complete
+#pragma HLS array_partition variable=P3 dim=2 complete
+#pragma HLS array_partition variable=cameraToWorld dim=1 complete
+//#pragma HLS array_partition variable=cameraToWorld dim=2 complete
+
+    for(int i=0; i<NUM_TRIS; i++)
+    {
+        copy3(&P1_DRAM[i][0], &P1[i][0]);
+        copy3(&P2_DRAM[i][0], &P2[i][0]);
+        copy3(&P3_DRAM[i][0], &P3[i][0]);
+    }
+
     for(int i=0; i<4; i++)
     {
         for(int j=0; j<4; j++)
@@ -268,12 +260,6 @@ void render(
             cameraToWorld[i][j] = cameraToWorld_DRAM[i][j];
         }
     }
-
-#pragma HLS array_partition variable=P dim=1 factor=7 cyclic
-#pragma HLS array_partition variable=P dim=2 complete
-#pragma HLS array_partition variable=trisIndex dim=1 factor=2 cyclic
-#pragma HLS array_partition variable=cameraToWorld dim=1 complete
-//#pragma HLS array_partition variable=cameraToWorld dim=2 complete
 
     fixed_t scale = frame_scale;
     fixed_t imageAspectRatio = 1.33;//frame_width / frame_height;
@@ -287,7 +273,7 @@ void render(
         {
             castRay(
                 i, j, frame_width, frame_height, imageAspectRatio, scale,
-                origArr, P, trisIndex, texCoordinates, &framebuffer[j*WIDTH + i][0], backgroundColor,
+                origArr, P1, P2, P3, texCoordinates, &framebuffer[j*WIDTH + i][0], backgroundColor,
                 cameraToWorld);
         }
         // fprintf(stderr, "\r%3d%c", uint32_t(j / (float)HEIGHT * 100), '%');

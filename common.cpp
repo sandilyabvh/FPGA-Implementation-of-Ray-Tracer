@@ -148,3 +148,21 @@ fixed_t customFmod(fixed_t x)
 {
     return x - (int)x;
 }
+
+void getPrimitive(
+    fixed_t P[MAX_VERT_INDEX][3],
+    uint32_t trisIndex[NUM_TRIS * 3],
+    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
+    uint32_t index)
+{
+//#pragma HLS pipeline
+//#pragma HLS array_partition variable=P dim=1
+    uint32_t j = index*3;
+    for (int i = 0; i < 3; ++i)
+    {
+//#pragma HLS unroll
+        v0Arr[i] = P[trisIndex[j]][i];
+        v1Arr[i] = P[trisIndex[j + 1]][i];
+        v2Arr[i] = P[trisIndex[j + 2]][i];
+    }
+}

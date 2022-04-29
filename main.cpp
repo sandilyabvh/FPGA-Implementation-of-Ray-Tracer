@@ -202,8 +202,15 @@ int main(int argc, char **argv)
     float frame_scale = tan(frame_fov * 0.5 * M_PI / 180);
     fixed_t frame_scale_ft = (fixed_t)frame_scale;
 
+    // Build primitive arrays
+    fixed_t PBuffer1[NUM_TRIS][3], PBuffer2[NUM_TRIS][3], PBuffer3[NUM_TRIS][3];
+    for (uint32_t i = 0; i < NUM_TRIS; ++i)
+    {
+        getPrimitive(mesh.P, mesh.trisIndex, &PBuffer1[i][0], &PBuffer2[i][0], &PBuffer3[i][0], i);
+    }
+
     // finally, render
-    render(mesh.P, mesh.trisIndex, mesh.texCoordinates, framebuffer, cameraToWorld, backgroundColor,
+    render(PBuffer1, PBuffer2, PBuffer3, mesh.texCoordinates, framebuffer, cameraToWorld, backgroundColor,
         frame_width_ft, frame_height_ft, frame_scale_ft);
 
     // save framebuffer to file
