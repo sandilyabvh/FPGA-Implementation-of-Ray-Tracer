@@ -5,18 +5,16 @@
 
 void customMultVecMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 {
-#pragma HLS BIND_OP variable=src op=mul impl=fabric
-#pragma HLS BIND_OP variable=src op=add impl=fabric
-#pragma HLS BIND_OP variable=x   op=mul impl=fabric
-#pragma HLS BIND_OP variable=x   op=add impl=fabric
     fixed_t val[4];
     fixed_t temp_val[4][3];
-#pragma HLS BIND_OP variable=temp_val op=add impl=fabric
-#pragma HLS BIND_OP variable=temp_val op=fdiv impl=fabric
-#pragma HLS BIND_OP variable=temp_val op=hdiv impl=fabric
-#pragma HLS BIND_OP variable=temp_val op=ddiv impl=fabric
+CUSTOMVEC_MUL_OUTER:
     for (int i = 0; i < 4; ++i)
     {
+// #pragma HLS pipeline
+        temp_val[i][0] = 0;
+        temp_val[i][1] = 0;
+        temp_val[i][2] = 0;
+CUSTOMVEC_MUL_INNER:
         for (int j = 0; j < 3; ++j)
         {
             temp_val[i][j] = src[j] * x[j][i];
@@ -24,33 +22,33 @@ void customMultVecMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
         val[i] = temp_val[i][0]+temp_val[i][1]+temp_val[i][2]+x[3][i];
     }
 
+CUSTOMVEC_MUL_FINAL:
     for (int i = 0; i < 3; ++i)
     {
+//#pragma HLS unroll
         dst[i] = val[i] / val[3];
     }
 }
 
 void customMultDirMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 {
-#pragma HLS BIND_OP variable=src op=mul impl=fabric
-#pragma HLS BIND_OP variable=src op=add impl=fabric
-#pragma HLS BIND_OP variable=x   op=mul impl=fabric
-#pragma HLS BIND_OP variable=x   op=add impl=fabric
-    fixed_t val[3];
+    fixed_t val[3] = { 0, 0, 0};
 
-    for (int i = 0; i < 3; ++i)
+CUSTOMDIR_MUL_OUTER:
+for (int j = 0; j < 3; ++j)
     {
-        fixed_t temp_val = 0;
-        for (int j = 0; j < 3; ++j)
-        {
-            temp_val += src[j] * x[j][i];
+//#pragma HLS pipeline
+CUSTOMDIR_MUL_INNER:
+		for (int i = 0; i < 3; ++i)
+		{
+        	val[i] += src[j] * x[j][i];
         }
-        val[i] = temp_val;
-
     }
 
+CUSTOMDIR_MUL_FINAL:
     for (int i = 0; i < 3; ++i)
     {
+//#pragma HLS unroll
         dst[i] = val[i];
     }
 }
@@ -61,13 +59,15 @@ void customMultDirMatrix(fixed_t src[3], fixed_t dst[3], fixed_t x[4][4])
 */
 void customCrossProduct(fixed_t in1[3], fixed_t in2[3], fixed_t result[3])
 {
-#pragma HLS BIND_OP variable=in1 op=mul impl=fabric
-#pragma HLS BIND_OP variable=in1 op=add impl=fabric
-#pragma HLS BIND_OP variable=in2 op=mul impl=fabric
-#pragma HLS BIND_OP variable=in2 op=add impl=fabric
+
+CUSTOM_CROSS_PRODUCT:
     for (int i = 0; i < 3; ++i)
     {
-        result[i] = in1[(i+1)%3] * in2[(i+2)%3] - in1[(i+2)%3] * in2[(i+1)%3];
+//#pragma HLS unroll
+    	int modulo_1 = (i == 2)? 0: (i+1);
+    	int modulo_2 = (modulo_1 == 2) ? 0 : (modulo_1 + 1);
+
+        result[i] = in1[modulo_1] * in2[modulo_2] - in1[modulo_2] * in2[modulo_1];
     }
 }
 
@@ -77,13 +77,11 @@ void customCrossProduct(fixed_t in1[3], fixed_t in2[3], fixed_t result[3])
 */
 void customDotProduct(fixed_t in1[3], fixed_t in2[3], fixed_t &result)
 {
-#pragma HLS BIND_OP variable=in1 op=mul impl=fabric
-#pragma HLS BIND_OP variable=in1 op=add impl=fabric
-#pragma HLS BIND_OP variable=in2 op=mul impl=fabric
-#pragma HLS BIND_OP variable=in2 op=add impl=fabric
     fixed_t temp_val = 0;
+CUSTOM_DOT_PRODUCT:
     for (int i = 0; i < 3; ++i)
     {
+//#pragma HLS unroll
         temp_val += in1[i] * in2[i];
     }
     result = temp_val;
@@ -95,26 +93,30 @@ void customDotProduct(fixed_t in1[3], fixed_t in2[3], fixed_t &result)
 */
 void customSubtract(fixed_t in1[3], fixed_t in2[3], fixed_t result[3])
 {
-#pragma HLS BIND_OP variable=in1 op=sub impl=fabric
-#pragma HLS BIND_OP variable=in2 op=sub impl=fabric
+CUSTOM_SUB:
     for (int i = 0; i < 3; ++i)
     {
+//#pragma HLS unroll
         result[i] = in1[i] - in2[i];
     }
 }
 
 void copy3(fixed_t in[3], fixed_t out[3])
 {
+COPY3:
     for (int i = 0; i < 3; ++i)
     {
+//#pragma HLS unroll
         out[i] = in[i];
     }
 }
 
 void copy2(fixed_t in[2], fixed_t out[2])
 {
+COPY2:
     for (int i = 0; i < 2; ++i)
     {
+//#pragma HLS unroll
         out[i] = in[i];
     }
 }
