@@ -12,8 +12,6 @@ bool rayTriangleIntersect(
     fixed_t v0[3], fixed_t v1[3], fixed_t v2[3],
     fixed_t &t, fixed_t &u, fixed_t &v)
 {
-// #pragma HLS expression_balance off
-
     // v0v1 = v1 - v0
     fixed_t v0v1[3];
     customSubtract(v1, v0, v0v1);
@@ -37,7 +35,9 @@ bool rayTriangleIntersect(
         detTest = detTest * (-1);
     }
 
-    fixed_t invDet = (fixed_t)1/ det;
+    fixed_t one = 1.0, invDet;
+    customDivide(one, det, invDet);
+    // fixed_t invDet = (fixed_t)1.0/ det;
 
     fixed_t tvec[3];
     customSubtract(orig, v0, tvec);
@@ -45,7 +45,6 @@ bool rayTriangleIntersect(
     fixed_t tempResult;
     customDotProduct(tvec, pvec, tempResult);
     u = tempResult * invDet;
-
 
     fixed_t qvec[3];
     customCrossProduct(tvec, v0v1, qvec);

@@ -13,8 +13,8 @@
 
 #define WIDTH  320
 #define HEIGHT 240
-// #define WIDTH  20
-// #define HEIGHT 20
+// #define WIDTH  100
+// #define HEIGHT 100
 #define FOV    20
 
 #define PRINT
@@ -22,8 +22,10 @@
 #ifdef  CSIM_DEBUG
     typedef float fixed_t;
 #else
-    typedef ap_fixed<48,16> fixed_t;
-    typedef ap_ufixed<48,16> ufixed_t;
+    // typedef ap_fixed<48,16> fixed_t;
+    // typedef ap_ufixed<48,16> ufixed_t;
+    typedef ap_fixed<32,16> fixed_t;
+    typedef ap_ufixed<32,16> ufixed_t;
 #endif
 
 

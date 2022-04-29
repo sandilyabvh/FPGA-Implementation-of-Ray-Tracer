@@ -8,9 +8,9 @@
 #include "ap_fixed.h"
 #include "geometry.h"
 
-static const fixed_t kInfinity = pow(2,10);//std::numeric_limits<fixed_t>::max();
+static const fixed_t kInfinity = (fixed_t)pow(2,14);//std::numeric_limits<fixed_t>::max();
 // NOTE: This decides the accuracy/precision of intersection checks
-static const fixed_t kEpsilon = (fixed_t)1e-5;
+static const fixed_t kEpsilon = (fixed_t)pow(2,-15);//(fixed_t)1e-5;
 
 fixed_t customNorm3(fixed_t x[3]);
 
@@ -45,6 +45,8 @@ void copy3(fixed_t in[3], fixed_t out[3]);
 void copy2(fixed_t in[2], fixed_t out[2]);
 
 fixed_t customFmod(fixed_t x);
+
+void customDivide(fixed_t &in1, fixed_t &in2, fixed_t &result);
 
 // COPY FUNCTIONS:
 

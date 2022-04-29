@@ -183,7 +183,7 @@ int main(int argc, char **argv)
         {-0.3187, 0.48692, 0.813227, 0},
         {-41.229214, 81.862351, 112.456908, 1}
     };
-    
+
     uint32_t frame = 0;
     fixed_t framebuffer[WIDTH * HEIGHT][3];
     triangle_mesh_t mesh;

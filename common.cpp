@@ -25,8 +25,8 @@ CUSTOMVEC_MUL_INNER:
 CUSTOMVEC_MUL_FINAL:
     for (int i = 0; i < 3; ++i)
     {
-//#pragma HLS unroll
-        dst[i] = val[i] / val[3];
+        // dst[i] = val[i] / val[3];
+        customDivide(val[i], val[3], dst[i]);
     }
 }
 
@@ -39,8 +39,8 @@ for (int j = 0; j < 3; ++j)
     {
 //#pragma HLS pipeline
 CUSTOMDIR_MUL_INNER:
-		for (int i = 0; i < 3; ++i)
-		{
+        for (int i = 0; i < 3; ++i)
+        {
         	val[i] += src[j] * x[j][i];
         }
     }
@@ -64,8 +64,8 @@ CUSTOM_CROSS_PRODUCT:
     for (int i = 0; i < 3; ++i)
     {
 //#pragma HLS unroll
-    	int modulo_1 = (i == 2)? 0: (i+1);
-    	int modulo_2 = (modulo_1 == 2) ? 0 : (modulo_1 + 1);
+        int modulo_1 = (i == 2)? 0: (i+1);
+        int modulo_2 = (modulo_1 == 2) ? 0 : (modulo_1 + 1);
 
         result[i] = in1[modulo_1] * in2[modulo_2] - in1[modulo_2] * in2[modulo_1];
     }
@@ -146,7 +146,9 @@ void customNormalize3(fixed_t x[3])
         if(n>(fixed_t)0.0)
         {
             fxp_sqrt(sqrt_val, u_n);
-            factor = (fixed_t)1.0 / sqrt_val;
+            fixed_t sqrt_val_f = sqrt_val;
+            fixed_t one = (fixed_t)1.0;
+            customDivide(one, sqrt_val_f, factor);
         }
     #endif
     for (int i = 0; i < 3; ++i)
@@ -159,6 +161,25 @@ fixed_t customFmod(fixed_t x)
 {
 #pragma HLS BIND_OP variable=x op=sub impl=fabric
     return x - (int)x;
+}
+
+void customDivide(fixed_t &in1, fixed_t &in2, fixed_t &result)
+{
+    if (in2 != (fixed_t)0.0)
+    {
+        // try
+        // {
+            result = in1 / in2;
+        // }
+        // catch (...)
+        // {
+        //     result = 1.0;
+        // }
+    }
+    else
+    {
+        result = kInfinity;
+    }
 }
 
 // COPY FUNCTIONS:
