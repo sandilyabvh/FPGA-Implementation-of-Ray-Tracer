@@ -170,13 +170,27 @@ bool trace(
 }
 
 void castRay(
-    fixed_t orig[3], fixed_t dir[3],
+    uint32_t &i, uint32_t &j, fixed_t &frame_width, fixed_t &frame_height, fixed_t &imageAspectRatio, fixed_t &scale,
+    fixed_t orig[3],
     fixed_t P[MAX_VERT_INDEX][3],
     uint32_t trisIndex[NUM_TRIS * 3],
     fixed_t texCoordinates[NUM_TRIS * 3][2],
     fixed_t hitColor[3],
-    fixed_t backgroundColor[3])
+    fixed_t backgroundColor[3],
+    fixed_t cameraToWorld[4][4])
 {
+
+    // generate primary ray direction
+    fixed_t x = (2 * (i + (fixed_t)0.5) / frame_width - 1) * imageAspectRatio * scale;
+    fixed_t y = (1 - 2 * (j + (fixed_t)0.5) / frame_height) * scale;
+
+    fixed_t srcRayDir[3] = {x, y, -1};
+    fixed_t dir[3];
+
+    customMultDirMatrix(srcRayDir, dir, cameraToWorld);
+
+    customNormalize3(dir);
+
     for (int i = 0; i < 3; ++i)
     {
 //#pragma HLS pipeline
@@ -267,22 +281,14 @@ void render(
     fixed_t zeroArr[3] = {0, 0, 0};
     customMultVecMatrix(zeroArr, origArr, cameraToWorld);
 
-    for (uint32_t j = 0; j < HEIGHT;  ++j) // HEIGHT;
+    for (uint32_t j = 0; j < HEIGHT;  ++j)
     {
-//#pragma HLS pipeline
         for (uint32_t i = 0; i < WIDTH; ++i)
         {
-            // generate primary ray direction
-            fixed_t x = (2 * (i + (fixed_t)0.5) / frame_width - 1) * imageAspectRatio * scale;
-            fixed_t y = (1 - 2 * (j + (fixed_t)0.5) / frame_height) * scale;
-
-            fixed_t srcRayDir[3] = {x, y, -1};
-            fixed_t dirArr[3];
-
-            customMultDirMatrix(srcRayDir, dirArr, cameraToWorld);
-
-            customNormalize3(dirArr);
-            castRay(origArr, dirArr, P, trisIndex, texCoordinates, &framebuffer[j*WIDTH + i][0], backgroundColor);
+            castRay(
+                i, j, frame_width, frame_height, imageAspectRatio, scale,
+                origArr, P, trisIndex, texCoordinates, &framebuffer[j*WIDTH + i][0], backgroundColor,
+                cameraToWorld);
         }
         // fprintf(stderr, "\r%3d%c", uint32_t(j / (float)HEIGHT * 100), '%');
     }
