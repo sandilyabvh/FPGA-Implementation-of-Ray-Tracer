@@ -13,8 +13,8 @@
 
 #define WIDTH  320
 #define HEIGHT 240
-// #define WIDTH  100
-// #define HEIGHT 100
+// #define WIDTH  16
+// #define HEIGHT 12
 #define FOV    20
 
 #define PRINT
