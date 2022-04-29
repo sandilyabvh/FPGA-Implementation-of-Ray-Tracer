@@ -112,13 +112,14 @@ bool intersect(
     fixed_t origArr[3], fixed_t dirArr[3],
     fixed_t &tNear, uint32_t &triIndex,
     fixed_t uv[2],
-    fixed_t v0Arr_intersect[3], fixed_t v1Arr_intersect[3], fixed_t v2Arr_intersect[3])
+    fixed_t v0Arr_intersect[3], fixed_t v1Arr_intersect[3], fixed_t v2Arr_intersect[3],
+    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3])
 {
     bool isect = false;
+
     NUM_TRIS_LOOP: for (uint32_t i = 0; i < NUM_TRIS; ++i)
     {
         fixed_t t = kInfinity, u, v;
-        fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
         copy3(&P1[i][0], v0Arr);
         copy3(&P2[i][0], v1Arr);
         copy3(&P3[i][0], v2Arr);
@@ -144,13 +145,15 @@ bool trace(
     fixed_t P2[NUM_TRIS][3],
     fixed_t P3[NUM_TRIS][3],
     fixed_t &tNear, uint32_t &index, fixed_t uv[2],
-    fixed_t v0Arr_intersect[3], fixed_t v1Arr_intersect[3], fixed_t v2Arr_intersect[3])
+    fixed_t v0Arr_intersect[3], fixed_t v1Arr_intersect[3], fixed_t v2Arr_intersect[3],
+    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3])
 {
     bool isIntersecting = false;
     fixed_t tNearTriangle = kInfinity;
     uint32_t indexTriangle;
     if (intersect(P1, P2, P3, orig, dir, tNearTriangle, indexTriangle, uv, 
-        v0Arr_intersect, v1Arr_intersect, v2Arr_intersect) && tNearTriangle < tNear)
+        v0Arr_intersect, v1Arr_intersect, v2Arr_intersect,
+        v0Arr, v1Arr, v2Arr) && tNearTriangle < tNear)
     {
         tNear = tNearTriangle;
         index = indexTriangle;
@@ -161,15 +164,17 @@ bool trace(
 }
 
 void castRay(
-    uint32_t &i, uint32_t &j, fixed_t &frame_width, fixed_t &frame_height, fixed_t &imageAspectRatio, fixed_t &scale,
-    fixed_t orig[3],
+    uint32_t i, uint32_t j, fixed_t frame_width, fixed_t frame_height, fixed_t imageAspectRatio, fixed_t scale,
+    fixed_t orig[3], fixed_t dir[3],
     fixed_t P1[NUM_TRIS][3],
     fixed_t P2[NUM_TRIS][3],
     fixed_t P3[NUM_TRIS][3],
     fixed_t texCoordinates[NUM_TRIS * 3][2],
     fixed_t hitColor[3],
     fixed_t backgroundColor[3],
-    fixed_t cameraToWorld[4][4])
+    fixed_t cameraToWorld[4][4],
+    fixed_t v0Arr[3], fixed_t v1Arr[3], fixed_t v2Arr[3],
+    fixed_t v0Arr_intersect[3], fixed_t v1Arr_intersect[3], fixed_t v2Arr_intersect[3])
 {
 
     // generate primary ray direction
@@ -177,7 +182,6 @@ void castRay(
     fixed_t y = (1 - 2 * (j + (fixed_t)0.5) / frame_height) * scale;
 
     fixed_t srcRayDir[3] = {x, y, -1};
-    fixed_t dir[3];
 
     customMultDirMatrix(srcRayDir, dir, cameraToWorld);
 
@@ -191,8 +195,11 @@ void castRay(
     fixed_t tnear = kInfinity;
     fixed_t uv[2];
     uint32_t index = 0;
-    fixed_t v0Arr_intersect[3], v1Arr_intersect[3], v2Arr_intersect[3];
-    if (trace(orig, dir, P1, P2, P3, tnear, index, uv, v0Arr_intersect, v1Arr_intersect, v2Arr_intersect))
+    // fixed_t v0Arr_intersect[3], v1Arr_intersect[3], v2Arr_intersect[3];
+    // fixed_t v0Arr[3], v1Arr[3], v2Arr[3];
+    if (trace(orig, dir, P1, P2, P3, tnear, index, uv,
+        v0Arr_intersect, v1Arr_intersect, v2Arr_intersect,
+        v0Arr, v1Arr, v2Arr))
     {
         fixed_t hitPoint[3];
         for (int i = 0; i < 3; ++i)
@@ -219,6 +226,42 @@ void castRay(
     }
 }
 
+void dataflow(
+    uint32_t i, uint32_t i_1, uint32_t j, fixed_t frame_width, fixed_t frame_height, fixed_t imageAspectRatio, fixed_t scale,
+    fixed_t origArr_1[3], fixed_t origArr_2[3],
+    fixed_t dir_1[3], fixed_t dir_2[3],
+    fixed_t P1_1[NUM_TRIS][3],
+    fixed_t P2_1[NUM_TRIS][3],
+    fixed_t P3_1[NUM_TRIS][3],
+    fixed_t cameraToWorld_1[4][4],
+    fixed_t P1_2[NUM_TRIS][3],
+    fixed_t P2_2[NUM_TRIS][3],
+    fixed_t P3_2[NUM_TRIS][3],
+    fixed_t cameraToWorld_2[4][4],
+    fixed_t texCoordinates[NUM_TRIS * 3][2],
+    fixed_t backgroundColor_1[3], fixed_t backgroundColor_2[3],
+    fixed_t return_1[3],
+    fixed_t return_2[3],
+    fixed_t v0Arr_1[3], fixed_t v1Arr_1[3], fixed_t v2Arr_1[3],
+    fixed_t v0Arr_2[3], fixed_t v1Arr_2[3], fixed_t v2Arr_2[3],
+    fixed_t v0Arr_intersect_1[3], fixed_t v1Arr_intersect_1[3], fixed_t v2Arr_intersect_1[3],
+    fixed_t v0Arr_intersect_2[3], fixed_t v1Arr_intersect_2[3], fixed_t v2Arr_intersect_2[3])
+{
+#pragma HLS dataflow
+    castRay(
+        i, j, frame_width, frame_height, imageAspectRatio, scale,
+        origArr_1, dir_1, P1_1, P2_1, P3_1, texCoordinates, return_1, backgroundColor_1,
+        cameraToWorld_1,
+        v0Arr_1, v1Arr_1, v2Arr_1,
+        v0Arr_intersect_1, v1Arr_intersect_1, v2Arr_intersect_1);
+    castRay(
+        i_1, j, frame_width, frame_height, imageAspectRatio, scale,
+        origArr_2, dir_2, P1_2, P2_2, P3_2, texCoordinates, return_2, backgroundColor_2,
+        cameraToWorld_2,
+        v0Arr_2, v1Arr_2, v2Arr_2,
+        v0Arr_intersect_2, v1Arr_intersect_2, v2Arr_intersect_2);
+}
+
 // The main render function. This where we iterate over all pixels in the image, generate
 // primary rays and cast these rays into the scene. The content of the framebuffer is
 // saved to a file.
@@ -226,10 +269,10 @@ void render(
     fixed_t P1_DRAM[NUM_TRIS][3],
     fixed_t P2_DRAM[NUM_TRIS][3],
     fixed_t P3_DRAM[NUM_TRIS][3],
-    fixed_t texCoordinates[NUM_TRIS * 3][2],
-    fixed_t framebuffer[WIDTH * HEIGHT][3],
+    fixed_t texCoordinates_DRAM[NUM_TRIS * 3][2],
+    fixed_t framebuffer_DRAM[WIDTH * HEIGHT][3],
     fixed_t cameraToWorld_DRAM[4][4],
-    fixed_t backgroundColor[3],
+    fixed_t backgroundColor_DRAM[3],
     fixed_t frame_width,
     fixed_t frame_height,
     fixed_t frame_scale)
@@ -241,35 +284,106 @@ void render(
 #pragma HLS interface m_axi depth=16 port=cameraToWorld_DRAM offset=slave bundle=c2w
 #pragma HLS interface s_axilite port=return
 
-    fixed_t P1[NUM_TRIS][3];
-    fixed_t P2[NUM_TRIS][3];
-    fixed_t P3[NUM_TRIS][3];
-    fixed_t cameraToWorld[4][4];
+    fixed_t P1_1[NUM_TRIS][3];
+    fixed_t P2_1[NUM_TRIS][3];
+    fixed_t P3_1[NUM_TRIS][3];
+    fixed_t cameraToWorld_1[4][4];
+    fixed_t backgroundColor_1[3];
+    fixed_t P1_2[NUM_TRIS][3];
+    fixed_t P2_2[NUM_TRIS][3];
+    fixed_t P3_2[NUM_TRIS][3];
+    fixed_t cameraToWorld_2[4][4];
+    fixed_t backgroundColor_2[3];
+    fixed_t v0Arr_1[3], v1Arr_1[3], v2Arr_1[3];
+    fixed_t v0Arr_2[3], v1Arr_2[3], v2Arr_2[3];
+    fixed_t v0Arr_intersect_1[3], v1Arr_intersect_1[3], v2Arr_intersect_1[3];
+    fixed_t v0Arr_intersect_2[3], v1Arr_intersect_2[3], v2Arr_intersect_2[3];
+
+
+    fixed_t origArr_1[3], origArr_2[3];
+    fixed_t dir_1[3], dir_2[3];
 
 // #pragma HLS array_partition variable=P dim=1 factor=7 cyclic
-#pragma HLS array_partition variable=P1 dim=2 complete
-#pragma HLS array_partition variable=P2 dim=2 complete
-#pragma HLS array_partition variable=P3 dim=2 complete
-//#pragma HLS array_partition variable=cameraToWorld dim=2 complete
+#pragma HLS array_partition variable=P1_1 dim=2 complete
+#pragma HLS array_partition variable=P2_1 dim=2 complete
+#pragma HLS array_partition variable=P3_1 dim=2 complete
+#pragma HLS array_partition variable=cameraToWorld_1 dim=2 complete
+#pragma HLS array_partition variable=backgroundColor_1 dim=0 complete
+#pragma HLS array_partition variable=P1_2 dim=2 complete
+#pragma HLS array_partition variable=P2_2 dim=2 complete
+#pragma HLS array_partition variable=P3_2 dim=2 complete
+#pragma HLS array_partition variable=cameraToWorld_2 dim=2 complete
+#pragma HLS array_partition variable=backgroundColor_2 dim=0 complete
+
+#pragma HLS array_partition variable=origArr_1 dim=0 complete
+#pragma HLS array_partition variable=origArr_2 dim=0 complete
+#pragma HLS array_partition variable=dir_1 dim=0 complete
+#pragma HLS array_partition variable=dir_2 dim=0 complete
+
+#pragma HLS array_partition variable=v0Arr_1 dim=0 complete
+#pragma HLS array_partition variable=v0Arr_2 dim=0 complete
+#pragma HLS array_partition variable=v1Arr_1 dim=0 complete
+#pragma HLS array_partition variable=v1Arr_2 dim=0 complete
+#pragma HLS array_partition variable=v2Arr_1 dim=0 complete
+#pragma HLS array_partition variable=v2Arr_2 dim=0 complete
 
 
-    copyP(P1_DRAM, P2_DRAM, P3_DRAM, P1, P2, P3);
-    copyCTW(cameraToWorld_DRAM, cameraToWorld);
+#pragma HLS array_partition variable=v0Arr_intersect_1 dim=0 complete
+#pragma HLS array_partition variable=v0Arr_intersect_2 dim=0 complete
+#pragma HLS array_partition variable=v1Arr_intersect_1 dim=0 complete
+#pragma HLS array_partition variable=v1Arr_intersect_2 dim=0 complete
+#pragma HLS array_partition variable=v2Arr_intersect_1 dim=0 complete
+#pragma HLS array_partition variable=v2Arr_intersect_2 dim=0 complete
+
+
+    copyP(P1_DRAM, P2_DRAM, P3_DRAM, P1_1, P2_1, P3_1);
+    copyCTW(cameraToWorld_DRAM, cameraToWorld_1);
+    // Copy to copy_2
+    for (int i = 0; i < NUM_TRIS; ++i)
+    {
+        copy3(&P1_1[i][0], &P1_2[i][0]);
+        copy3(&P2_1[i][0], &P2_2[i][0]);
+        copy3(&P3_1[i][0], &P3_2[i][0]);
+    }
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
+            cameraToWorld_2[i][j] = cameraToWorld_1[i][j];
+        }
+    }
+    copy3(backgroundColor_DRAM, backgroundColor_1);
+    copy3(backgroundColor_1, backgroundColor_2);
 
     fixed_t scale = frame_scale;
     fixed_t imageAspectRatio = 1.33;//frame_width / frame_height;
-    fixed_t origArr[3];
     fixed_t zeroArr[3] = {0, 0, 0};
-    customMultVecMatrix(zeroArr, origArr, cameraToWorld);
+    customMultVecMatrix(zeroArr, origArr_1, cameraToWorld_1);
+    copy3(origArr_1, origArr_2);
+
+    fixed_t return_1[3], return_2[3];
 
     HEIGHT_LOOP: for (uint32_t j = 0; j < HEIGHT;  ++j)
     {
-        WIDTH_LOOP: for (uint32_t i = 0; i < WIDTH; ++i)
+        WIDTH_LOOP: for (uint32_t i = 0; i < WIDTH; i += 2)
         {
-            castRay(
-                i, j, frame_width, frame_height, imageAspectRatio, scale,
-                origArr, P1, P2, P3, texCoordinates, &framebuffer[j*WIDTH + i][0], backgroundColor,
-                cameraToWorld);
+            dataflow(
+                i, i+1, j, frame_width, frame_height, imageAspectRatio, scale,
+                origArr_1, origArr_2,
+                dir_1, dir_2,
+                P1_1, P2_1, P3_1,
+                cameraToWorld_1,
+                P1_2, P2_2, P3_2,
+                cameraToWorld_2,
+                texCoordinates_DRAM,
+                backgroundColor_1, backgroundColor_2,
+                return_1, return_2,
+                v0Arr_1, v1Arr_1, v2Arr_1,
+                v0Arr_2, v1Arr_2, v2Arr_2,
+                v0Arr_intersect_1, v1Arr_intersect_1, v2Arr_intersect_1,
+                v0Arr_intersect_2, v1Arr_intersect_2, v2Arr_intersect_2);
+                copy3(return_1, &framebuffer_DRAM[j*WIDTH + i][0]);
+                copy3(return_2, &framebuffer_DRAM[j*WIDTH + i + 1][0]);
         }
         // fprintf(stderr, "\r%3d%c", uint32_t(j / (float)HEIGHT * 100), '%');
     }
