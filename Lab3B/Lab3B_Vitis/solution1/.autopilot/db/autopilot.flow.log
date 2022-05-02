@@ -1,0 +1,1346 @@
+INFO-FLOW: Workspace /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1 opened at Sun May 02 18:21:37 EDT 2021
+Execute     ap_set_clock -name default -period 10 -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+Execute     set_part xczu3eg-sbva484-1-e 
+Execute       create_platform xczu3eg-sbva484-1-e -board  
+DBG:HLSDevice: Trying to load device library: /tools/software/xilinx/Vitis_HLS/2021.1/lib/lnx64.o/librdi_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/software/xilinx/Vivado/2021.1/data/parts/arch.xml
+DBG:HLSDevice: init success
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/zynquplus_dsp48e2.hlp 
+INFO: [HLS 200-1611] Setting target device to 'xczu3eg-sbva484-1-e'
+Command       create_platform done; 3.17 sec.
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute           source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command       ap_source done; 0.15 sec.
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data info 
+Execute       config_compile -quiet -complex-mul-dsp=0 
+Command     set_part done; 3.36 sec.
+Execute     send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute     get_config_interface -m_axi_latency 
+Execute     get_config_interface -m_axi_alignment_byte_size 
+Execute     get_config_interface -m_axi_max_widen_bitwidth 
+Execute     get_config_interface -default_interface 
+Execute     get_config_rtl -register_reset_num 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -format=ip_catalog 
+INFO: [HLS 200-1464] Running solution command: config_export -format=ip_catalog
+Execute     config_export -format=ip_catalog 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -output=/nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip 
+INFO: [HLS 200-1464] Running solution command: config_export -output=/nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip
+Execute     config_export -output=/nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -rtl=verilog 
+INFO: [HLS 200-1464] Running solution command: config_export -rtl=verilog
+Execute     config_export -rtl=verilog 
+Command   open_solution done; 3.38 sec.
+Execute   set_part xczu3eg-sbva484-1-e 
+INFO: [HLS 200-1510] Running: set_part xczu3eg-sbva484-1-e 
+Execute     create_platform xczu3eg-sbva484-1-e -board  
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/zynquplus_dsp48e2.hlp 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command     ap_source done; 0.13 sec.
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info 
+Execute     config_compile -quiet -complex-mul-dsp=0 
+Command   set_part done; 0.21 sec.
+Execute   create_clock -period 10 -name default 
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+Execute   config_export -format ip_catalog -output /nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip -rtl verilog 
+INFO: [HLS 200-1510] Running: config_export -format ip_catalog -output /nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip -rtl verilog 
+Execute   csynth_design 
+INFO: [HLS 200-1510] Running: csynth_design 
+Execute     get_config_compile -effort 
+Execute     get_config_compile -enable_clang39 
+Execute     get_config_compile -g 
+Execute     get_config_compile -hw_syn 
+Execute     get_config_compile -ng 
+Execute     get_config_compile -opt_fp 
+Execute     get_config_compile -skip_cdt 
+Execute     get_config_compile -skip_syncheck 
+Execute     get_config_compile -skip_transform 
+Execute     get_config_compile -pre_tcl 
+Execute     get_config_compile -keep_printf 
+Execute     elaborate -effort=medium -skip_syncheck=0 -keep_printf=0 -skip_cdt=0 -skip_transform=0 -ng=0 -g=0 -opt_fp=0 -from_csynth_design=1 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.02 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 317.283 MB.
+INFO: [HLS 200-10] Analyzing design file 'raytriangleintersect.cpp' ... 
+INFO-FLOW: Compiling one TU...
+Execute       get_config_compile -pragma_strict_mode 
+INFO-FLOW: Handling raytriangleintersect.cpp as C++
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data info 
+INFO-FLOW: Running: GCC PP 39
+INFO-FLOW: Source preprocessing
+Execute       ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang raytriangleintersect.cpp -foptimization-record-file=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.raytriangleintersect.cpp.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -gcc-toolchain /tools/software/xilinx/Vitis_HLS/2021.1/tps/lnx64/gcc-6.2.0 -fhls -fno-exceptions -E -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -fno-threadsafe-statics -fno-use-cxa-atexit -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot/39 -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E2__ -I /usr/include/x86_64-linux-gnu -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp -hls-platform-db-name=/tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.raytriangleintersect.cpp.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.raytriangleintersect.cpp.err.log 
+Command       ap_eval done; 0.34 sec.
+INFO-FLOW: Done: GCC PP 39 time: 0.4 seconds per iteration
+Execute       set_directive_top rayTriangleIntersect -name=rayTriangleIntersect 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/huddle.tcl 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/json2huddle.tcl 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/try/try.tcl 
+Execute       list_core -type functional_unit 
+Execute       ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fsyntax-only -fhls -target fpga64-xilinx-linux-gnu /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp -hls-platform-db-name=/tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.err.log 
+Command       ap_eval done; 4.5 sec.
+WARNING: [HLS 207-5528] Ignore interface attribute or pragma which is not used in top function: raytriangleintersect.cpp:45:9
+Execute       clang_tidy xilinx-systemc-detector /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp std=gnu++14 -target fpga  -directive=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/.systemc_flag 
+INFO-FLOW: exec /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-systemc-detector -import-directive=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/.systemc_flag -fix-errors /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 4.64 sec.
+INFO-FLOW: Running: clang-tidy CDT preprocess 39
+Execute       clang_tidy xilinx-directive2pragma /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp std=gnu++14 -target fpga  -directive=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/all.directive.json 
+INFO-FLOW: exec /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-directive2pragma -import-directive=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/all.directive.json -fix-errors /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 5.63 sec.
+Execute       clang_tidy xilinx-constantarray-param,xilinx-remove-assert /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp std=gnu++14 -target fpga  
+INFO-FLOW: exec /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-constantarray-param,xilinx-remove-assert -fix-errors /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 6.75 sec.
+INFO-FLOW: Done: clang-tidy CDT preprocess 39 time: 12.4 seconds per iteration
+INFO-FLOW: Calling xilinx-label-all-loops ... 
+INFO-FLOW: Calling xilinx-aggregate-on-hls-vector ... 
+Execute       clang_tidy -errorcheck xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp std=gnu++14 -target fpga  
+Execute         ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -export-fixes=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang-tidy.raytriangleintersect.pp.0.cpp.diag.yml -header-filter=.* --checks=-*,xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute -fix-errors /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang-tidy.raytriangleintersect.pp.0.cpp.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang-tidy.raytriangleintersect.pp.0.cpp.err.log 
+Command         ap_eval done; 8.17 sec.
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/yaml.tcl 
+Command       clang_tidy done; 8.75 sec.
+Execute       get_config_dataflow -strict_mode 
+Execute       ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/xilinx-dataflow-lawyer -export-fixes=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/xilinx-dataflow-lawyer.raytriangleintersect.pp.0.cpp.diag.yml /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 -fstrict-dataflow > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/xilinx-dataflow-lawyer.raytriangleintersect.pp.0.cpp.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/xilinx-dataflow-lawyer.raytriangleintersect.pp.0.cpp.err.log 
+Command       ap_eval done; 4.12 sec.
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data info 
+INFO-FLOW: compiling source code to llvm bc
+Execute       ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.raytriangleintersect.pp.0.cpp.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -fhls -flto -fno-exceptions -Wno-error=c++11-narrowing /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.pp.0.cpp -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E2__ -g -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.bc -hls-platform-db-name=/tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.raytriangleintersect.pp.0.cpp.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.raytriangleintersect.pp.0.cpp.err.log 
+Command       ap_eval done; 4.46 sec.
+WARNING: [HLS 207-5301] unused parameter 'print': /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_int_base.h:792:16
+INFO: [HLS 200-10] Analyzing design file 'common.cpp' ... 
+INFO-FLOW: Compiling one TU...
+Execute       get_config_compile -pragma_strict_mode 
+INFO-FLOW: Handling common.cpp as C++
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data info 
+INFO-FLOW: Running: GCC PP 39
+INFO-FLOW: Source preprocessing
+Execute       ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang common.cpp -foptimization-record-file=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.common.cpp.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -gcc-toolchain /tools/software/xilinx/Vitis_HLS/2021.1/tps/lnx64/gcc-6.2.0 -fhls -fno-exceptions -E -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -fno-threadsafe-statics -fno-use-cxa-atexit -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot/39 -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E2__ -I /usr/include/x86_64-linux-gnu -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp -hls-platform-db-name=/tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.common.cpp.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.common.cpp.err.log 
+Command       ap_eval done; 0.22 sec.
+INFO-FLOW: Done: GCC PP 39 time: 0.2 seconds per iteration
+Execute       set_directive_top rayTriangleIntersect -name=rayTriangleIntersect 
+Execute       list_core -type functional_unit 
+Execute       ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fsyntax-only -fhls -target fpga64-xilinx-linux-gnu /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp -hls-platform-db-name=/tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.err.log 
+Command       ap_eval done; 4.29 sec.
+Execute       clang_tidy xilinx-systemc-detector /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp std=gnu++14 -target fpga  -directive=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/.systemc_flag 
+INFO-FLOW: exec /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-systemc-detector -import-directive=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/.systemc_flag -fix-errors /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 4.02 sec.
+INFO-FLOW: Running: clang-tidy CDT preprocess 39
+Execute       clang_tidy xilinx-directive2pragma /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp std=gnu++14 -target fpga  -directive=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/all.directive.json 
+INFO-FLOW: exec /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-directive2pragma -import-directive=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/all.directive.json -fix-errors /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 4.2 sec.
+Execute       clang_tidy xilinx-constantarray-param,xilinx-remove-assert /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp std=gnu++14 -target fpga  
+INFO-FLOW: exec /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-constantarray-param,xilinx-remove-assert -fix-errors /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 5.9 sec.
+INFO-FLOW: Done: clang-tidy CDT preprocess 39 time: 10.1 seconds per iteration
+INFO-FLOW: Calling xilinx-label-all-loops ... 
+INFO-FLOW: Calling xilinx-aggregate-on-hls-vector ... 
+Execute       clang_tidy -errorcheck xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp std=gnu++14 -target fpga  
+Execute         ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang-tidy -export-fixes=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang-tidy.common.pp.0.cpp.diag.yml -header-filter=.* --checks=-*,xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute -fix-errors /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang-tidy.common.pp.0.cpp.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang-tidy.common.pp.0.cpp.err.log 
+Command         ap_eval done; 8.35 sec.
+Command       clang_tidy done; 8.9 sec.
+Execute       get_config_dataflow -strict_mode 
+Execute       ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/xilinx-dataflow-lawyer -export-fixes=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/xilinx-dataflow-lawyer.common.pp.0.cpp.diag.yml /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 -fstrict-dataflow > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/xilinx-dataflow-lawyer.common.pp.0.cpp.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/xilinx-dataflow-lawyer.common.pp.0.cpp.err.log 
+Command       ap_eval done; 3.89 sec.
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data info 
+INFO-FLOW: compiling source code to llvm bc
+Execute       ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.common.pp.0.cpp.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -fhls -flto -fno-exceptions -Wno-error=c++11-narrowing /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.pp.0.cpp -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot -I /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E2__ -g -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.bc -hls-platform-db-name=/tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.common.pp.0.cpp.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.common.pp.0.cpp.err.log 
+Command       ap_eval done; 4.08 sec.
+WARNING: [HLS 207-5301] unused parameter 'print': /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_int_base.h:792:16
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 67.44 seconds. CPU system time: 7.42 seconds. Elapsed time: 75.01 seconds; current allocated memory: 320.418 MB.
+INFO-FLOW: Linking Debug ...
+INFO-FLOW: Linking dut bc code.
+Execute       run_link_or_opt -out /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.0.bc -args  "/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.g.bc" "/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.g.bc"  
+Execute         ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/llvm-link /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/raytriangleintersect.g.bc /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/common.g.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.0.bc > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/llvm-link.a.g.ld.0.bc.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/llvm-link.a.g.ld.0.bc.err.log 
+INFO-FLOW: 
+Execute       run_link_or_opt -opt -out /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.1.lower.bc -args /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.0.bc -reflow-lower-math-intrinsics 
+Execute         ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/opt.a.g.ld.1.lower.bc.diag.yml /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.0.bc -reflow-lower-math-intrinsics -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.1.lower.bc > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/opt.a.g.ld.1.lower.bc.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/opt.a.g.ld.1.lower.bc.err.log 
+INFO-FLOW: 
+INFO-FLOW: Linking math bc lib
+Execute       run_link_or_opt -out /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.2.m1.bc -args /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.1.lower.bc -only-needed /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/lib/libhlsm_39.bc /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/lib/libhlsmc++_39.bc 
+Execute         ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/llvm-link /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.1.lower.bc -only-needed /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/lib/libhlsm_39.bc /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/lib/libhlsmc++_39.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.2.m1.bc > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/llvm-link.a.g.ld.2.m1.bc.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/llvm-link.a.g.ld.2.m1.bc.err.log 
+Command         ap_eval done; 4.87 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 4.88 sec.
+Execute       run_link_or_opt -opt -out /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.3.fpc.bc -args /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.2.m1.bc -reflow-globaldce -hls-top-function-name=rayTriangleIntersect -reflow-float-conversion 
+Execute         ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/opt.a.g.ld.3.fpc.bc.diag.yml /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.2.m1.bc -reflow-globaldce -hls-top-function-name=rayTriangleIntersect -reflow-float-conversion -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.3.fpc.bc > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/opt.a.g.ld.3.fpc.bc.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/opt.a.g.ld.3.fpc.bc.err.log 
+Command         ap_eval done; 1.73 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 1.73 sec.
+Execute       run_link_or_opt -out /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.4.m2.bc -args /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.3.fpc.bc -only-needed /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/lib/libfloatconversion_39.bc 
+Execute         ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/llvm-link /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.3.fpc.bc -only-needed /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/lib/libfloatconversion_39.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.4.m2.bc > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/llvm-link.a.g.ld.4.m2.bc.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/llvm-link.a.g.ld.4.m2.bc.err.log 
+Command         ap_eval done; 0.58 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 0.58 sec.
+Execute       run_link_or_opt -opt -out /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.5.gdce.bc -args /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.4.m2.bc -reflow-globaldce -hls-top-function-name=rayTriangleIntersect 
+Execute         ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/opt.a.g.ld.5.gdce.bc.diag.yml /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.4.m2.bc -reflow-globaldce -hls-top-function-name=rayTriangleIntersect -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.5.gdce.bc > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/opt.a.g.ld.5.gdce.bc.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/opt.a.g.ld.5.gdce.bc.err.log 
+Command         ap_eval done; 0.52 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 0.53 sec.
+Execute       get_solution -flow_target 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_interface -default_slave_interface 
+Execute       get_solution -flow_target 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       get_config_interface -m_axi_offset 
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -m_axi_num_read_outstanding 
+Execute       get_config_interface -m_axi_num_write_outstanding 
+Execute       get_config_interface -m_axi_max_read_burst_length 
+Execute       get_config_interface -m_axi_max_write_burst_length 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -m_axi_auto_max_ports 
+Execute       get_config_interface -m_axi_num_read_outstanding 
+Execute       get_config_interface -m_axi_num_write_outstanding 
+Execute       get_config_interface -m_axi_max_read_burst_length 
+Execute       get_config_interface -m_axi_max_write_burst_length 
+Execute       get_config_interface -s_axilite_data64 
+Execute       get_config_compile -instruction_warning_threshold 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_compile -pragma_strict_mode 
+Execute       get_config_compile -pipeline_style 
+Execute       get_config_array_partition -throughput_driven 
+Execute       send_msg_by_id INFO @200-777@%s Vivado 
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+Execute       is_m_axi_addr64 
+INFO-FLOW: Doing LTO.
+Execute       ap_eval exec -ignorestderr /tools/software/xilinx/Vitis_HLS/2021.1/lnx64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.a.g.ld.0.bc.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fhls -mllvm -hls-top-function-name=rayTriangleIntersect -mllvm -hls-db-dir -mllvm /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db -emit-llvm -c -target fpga64-xilinx-none -mllvm -xcl-xmlinfo=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/kernel.internal.xml -mllvm -top-io-mapping-info=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/top-io-fe.xml -mllvm -hls-bitcode-version=3.1 -mllvm -reflow-enable-slave-interface-default-setting=true -mllvm -gen-kernel-xml=false -mllvm -default-maxi-offset=slave -mllvm -maxi-latency=0 -mllvm -hls-maxi-data-size-in-bits=8 -mllvm -hls-maxi-max-data-size-in-bits=1024 -mllvm -hls-max-widen-size-in-bits=0 -mllvm -xcl-kernel-max-mem-ports=0 -mllvm -maxi-read-trans=16 -mllvm -maxi-write-trans=16 -mllvm -maxi-read-burst-len=16 -mllvm -maxi-write-burst-len=16 -mllvm -reflow-enable-saxi-64bits=0 -mllvm -reflow-basic-block-instr-threshhold=200000 -mllvm -assume-maxi-align=0 -mllvm -no-unaligned-maxi-accesses -mllvm -reflow-pipeline-style-llvm-setting=0 -mllvm -reflow-auto-array-partition-mode=default -mllvm -reflow-enable-auto-array-partition=true -mllvm -reflow-aggregate-bitwidth-threshold=4096 -mllvm -reflow-disaggregate-bitwidth-threshold=4096 -mllvm -hls -mllvm -disable-inlined-alloca-merging=true -x ir /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.ld.5.gdce.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.lto.bc -hls-platform-db-name=/tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.a.g.ld.0.bc.out.log 2> /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/clang.a.g.ld.0.bc.err.log 
+Command       ap_eval done; 1.34 sec.
+INFO: [HLS 214-279] Initial Interval estimation mode is set into default.
+INFO: [HLS 214-284] Auto array partition mode is set into default.
+INFO: [HLS 214-186] Unrolling loop 'CUSTOM_DOT_PRODUCT' (common.cpp:33:5) in function 'customDotProduct' completely with a factor of 3 (common.cpp:30:0)
+INFO: [HLS 214-186] Unrolling loop 'CUSTOM_CROSS_PRODUCT' (common.cpp:15:5) in function 'customCrossProduct' completely with a factor of 3 (common.cpp:12:0)
+INFO: [HLS 214-186] Unrolling loop 'CUSTOM_SUB' (common.cpp:48:5) in function 'customSubtract' completely with a factor of 3 (common.cpp:46:0)
+INFO: [HLS 214-178] Inlining function 'copyDRAMtoBRAM(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3])' into 'rayTriangleIntersect(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*)' (raytriangleintersect.cpp:38:0)
+INFO: [HLS 214-178] Inlining function 'customSubtract(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*)' into 'rayTriangleIntersect(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*)' (raytriangleintersect.cpp:38:0)
+INFO: [HLS 214-178] Inlining function 'customCrossProduct(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*)' into 'rayTriangleIntersect(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*)' (raytriangleintersect.cpp:38:0)
+INFO: [HLS 214-178] Inlining function 'customDotProduct(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>&)' into 'rayTriangleIntersect(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*)' (raytriangleintersect.cpp:38:0)
+INFO: [HLS 214-178] Inlining function 'customDivide(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>&)' into 'rayTriangleIntersect(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*)' (raytriangleintersect.cpp:38:0)
+INFO: [HLS 214-241] Aggregating maxi variable 'intersectIndex' with non-compact mode in 32-bits (raytriangleintersect.cpp:38:0)
+INFO: [HLS 214-241] Aggregating maxi variable 'P3_DRAM' with non-compact mode in 32-bits
+INFO: [HLS 214-241] Aggregating maxi variable 'P2_DRAM' with non-compact mode in 32-bits
+INFO: [HLS 214-241] Aggregating maxi variable 'P1_DRAM' with non-compact mode in 32-bits
+INFO: [HLS 214-241] Aggregating maxi variable 'dir_DRAM' with non-compact mode in 32-bits (raytriangleintersect.cpp:38:0)
+INFO: [HLS 214-270] Starting automatic array partition analysis...
+INFO: [HLS 214-115] Multiple burst reads of length 3 and bit width 32 in loop 'VITIS_LOOP_15_1'(raytriangleintersect.cpp:15:22) has been inferred on port 'dir'. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (raytriangleintersect.cpp:15:22)
+INFO: [HLS 214-115] Multiple burst reads of length 18960 and bit width 32 in loop 'VITIS_LOOP_20_2'(raytriangleintersect.cpp:20:22) has been inferred on port 'P1_DRAM'. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (raytriangleintersect.cpp:20:22)
+INFO: [HLS 214-115] Multiple burst reads of length 18960 and bit width 32 in loop 'VITIS_LOOP_20_2'(raytriangleintersect.cpp:20:22) has been inferred on port 'P2_DRAM'. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (raytriangleintersect.cpp:20:22)
+INFO: [HLS 214-115] Multiple burst reads of length 18960 and bit width 32 in loop 'VITIS_LOOP_20_2'(raytriangleintersect.cpp:20:22) has been inferred on port 'P3_DRAM'. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (raytriangleintersect.cpp:20:22)
+INFO: [HLS 214-115] Multiple burst writes of length 2 and bit width 32 has been inferred on port 'intersectIndex'. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (raytriangleintersect.cpp:143:5)
+INFO: [HLS 214-131] Inlining function '_llvm.fpga.pack.none.i32.s_struct.ap_fixeds' into 'rayTriangleIntersect(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*)' (raytriangleintersect.cpp:140:23)
+INFO: [HLS 214-131] Inlining function '_llvm.fpga.pack.none.i32.s_struct.ap_fixeds' into 'rayTriangleIntersect(ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*, ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0> (*) [3], ap_fixed<32, 16, (ap_q_mode)5, (ap_o_mode)3, 0>*)' (raytriangleintersect.cpp:141:23)
+INFO-FLOW: DBG:PUTS: copy_raw_kernel_xml ap_link_39: kernel.xml not generated: /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/kernel.internal.xml
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 8.66 seconds. CPU system time: 1.14 seconds. Elapsed time: 10.04 seconds; current allocated memory: 322.600 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 322.601 MB.
+Execute       opt_and_import_c a -opt_level=2 -skip_syncheck=0 -ng=0 -keep_printf=0 
+Execute         cleanup_all_models 
+INFO: [HLS 200-10] Starting code transformations ...
+INFO-FLOW: Running Standard Transforms...
+Execute         transform -hls -share-std-xform -demangle-name -inline-byval-memcpy -always-inline -promote-dbg-pointer -interface-preproc -mem2reg -scalarrepl -mem2reg -keep-read-access -instcombine -dce -promote-dbg-pointer -bitop-raise -loop-simplify -indvarspre -indvars -loop-simplify -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -basicaa -simplifycfg -mem2reg -globalopt -global-constprop -deadargelim -instcombine -simplifycfg -scalarrepl -instcombine -reassociate -licm -simplifycfg -loop-simplify -indvars -instcombine -simplifycfg -mem2reg -loop-simplify -indvars -instcombine -gvn -gvn -instcombine -adce -break-crit-edges -simplifycfg -loop-delete -global-array-opt -dce -dse -adce -find-syn-modules -top rayTriangleIntersect -deadargelim -mem2reg -instcombine -dce -presyn-prepare -auto-rom-infer -interface-preproc -syn-check -check-rec-only -find-region -simplifycfg -func-extr -function-inline -globaldce -mem2reg -instcombine -dce -gvn -globaldce -adce -adse -constprop -instcombine -bit-constprop -instcombine -dce -simplifycfg -bitop-raise -simplifycfg -dce -loop-delete -reassociate -globalopt -global-privatize -mem2reg -dce -global-constprop -pointer-simplify -constprop -dce -func-inst -deadargelim -auto-shift-reg-idiom -promote-dbg-pointer -norm-name /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.0.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.1.bc -f -phase std-opt 
+Command         transform done; 0.23 sec.
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.2 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.26 seconds; current allocated memory: 348.388 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO-FLOW: Checking Synthesizability 1/2..
+Execute         transform -hls -syn-check -check-rec-only -scalarrepl -norm-name -dce -mem2reg -instcombine -function-uniquify -directive-preproc -mem2reg -dse -dce -auto-rom-infer -dce -pag -array-normalize -instcombine -dce -array-seg-normalize -instcombine -dce -data-pack -instcombine -dce -inst-simplify -array-flatten -instcombine -dce -array-burst -dce -deadargelim -promote-global-argument -simplifycfg -mem2reg -globaldce -dce -deadargelim -dce -instcombine -function-inline -globaldce -dce -doublePtrSimplify -doublePtrElim -dce -doublePtrSimplify -promote-dbg-pointer -dce -scalarrepl -dse -adse -instcombine -ptrLegalization -simplifycfg -dce -instcombine -pointer-simplify -ptrArgReplace -dce -instcombine -resolve-double-ptr -scalarrepl -norm-name -dce -mem2reg -instcombine -ptrLegalization -simplifycfg -deadargelim -instcombine -dce -inst-simplify -function-uniquify -directive-preproc -mem2reg -dse -dce -globaldce -check-dspbuiltin /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.1.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.2.prechk.bc -f 
+Command         transform done; 0.27 sec.
+INFO-FLOW: Checking Synthesizability 2/2..
+Execute         transform -syn-check /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.2.prechk.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.2.bc -f -phase syn-check 
+Command         transform done; 0.25 sec.
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.47 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.53 seconds; current allocated memory: 387.605 MB.
+INFO-FLOW: Compiler optimizing ...
+INFO-FLOW: Share syncheck's 1.bc for syn flow: copy /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.g.1.bc to /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.o.1.bc
+INFO-FLOW: Presyn 1...
+Execute         transform -hls -tmp /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db -interface-port-rename -function-uniquify -directive-preproc -mem2reg -dse -dce -scalarrepl -norm-name -deadargelim -mem2reg -instcombine -dce -simplifycfg -auto-rom-infer -dce -function-uniquify -resource-proc -clib-intrinsic-prepare -dce -func-buffer -dce -pag -array-normalize -func-legal -instcombine -gvn -constprop -dce -simplifycfg -mem2reg -globaldce -resolve-double-ptr -dce -deadargelim -dce -instcombine -ptrArgReplace -mem2reg -dce -array-seg-normalize -deadargelim -instcombine -dce -function-uniquify -directive-preproc -mem2reg -dse -dce -pointer-simplify -dce -port-alignment -dce -interface-preproc -data-pack -instcombine -dce -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -loop-simplify -indvars -instcombine -gvn -loop-simplify -mem2reg -dce -find-region -instcombine -auto-loop-pipeline -inst-simplify -interface-preproc -cfgopt -instcombine -indvars -auto-loop-unroll -loop-simplify -loop-bound -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -clean-region -attach-range -gvn -inst-simplify -constprop -simplifycfg -dce -pointer-simplify -dce -globalopt -constprop -dce -array-promote -constprop -dce -ptrArgReplace -mem2reg -simplifycfg -dce -instcombine -dce -array-transform-check -array-reshape -instcombine -simplifycfg -dce -ptrArgReplace -deadargelim -mem2reg -instcombine -simplifycfg -dce -indvars -loop-simplify -loop-bound -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -duplicate-dataflow-processes -globaldce -instcombine -array-partition -instcombine -simplifycfg -dce -ptrArgReplace -global-constprop -deadargelim -mem2reg -func-legal -dce -global-constprop -deadargelim -mem2reg -simplifycfg -dce -merge-param -deadargelim -globalopt -constprop -dce -array-promote -constprop -dce -ptrArgReplace -mem2reg -simplifycfg -dce -mem-intrinsic-preproc -dce -global-internalize -global-privatize -mem2reg -globaldce -promote-global-argument -ptrArgReplace -mem2reg -dce -globalopt -mergereturn -simplify-global-access -mem2reg -dce -pointer-simplify -dce -functionattrs -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -dce -norm-name -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -accesses-merge -function-inline -complex-op-raise -inst-simplify -globaldce -func-inst -constprop -instcombine -simplifycfg -dce -func-legal -dce -loop-bound -arraycheck -bitwidthmin2 -bitwidthmin2 -on-by-dataflow -loop-delete -instcombine -simplifycfg -globaldce -dce -gvn -deadargelim -dce -loop-simplify -clean-region -simplifycfg -propagate-stable-arguments -loop-stream -instcombine -simplifycfg -dce -globaldce -duplicate-dataflow-processes -stream-intrinsic-preproc -dce -check-ap-stream -loop-simplify -eliminate-keepreads -extract-dataflow-in-loop -loop-simplify -dce -gvn -deadargelim -dse -duplicate-dataflow-processes -check-dataflow-syntax -legalize-stream-variable -legalize-global -extract-subproc -dce -dead-channel-elimination -canonicalize-gep -globaldce -dce -gvn -hls-dead-arg-elim -deadargelim -directive-preproc -annotate-dataflow-channels -scalar-preprocessing -scalar-propagation2 -deadargelim -globaldce -mem2reg -check-dataflow-channels -function-stream -dce -globaldce -prop-fifo-spec -internal-stream-gen -canonicalize-gep -globaldce -dce -gvn -deadargelim -mergereturn -indvars -loop-simplify -instcombine -array-stream -array-seg-normalize -array-partition -func-legal -instcombine -simplifycfg -dce -bundle-memfifo-ops -deadargelim -function-uniquify -directive-preproc -mem2reg -dse -dce -group-axi-access -licm -simplifycfg -dce -loop-delete -hls-display -norm-name /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.o.1.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.o.1.tmp.bc -f 
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_15_1' (raytriangleintersect.cpp:15) in function 'rayTriangleIntersect' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_22_3' (raytriangleintersect.cpp:22) in function 'rayTriangleIntersect' automatically.
+INFO: [XFORM 203-101] Partitioning array 'dir.V' (raytriangleintersect.cpp:48) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'P1.V' (raytriangleintersect.cpp:50) in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'P2.V' (raytriangleintersect.cpp:51) in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'P3.V' (raytriangleintersect.cpp:52) in dimension 2 completely.
+Command         transform done; 0.42 sec.
+INFO-FLOW: Presyn 2...
+Execute         transform -hls -keep-callgraph -scalarrepl -mem2reg -port-alignment -attach-range -dce -pipe-mux-gen -indvars -loop-bound -inst-simplify -instcombine -dce -merge-array-access -mem2reg -dce -clean-region -mergereturn -if-conv -instcombine -dce -constprop -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -scalarrepl -mem2reg -global-constprop -deadargelim -deadargelim -instcombine -dce -simplifycfg -ptrArgReplace -mem2reg -function-inline -globaldce -mem2reg -instcombine -dce -expr-balance -instcombine -dce -bitwidthmin2 -bitwidthmin2 -interface-preproc -directive-preproc -inst-rectify -instcombine -dce -functionattrs -constprop -instcombine -bit-constprop -simplify-global-access -globalopt -globaldce -inst-simplify -instcombine -elimdeaddata -dce -loop-delete -simplifycfg -loop-simplify -auto-burst -barrier -norm-name /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.o.1.tmp.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.o.2.bc -f -phase presyn 
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (raytriangleintersect.cpp:95:28) in function 'rayTriangleIntersect'... converting 5 basic blocks.
+Command         transform done; 0.32 sec.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.66 seconds. CPU system time: 0.07 seconds. Elapsed time: 0.75 seconds; current allocated memory: 451.548 MB.
+Execute         get_config_compile -enable_auto_rewind 
+Execute         get_config_compile -enable_loop_extract 
+INFO-FLOW: Building ssdm...
+Execute         transform -hls -function-uniquify -auto-function-inline -globaldce -ptrArgReplace -mem2reg -dce -reset-lda -loop-simplify -indvars -aggr-aa -licm -loop-dep -loop-bound -licm -loop-simplify -flattenloopnest -array-flatten -gvn -instcombine -dce -array-map -dce -func-legal -gvn -adce -instcombine -cfgopt -simplifycfg -loop-simplify -array-burst -promote-global-argument -dce -array-seg-normalize -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -gvn -gvn -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -dse -adse -adce -licm -inst-simplify -dce -globaldce -instcombine -array-stream -eliminate-keepreads -instcombine -dce -deadargelim -doublePtrSimplify -doublePtrElim -dce -doublePtrSimplify -promote-dbg-pointer -dce -scalarrepl -mem2reg -norm-name -mem2reg -instcombine -dse -adse -adce -ptrLegalization -dce -auto-rom-infer -array-flatten -dce -instcombine -check-doubleptr -loop-rot -constprop -cfgopt -simplifycfg -loop-simplify -indvars -pointer-simplify -dce -loop-bound -loop-simplify -loop-preproc -constprop -global-constprop -gvn -mem2reg -instcombine -dce -loop-bound -loop-merge -dce -deadargelim -dce -canonicalize-dataflow -dce -scalar-propagation2 -deadargelim -globaldce -mem2reg -load-elim -read-loop-dep -loop-simplify -loop-extract-inner -directive-preproc -bitwidthmin2 -bitwidthmin2 -read-loop-dep -interface-preproc -directive-preproc -interface-gen -bram-byte-enable -deadargelim -inst-simplify -dce -gvn -mem2reg -instcombine -dce -adse -loop-bound -instcombine -cfgopt -simplifycfg -loop-simplify -clean-region -io-protocol -find-region -mem2reg -bitop-raise -complex-op-raise -inst-simplify -inst-rectify -instcombine -adce -deadargelim -float-op-raise -loop-simplify -phi-opt -bitop-raise -cfgopt -simplifycfg -strip-dead-prototypes -interface-lower -bitop-lower -intrinsic-lower -auto-function-inline -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -inst-simplify -simplifycfg -loop-simplify -mergereturn -inst-simplify -inst-rectify -dce -load-elim -bitop-lower -float-op-raise -fma-raise -loop-rewind -pointer-simplify -dce -cfgopt -dce -loop-bound -loop-dep -read-loop-dep -dce -dyn-mem-reuse -dce -recurrence-min -dce -check-stream -norm-name -legalize -validate-dataflow -inst-clarity -bitwidth -dump-loop-dep-to-ir -check-all-ssdm -cdfg-build /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.o.2.bc -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/a.o.3.bc -f -phase build-ssdm 
+INFO: [XFORM 203-541] Flattening a loop nest 'VITIS_LOOP_20_2' (raytriangleintersect.cpp:20:32) in function 'rayTriangleIntersect'.
+INFO: [HLS 200-472] Inferring partial write operation for 'P1.V[0]' (raytriangleintersect.cpp:24:16)
+INFO: [HLS 200-472] Inferring partial write operation for 'P2.V[0]' (raytriangleintersect.cpp:25:16)
+INFO: [HLS 200-472] Inferring partial write operation for 'P3.V[0]' (raytriangleintersect.cpp:26:16)
+Command         transform done; 0.38 sec.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.33 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.38 seconds; current allocated memory: 493.683 MB.
+INFO-FLOW: Finish building internal data model.
+Command       opt_and_import_c done; 1.94 sec.
+Command     elaborate done; 87 sec.
+Execute     ap_eval exec zip -j /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/dut.hcp $dbDir/a.o.3.bc $dbDir/${topname}.rtl_wrap.cfg.tcl $dbDir/apatb_${topname}.cpp $dbDir/apatb_${topname}_util.cpp $dbDir/apatb_${topname}_ir.ll $dbDir/mapper_${topname}.cpp $dbDir/top-io-fe.xml $dbDir/kernel.internal.xml $workdir/../hls.app 
+Command     ap_eval done; 0.13 sec.
+Execute     autosyn -from_csynth_design=1 
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO-FLOW: Synthesizing C/C++ design ...
+INFO: [HLS 200-10] Synthesizing 'rayTriangleIntersect' ...
+Execute       ap_set_top_model rayTriangleIntersect 
+Execute       get_model_list rayTriangleIntersect -filter all-wo-channel -topdown 
+Execute       preproc_iomode -model rayTriangleIntersect 
+Execute       preproc_iomode -model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+Execute       preproc_iomode -model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+Execute       preproc_iomode -model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+Execute       get_model_list rayTriangleIntersect -filter all-wo-channel 
+INFO-FLOW: Model list for configure: rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP rayTriangleIntersect
+INFO-FLOW: Configuring Module : rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 ...
+Execute       set_default_model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+Execute       apply_spec_resource_limit rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+INFO-FLOW: Configuring Module : rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 ...
+Execute       set_default_model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+Execute       apply_spec_resource_limit rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+INFO-FLOW: Configuring Module : rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP ...
+Execute       set_default_model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+Execute       apply_spec_resource_limit rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+INFO-FLOW: Configuring Module : rayTriangleIntersect ...
+Execute       set_default_model rayTriangleIntersect 
+Execute       apply_spec_resource_limit rayTriangleIntersect 
+INFO-FLOW: Model list for preprocess: rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP rayTriangleIntersect
+INFO-FLOW: Preprocessing Module: rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 ...
+Execute       set_default_model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+Execute       cdfg_preprocess -model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+Execute       rtl_gen_preprocess rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+INFO-FLOW: Preprocessing Module: rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 ...
+Execute       set_default_model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+Execute       cdfg_preprocess -model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+Execute       rtl_gen_preprocess rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+INFO-FLOW: Preprocessing Module: rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP ...
+Execute       set_default_model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+Execute       cdfg_preprocess -model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+Execute       rtl_gen_preprocess rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+INFO-FLOW: Preprocessing Module: rayTriangleIntersect ...
+Execute       set_default_model rayTriangleIntersect 
+Execute       cdfg_preprocess -model rayTriangleIntersect 
+Execute       rtl_gen_preprocess rayTriangleIntersect 
+INFO-FLOW: Model list for synthesis: rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP rayTriangleIntersect
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+Execute       schedule -model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_15_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 2, loop 'VITIS_LOOP_15_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.13 seconds. CPU system time: 0.05 seconds. Elapsed time: 0.22 seconds; current allocated memory: 493.966 MB.
+Execute       syn_report -verbosereport -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.sched.adb -f 
+INFO-FLOW: Finish scheduling rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.
+Execute       set_default_model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+Execute       bind -model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.03 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.05 seconds; current allocated memory: 494.155 MB.
+Execute       syn_report -verbosereport -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.bind.adb -f 
+INFO-FLOW: Finish binding rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+Execute       schedule -model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_20_2_VITIS_LOOP_22_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 3, loop 'VITIS_LOOP_20_2_VITIS_LOOP_22_3'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.08 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.11 seconds; current allocated memory: 494.418 MB.
+Execute       syn_report -verbosereport -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.sched.adb -f 
+INFO-FLOW: Finish scheduling rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.
+Execute       set_default_model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+Execute       bind -model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.05 seconds. CPU system time: 0 seconds. Elapsed time: 0.07 seconds; current allocated memory: 494.725 MB.
+Execute       syn_report -verbosereport -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.bind.adb -f 
+INFO-FLOW: Finish binding rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+Execute       schedule -model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'NUM_TRIS_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 42, loop 'NUM_TRIS_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+Command       schedule done; 0.43 sec.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.43 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.49 seconds; current allocated memory: 495.414 MB.
+Execute       syn_report -verbosereport -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.21 sec.
+Execute       db_write -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.sched.adb -f 
+INFO-FLOW: Finish scheduling rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.
+Execute       set_default_model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+Execute       bind -model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+Command       bind done; 0.18 sec.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.4 seconds. CPU system time: 0 seconds. Elapsed time: 0.42 seconds; current allocated memory: 496.327 MB.
+Execute       syn_report -verbosereport -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.34 sec.
+Execute       db_write -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.bind.adb -f 
+INFO-FLOW: Finish binding rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rayTriangleIntersect' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model rayTriangleIntersect 
+Execute       schedule -model rayTriangleIntersect 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.43 seconds. CPU system time: 0 seconds. Elapsed time: 0.45 seconds; current allocated memory: 496.561 MB.
+Execute       syn_report -verbosereport -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.sched.adb -f 
+INFO-FLOW: Finish scheduling rayTriangleIntersect.
+Execute       set_default_model rayTriangleIntersect 
+Execute       bind -model rayTriangleIntersect 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+Command       bind done; 0.17 sec.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.21 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.25 seconds; current allocated memory: 497.054 MB.
+Execute       syn_report -verbosereport -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.28 sec.
+Execute       db_write -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.bind.adb -f 
+INFO-FLOW: Finish binding rayTriangleIntersect.
+Execute       get_model_list rayTriangleIntersect -filter all-wo-channel 
+INFO-FLOW: Preprocessing for RTLGen ...
+Execute       rtl_gen_preprocess rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+Execute       rtl_gen_preprocess rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+Execute       rtl_gen_preprocess rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+Execute       rtl_gen_preprocess rayTriangleIntersect 
+INFO-FLOW: Model list for RTL generation: rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP rayTriangleIntersect
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 -top_prefix rayTriangleIntersect_ -sub_prefix rayTriangleIntersect_ -mg_file /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1' pipeline 'VITIS_LOOP_15_1' pipeline type 'loop pipeline'
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1/m_axi_dir_ARUSER' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.32 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.38 seconds; current allocated memory: 497.587 MB.
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute       gen_rtl rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 -style xilinx -f -lang vhdl -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/vhdl/rayTriangleIntersect_rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+Execute       gen_rtl rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 -style xilinx -f -lang vlog -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/verilog/rayTriangleIntersect_rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+Execute       syn_report -csynth -model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 -f -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.adb 
+Execute       db_write -model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 -bindview -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 -p /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 -top_prefix rayTriangleIntersect_ -sub_prefix rayTriangleIntersect_ -mg_file /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3' pipeline 'VITIS_LOOP_20_2_VITIS_LOOP_22_3' pipeline type 'loop pipeline'
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P1_DRAM_ARUSER' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P2_DRAM_ARUSER' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3/m_axi_P3_DRAM_ARUSER' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3'.
+Command       create_rtl_model done; 0.18 sec.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.18 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.29 seconds; current allocated memory: 499.050 MB.
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute       gen_rtl rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 -style xilinx -f -lang vhdl -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/vhdl/rayTriangleIntersect_rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+Execute       gen_rtl rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 -style xilinx -f -lang vlog -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/verilog/rayTriangleIntersect_rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+Execute       syn_report -csynth -model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 -f -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.adb 
+Execute       db_write -model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 -bindview -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 -p /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP -top_prefix rayTriangleIntersect_ -sub_prefix rayTriangleIntersect_ -mg_file /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP' pipeline 'NUM_TRIS_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mul_32s_32s_48_1_1': 27 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sdiv_34ns_32s_32_38_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP'.
+Command       create_rtl_model done; 0.13 sec.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.27 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.33 seconds; current allocated memory: 503.053 MB.
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute       gen_rtl rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP -style xilinx -f -lang vhdl -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/vhdl/rayTriangleIntersect_rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+Execute       gen_rtl rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP -style xilinx -f -lang vlog -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/verilog/rayTriangleIntersect_rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+Execute       syn_report -csynth -model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.21 sec.
+Execute       syn_report -rtlxml -model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.11 sec.
+Execute       syn_report -verbosereport -model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.46 sec.
+Execute       db_write -model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP -f -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.adb 
+Command       db_write done; 0.13 sec.
+Execute       db_write -model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP -bindview -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP -p /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rayTriangleIntersect' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model rayTriangleIntersect -top_prefix  -sub_prefix rayTriangleIntersect_ -mg_file /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.tcl 
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/dir' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/P1_DRAM' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/P2_DRAM' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/P3_DRAM' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/intersectIndex' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/dir_DRAM' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/P1_DRAM_offset' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/P2_DRAM_offset' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/P3_DRAM_offset' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rayTriangleIntersect/intersectIndex_offset' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'rayTriangleIntersect' to 's_axilite & ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Bundling port 'dir_DRAM', 'P1_DRAM_offset', 'P2_DRAM_offset', 'P3_DRAM_offset', 'intersectIndex_offset' and 'return' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rayTriangleIntersect'.
+Command       create_rtl_model done; 0.12 sec.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1.06 seconds. CPU system time: 0.05 seconds. Elapsed time: 1.18 seconds; current allocated memory: 509.893 MB.
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute       gen_rtl rayTriangleIntersect -istop -style xilinx -f -lang vhdl -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/vhdl/rayTriangleIntersect 
+Execute       gen_rtl rayTriangleIntersect -istop -style xilinx -f -lang vlog -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/verilog/rayTriangleIntersect 
+Execute       syn_report -csynth -model rayTriangleIntersect -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/rayTriangleIntersect_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model rayTriangleIntersect -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/rayTriangleIntersect_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model rayTriangleIntersect -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.31 sec.
+Execute       db_write -model rayTriangleIntersect -f -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.adb 
+Execute       db_write -model rayTriangleIntersect -bindview -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info rayTriangleIntersect -p /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect 
+Execute       export_constraint_db -f -tool general -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.constraint.tcl 
+Execute       syn_report -designview -model rayTriangleIntersect -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.design.xml 
+Command       syn_report done; 0.28 sec.
+Execute       syn_report -csynthDesign -model rayTriangleIntersect -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       get_config_rtl -disable_wave_debug 
+Execute       syn_report -wcfg -model rayTriangleIntersect -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_dataflow_ana.wcfg 
+Execute       syn_report -protoinst -model rayTriangleIntersect -o /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.protoinst 
+Execute       get_config_debug -directory 
+Execute       sc_get_clocks rayTriangleIntersect 
+Execute       get_config_export -vivado_clock 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       sc_get_portdomain rayTriangleIntersect 
+INFO-FLOW: Model list for RTL component generation: rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP rayTriangleIntersect
+INFO-FLOW: Handling components in module [rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1] ... 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.compgen.tcl 
+INFO-FLOW: Found component rayTriangleIntersect_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3] ... 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.compgen.tcl 
+INFO-FLOW: Found component rayTriangleIntersect_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP] ... 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.compgen.tcl 
+INFO-FLOW: Found component rayTriangleIntersect_mul_32s_32s_48_1_1.
+INFO-FLOW: Append model rayTriangleIntersect_mul_32s_32s_48_1_1
+INFO-FLOW: Found component rayTriangleIntersect_sdiv_34ns_32s_32_38_1.
+INFO-FLOW: Append model rayTriangleIntersect_sdiv_34ns_32s_32_38_1
+INFO-FLOW: Found component rayTriangleIntersect_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [rayTriangleIntersect] ... 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.tcl 
+INFO-FLOW: Found component rayTriangleIntersect_P1_V_0.
+INFO-FLOW: Append model rayTriangleIntersect_P1_V_0
+INFO-FLOW: Found component rayTriangleIntersect_control_s_axi.
+INFO-FLOW: Append model rayTriangleIntersect_control_s_axi
+INFO-FLOW: Found component rayTriangleIntersect_dir_m_axi.
+INFO-FLOW: Append model rayTriangleIntersect_dir_m_axi
+INFO-FLOW: Found component rayTriangleIntersect_P1_DRAM_m_axi.
+INFO-FLOW: Append model rayTriangleIntersect_P1_DRAM_m_axi
+INFO-FLOW: Found component rayTriangleIntersect_P2_DRAM_m_axi.
+INFO-FLOW: Append model rayTriangleIntersect_P2_DRAM_m_axi
+INFO-FLOW: Found component rayTriangleIntersect_P3_DRAM_m_axi.
+INFO-FLOW: Append model rayTriangleIntersect_P3_DRAM_m_axi
+INFO-FLOW: Found component rayTriangleIntersect_intersectIndex_m_axi.
+INFO-FLOW: Append model rayTriangleIntersect_intersectIndex_m_axi
+INFO-FLOW: Append model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1
+INFO-FLOW: Append model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3
+INFO-FLOW: Append model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP
+INFO-FLOW: Append model rayTriangleIntersect
+INFO-FLOW: Generating RTL model list ...
+INFO-FLOW: All models in this session: rayTriangleIntersect_flow_control_loop_pipe_sequential_init rayTriangleIntersect_flow_control_loop_pipe_sequential_init rayTriangleIntersect_mul_32s_32s_48_1_1 rayTriangleIntersect_sdiv_34ns_32s_32_38_1 rayTriangleIntersect_flow_control_loop_pipe_sequential_init rayTriangleIntersect_P1_V_0 rayTriangleIntersect_control_s_axi rayTriangleIntersect_dir_m_axi rayTriangleIntersect_P1_DRAM_m_axi rayTriangleIntersect_P2_DRAM_m_axi rayTriangleIntersect_P3_DRAM_m_axi rayTriangleIntersect_intersectIndex_m_axi rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1 rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3 rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP rayTriangleIntersect
+INFO-FLOW: Generating /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/autopilot.rtl.models.txt file...
+INFO-FLOW: To file: write model rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model rayTriangleIntersect_mul_32s_32s_48_1_1
+INFO-FLOW: To file: write model rayTriangleIntersect_sdiv_34ns_32s_32_38_1
+INFO-FLOW: To file: write model rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model rayTriangleIntersect_P1_V_0
+INFO-FLOW: To file: write model rayTriangleIntersect_control_s_axi
+INFO-FLOW: To file: write model rayTriangleIntersect_dir_m_axi
+INFO-FLOW: To file: write model rayTriangleIntersect_P1_DRAM_m_axi
+INFO-FLOW: To file: write model rayTriangleIntersect_P2_DRAM_m_axi
+INFO-FLOW: To file: write model rayTriangleIntersect_P3_DRAM_m_axi
+INFO-FLOW: To file: write model rayTriangleIntersect_intersectIndex_m_axi
+INFO-FLOW: To file: write model rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1
+INFO-FLOW: To file: write model rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3
+INFO-FLOW: To file: write model rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP
+INFO-FLOW: To file: write model rayTriangleIntersect
+INFO-FLOW: Generating /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/autopilot.rtl.models.tcl file...
+INFO-FLOW: Finished generating RTL model list.
+
+
+INFO-FLOW: RTL Generation done.
+INFO-FLOW: CAS Generation done.
+INFO-FLOW: CBC Generation done.
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::auto_generate_csynth_design
+Execute       get_top 
+Execute       get_config_export -ipname 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       get_config_rtl -module_auto_prefix 
+INFO-FLOW: DBG:PUTS: read_platform_lib /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/common.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/APCoreGen.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op_simcore.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/interface.gen 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute           source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command       ap_source done; 0.14 sec.
+INFO-FLOW: DBG:PUTS:   using AESL_AUTOCG::g_clock_period=10.000 (was NA)
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::generate_ip_cores gen_sim_model='1' gen_fp_models='0' gen_for_export='0' dstSCDir='' dstVhdlDir='/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/vhdl' dstVlogDir='/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/vlog' tclDir='/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db' modelList='rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+rayTriangleIntersect_mul_32s_32s_48_1_1
+rayTriangleIntersect_sdiv_34ns_32s_32_38_1
+rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+rayTriangleIntersect_P1_V_0
+rayTriangleIntersect_control_s_axi
+rayTriangleIntersect_dir_m_axi
+rayTriangleIntersect_P1_DRAM_m_axi
+rayTriangleIntersect_P2_DRAM_m_axi
+rayTriangleIntersect_P3_DRAM_m_axi
+rayTriangleIntersect_intersectIndex_m_axi
+rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1
+rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3
+rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP
+rayTriangleIntersect
+' expOnly='0'
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.compgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.compgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.compgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.tcl 
+INFO: [RTMG 210-278] Implementing memory 'rayTriangleIntersect_P1_V_0_ram (RAM)' using auto RAMs.
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute         source ./control.slave.tcl 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Command       ap_source done; 0.4 sec.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 1.23 seconds. CPU system time: 0.1 seconds. Elapsed time: 1.59 seconds; current allocated memory: 515.314 MB.
+INFO-FLOW: DBG:PROC: ::AP::create_csynth_xml outfile=''
+INFO-FLOW: Running: create_csynth_xml read xml data
+INFO-FLOW: Done: create_csynth_xml read xml data time: 0 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml bind info
+INFO-FLOW: Done: create_csynth_xml bind info time: 0 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml config info
+Execute       get_config_op mul -impl 
+Execute       get_config_op mul -latency 
+Execute       get_config_op mul -precision 
+Execute       get_config_op add -impl 
+Execute       get_config_op add -latency 
+Execute       get_config_op add -precision 
+Execute       get_config_op sub -impl 
+Execute       get_config_op sub -latency 
+Execute       get_config_op sub -precision 
+Execute       get_config_op fadd -impl 
+Execute       get_config_op fadd -latency 
+Execute       get_config_op fadd -precision 
+Execute       get_config_op fsub -impl 
+Execute       get_config_op fsub -latency 
+Execute       get_config_op fsub -precision 
+Execute       get_config_op fdiv -impl 
+Execute       get_config_op fdiv -latency 
+Execute       get_config_op fdiv -precision 
+Execute       get_config_op fexp -impl 
+Execute       get_config_op fexp -latency 
+Execute       get_config_op fexp -precision 
+Execute       get_config_op flog -impl 
+Execute       get_config_op flog -latency 
+Execute       get_config_op flog -precision 
+Execute       get_config_op fmul -impl 
+Execute       get_config_op fmul -latency 
+Execute       get_config_op fmul -precision 
+Execute       get_config_op frsqrt -impl 
+Execute       get_config_op frsqrt -latency 
+Execute       get_config_op frsqrt -precision 
+Execute       get_config_op frecip -impl 
+Execute       get_config_op frecip -latency 
+Execute       get_config_op frecip -precision 
+Execute       get_config_op fsqrt -impl 
+Execute       get_config_op fsqrt -latency 
+Execute       get_config_op fsqrt -precision 
+Execute       get_config_op dadd -impl 
+Execute       get_config_op dadd -latency 
+Execute       get_config_op dadd -precision 
+Execute       get_config_op dsub -impl 
+Execute       get_config_op dsub -latency 
+Execute       get_config_op dsub -precision 
+Execute       get_config_op ddiv -impl 
+Execute       get_config_op ddiv -latency 
+Execute       get_config_op ddiv -precision 
+Execute       get_config_op dexp -impl 
+Execute       get_config_op dexp -latency 
+Execute       get_config_op dexp -precision 
+Execute       get_config_op dlog -impl 
+Execute       get_config_op dlog -latency 
+Execute       get_config_op dlog -precision 
+Execute       get_config_op dmul -impl 
+Execute       get_config_op dmul -latency 
+Execute       get_config_op dmul -precision 
+Execute       get_config_op drsqrt -impl 
+Execute       get_config_op drsqrt -latency 
+Execute       get_config_op drsqrt -precision 
+Execute       get_config_op drecip -impl 
+Execute       get_config_op drecip -latency 
+Execute       get_config_op drecip -precision 
+Execute       get_config_op dsqrt -impl 
+Execute       get_config_op dsqrt -latency 
+Execute       get_config_op dsqrt -precision 
+Execute       get_config_op hadd -impl 
+Execute       get_config_op hadd -latency 
+Execute       get_config_op hadd -precision 
+Execute       get_config_op hsub -impl 
+Execute       get_config_op hsub -latency 
+Execute       get_config_op hsub -precision 
+Execute       get_config_op hdiv -impl 
+Execute       get_config_op hdiv -latency 
+Execute       get_config_op hdiv -precision 
+Execute       get_config_op hmul -impl 
+Execute       get_config_op hmul -latency 
+Execute       get_config_op hmul -precision 
+Execute       get_config_op hsqrt -impl 
+Execute       get_config_op hsqrt -latency 
+Execute       get_config_op hsqrt -precision 
+Execute       get_config_op facc -impl 
+Execute       get_config_op facc -latency 
+Execute       get_config_op facc -precision 
+Execute       get_config_op fmacc -impl 
+Execute       get_config_op fmacc -latency 
+Execute       get_config_op fmacc -precision 
+Execute       get_config_op fmadd -impl 
+Execute       get_config_op fmadd -latency 
+Execute       get_config_op fmadd -precision 
+Execute       get_config_storage fifo -auto_srl_max_bits 
+Execute       get_config_storage fifo -auto_srl_max_depth 
+Execute       get_config_storage fifo -impl 
+Execute       get_solution -flow_target 
+Execute       get_config_array_partition -complete_threshold 
+Execute       get_config_array_partition -throughput_driven 
+Execute       get_config_compile -enable_auto_rewind 
+Execute       get_config_compile -name_max_length 
+Execute       get_config_compile -no_signed_zeros 
+Execute       get_config_compile -pipeline_loops 
+Execute       get_config_compile -pipeline_style 
+Execute       get_config_compile -pragma_strict_mode 
+Execute       get_config_compile -pre_tcl 
+Execute       get_config_compile -unsafe_math_optimizations 
+Execute       get_config_dataflow -default_channel 
+Execute       get_config_dataflow -disable_fifo_sizing_opt 
+Execute       get_config_dataflow -fifo_depth 
+Execute       get_config_dataflow -override_user_fifo_depth 
+Execute       get_config_dataflow -scalar_fifo_depth 
+Execute       get_config_dataflow -start_fifo_depth 
+Execute       get_config_dataflow -strict_mode 
+Execute       get_config_dataflow -strict_stable_sync 
+Execute       get_config_dataflow -task_level_fifo_depth 
+Execute       get_config_debug -directory 
+Execute       get_config_debug -enable 
+Execute       get_config_export -description 
+Execute       get_config_export -disable_deadlock_detection 
+Execute       get_config_export -display_name 
+Execute       get_config_export -format 
+Execute       get_config_export -ip_xdc_file 
+Execute       get_config_export -ip_xdc_ooc_file 
+Execute       get_config_export -ipname 
+Execute       get_config_export -library 
+Execute       get_config_export -output 
+Execute       get_config_export -rtl 
+Execute       get_config_export -taxonomy 
+Execute       get_config_export -vendor 
+Execute       get_config_export -version 
+Execute       get_config_export -vivado_clock 
+Execute       get_config_export -vivado_impl_strategy 
+Execute       get_config_export -vivado_max_timing_paths 
+Execute       get_config_export -vivado_optimization_level 
+Execute       get_config_export -vivado_pblock 
+Execute       get_config_export -vivado_phys_opt 
+Execute       get_config_export -vivado_report_level 
+Execute       get_config_export -vivado_synth_design_args 
+Execute       get_config_export -vivado_synth_strategy 
+Execute       get_config_interface -clock_enable 
+Execute       get_config_interface -default_slave_interface 
+Execute       get_config_interface -m_axi_addr64 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_interface -m_axi_auto_max_ports 
+Execute       get_config_interface -m_axi_buffer_impl 
+Execute       get_config_interface -m_axi_conservative_mode 
+Execute       get_config_interface -m_axi_flush_mode 
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_max_read_burst_length 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -m_axi_max_write_burst_length 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_num_read_outstanding 
+Execute       get_config_interface -m_axi_num_write_outstanding 
+Execute       get_config_interface -m_axi_offset 
+Execute       get_config_interface -register_io 
+Execute       get_config_interface -s_axilite_data64 
+Execute       get_config_interface -s_axilite_mailbox 
+Execute       get_config_interface -s_axilite_status_regs 
+Execute       get_config_interface -s_axilite_sw_reset 
+Execute       get_config_rtl -header 
+Execute       get_config_rtl -kernel_profile 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -mult_keep_attribute 
+Execute       get_config_rtl -register_all_io 
+Execute       get_config_rtl -register_reset_num 
+Execute       get_config_rtl -reset 
+Execute       get_config_rtl -reset_async 
+Execute       get_config_rtl -reset_level 
+Execute       get_config_schedule -enable_dsp_full_reg 
+Execute       get_config_unroll -tripcount_threshold 
+INFO-FLOW: Done: create_csynth_xml config info time: 0.1 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml write xml
+INFO-FLOW: Done: create_csynth_xml write xml time: 0 seconds per iteration
+INFO-FLOW: DBG:PUTS:       create_csynth_xml wrote csynth_xml=/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/syn/report/csynth.xml
+INFO-FLOW: DBG:PROC: ::AP::DESIGN_DATA::generate_json generate_bd_files='0' generate_xo_files='0' modelList='rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+rayTriangleIntersect_mul_32s_32s_48_1_1
+rayTriangleIntersect_sdiv_34ns_32s_32_38_1
+rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+rayTriangleIntersect_P1_V_0
+rayTriangleIntersect_control_s_axi
+rayTriangleIntersect_dir_m_axi
+rayTriangleIntersect_P1_DRAM_m_axi
+rayTriangleIntersect_P2_DRAM_m_axi
+rayTriangleIntersect_P3_DRAM_m_axi
+rayTriangleIntersect_intersectIndex_m_axi
+rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1
+rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3
+rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP
+rayTriangleIntersect
+' rtl_lang='both' bootstrap_tcl='false' outdir='' outfilename=''
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute       get_solution -flow_target 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/top-io-be.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.dataonly.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.dataonly.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.dataonly.tcl 
+Execute       get_config_export -format 
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute       get_solution -flow_target 
+Execute       get_config_rtl -kernel_profile 
+Execute       get_config_rtl -kernel_profile 
+Execute       get_config_rtl -stall_sig_gen 
+Execute       get_config_rtl -profile 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.constraint.tcl 
+Execute       sc_get_clocks rayTriangleIntersect 
+Execute       source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute       get_config_export -ip_xdc_file 
+Execute       get_config_export -ip_xdc_ooc_file 
+Execute       get_config_debug -directory 
+INFO-FLOW: DBG:PROC: ::AP::add_csynth_report_sections
+INFO-FLOW: DBG:PUTS:       update_csynth_reports json2reportxml
+Execute       send_msg_by_id INFO @200-1603@%s  and missed bursts 
+INFO: [HLS 200-1603] Design has MAXI bursts and missed bursts, see Vitis HLS GUI synthesis summary report for detailed information.
+INFO-FLOW: DBG:PUTS:       update_csynth_reports wrote xml
+INFO-FLOW: DBG:PUTS:       update_csynth_reports appended to csynth rpt file
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1.68 seconds. CPU system time: 0.05 seconds. Elapsed time: 1.81 seconds; current allocated memory: 527.279 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for rayTriangleIntersect.
+INFO: [VLOG 209-307] Generating Verilog RTL for rayTriangleIntersect.
+Execute       syn_report -model rayTriangleIntersect -printsummary 
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 136.99 MHz
+Command     autosyn done; 7.6 sec.
+Command   csynth_design done; 94.75 sec.
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 84.34 seconds. CPU system time: 9.14 seconds. Elapsed time: 94.75 seconds; current allocated memory: 527.265 MB.
+Command ap_source done; 98.39 sec.
+Execute cleanup_all 
+INFO-FLOW: Workspace /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1 opened at Sun May 02 18:24:56 EDT 2021
+Execute     ap_set_clock -name default -period 10 -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+Execute     set_part xczu3eg-sbva484-1-e 
+Execute       create_platform xczu3eg-sbva484-1-e -board  
+DBG:HLSDevice: Trying to load device library: /tools/software/xilinx/Vitis_HLS/2021.1/lib/lnx64.o/librdi_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/software/xilinx/Vivado/2021.1/data/parts/arch.xml
+DBG:HLSDevice: init success
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/zynquplus_dsp48e2.hlp 
+INFO: [HLS 200-1611] Setting target device to 'xczu3eg-sbva484-1-e'
+Command       create_platform done; 3.03 sec.
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute           source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command       ap_source done; 0.15 sec.
+Execute       ap_part_info -name xczu3eg-sbva484-1-e -data info 
+Execute       config_compile -quiet -complex-mul-dsp=0 
+Command     set_part done; 3.22 sec.
+Execute     send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute     get_config_interface -m_axi_latency 
+Execute     get_config_interface -m_axi_alignment_byte_size 
+Execute     get_config_interface -m_axi_max_widen_bitwidth 
+Execute     get_config_interface -default_interface 
+Execute     get_config_rtl -register_reset_num 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -format=ip_catalog 
+INFO: [HLS 200-1464] Running solution command: config_export -format=ip_catalog
+Execute     config_export -format=ip_catalog 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -output=/nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip 
+INFO: [HLS 200-1464] Running solution command: config_export -output=/nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip
+Execute     config_export -output=/nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -rtl=verilog 
+INFO: [HLS 200-1464] Running solution command: config_export -rtl=verilog
+Execute     config_export -rtl=verilog 
+Command   open_solution done; 3.24 sec.
+Execute   set_part xczu3eg-sbva484-1-e 
+INFO: [HLS 200-1510] Running: set_part xczu3eg-sbva484-1-e 
+Execute     create_platform xczu3eg-sbva484-1-e -board  
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/zynquplus_dsp48e2.hlp 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command     ap_source done; 0.13 sec.
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info 
+Execute     config_compile -quiet -complex-mul-dsp=0 
+Command   set_part done; 0.2 sec.
+Execute   create_clock -period 10 -name default 
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+Execute     ap_set_clock -name default -period 10 -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+Execute   config_export -format ip_catalog -output /nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip -rtl verilog 
+INFO: [HLS 200-1510] Running: config_export -format ip_catalog -output /nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip -rtl verilog 
+Execute   export_design -rtl verilog -format ip_catalog -output /nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip 
+INFO: [HLS 200-1510] Running: export_design -rtl verilog -format ip_catalog -output /nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip 
+Execute     get_config_export -clock_margin 
+Execute     get_config_export -custom_script 
+Execute     get_config_export -description 
+Execute     get_config_export -display_name 
+Execute     get_config_export -driver_input_dir 
+Execute     get_config_export -ipname 
+Execute     get_config_export -library 
+Execute     get_config_export -qor_test 
+Execute     get_config_export -sim 
+Execute     get_config_export -taxonomy 
+Execute     get_config_export -use_ip 
+Execute     get_config_export -use_netlist 
+Execute     get_config_export -vendor 
+Execute     get_config_export -version 
+Execute     get_config_export -xo 
+Execute     config_export -format=ip_catalog -output=/nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip -rtl=verilog 
+INFO-FLOW: DBG:PUTS: export_design_wrap: -format ip_catalog -rtl verilog
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_config_export -vivado_clock 
+Execute     get_top 
+Execute     get_config_export -ipname 
+Execute     get_config_export -xo 
+Execute     get_config_export -format 
+Execute     get_config_rtl -module_auto_prefix 
+Execute     get_solution -flow_target 
+Execute     get_config_export -xo 
+Execute     get_config_export -format 
+INFO-FLOW: DBG:PUTS:   auto_impl: pack: -export -rtl verilog
+INFO-FLOW: DBG:PROC: ::AESL_AUTOIMPL::auto_impl args='-export -rtl verilog'
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+INFO-FLOW: DBG:PUTS: automg_wrap -export -pcore_version 1.00.a -rtl vlog -tool Vivado -impltomg_flag
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::auto_generate args='-export -pcore_version 1.00.a -rtl vlog -tool Vivado -impltomg_flag'
+INFO-FLOW: DBG:PUTS:     auto_generate -export -pcore_version 1.00.a -rtl vlog -tool Vivado -impltomg_flag
+Execute     get_solution -flow_target 
+Execute     get_config_export -xo 
+Execute     get_config_export -format 
+Execute     get_config_export -ip_xdc_file 
+Execute     get_config_export -ip_xdc_ooc_file 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+INFO-FLOW: DBG:PUTS: read_platform_lib /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/common.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/APCoreGen.gen 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op.gen 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op_simcore.gen 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/interface.gen 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command     ap_source done; 0.13 sec.
+INFO-FLOW: DBG:PUTS:   using AESL_AUTOCG::g_clock_period=10.000 (was NA)
+INFO-FLOW: DBG:PUTS:       initCTypeInfo top_module=rayTriangleIntersect xml_exists=0
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     get_config_export -disable_deadlock_detection 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     get_config_rtl -module_prefix 
+INFO-FLOW: DBG:PUTS:       cosim_export_main adding deadlock detection to rayTriangleIntersect
+INFO-FLOW: DBG:PUTS: Skipping loadAnalyze_DB, #g_database=10
+INFO-FLOW: DBG:PUTS:       generate_json generate_bd_files=0 generate_xo_files=false #modelList=16 #gSsdmPorts=0
+INFO-FLOW: DBG:PROC: ::AP::DESIGN_DATA::generate_json generate_bd_files='0' generate_xo_files='false' modelList='rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+rayTriangleIntersect_mul_32s_32s_48_1_1
+rayTriangleIntersect_sdiv_34ns_32s_32_38_1
+rayTriangleIntersect_flow_control_loop_pipe_sequential_init
+rayTriangleIntersect_P1_V_0
+rayTriangleIntersect_control_s_axi
+rayTriangleIntersect_dir_m_axi
+rayTriangleIntersect_P1_DRAM_m_axi
+rayTriangleIntersect_P2_DRAM_m_axi
+rayTriangleIntersect_P3_DRAM_m_axi
+rayTriangleIntersect_intersectIndex_m_axi
+rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1
+rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3
+rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP
+rayTriangleIntersect
+' rtl_lang='vlog' bootstrap_tcl='false' outdir='' outfilename=''
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/huddle.tcl 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/json2huddle.tcl 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/try/try.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_solution -flow_target 
+Execute     get_config_export -xo 
+Execute     get_config_export -format 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/top-io-be.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.dataonly.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.dataonly.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.dataonly.tcl 
+Execute     get_config_export -format 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_15_1.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_VITIS_LOOP_20_2_VITIS_LOOP_22_3.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect_Pipeline_NUM_TRIS_LOOP.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute     get_solution -flow_target 
+Execute     get_config_rtl -kernel_profile 
+Execute     get_config_rtl -kernel_profile 
+Execute     get_config_rtl -stall_sig_gen 
+Execute     get_config_rtl -profile 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.constraint.tcl 
+Execute     sc_get_clocks rayTriangleIntersect 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_config_export -ip_xdc_file 
+Execute     get_config_export -ip_xdc_ooc_file 
+Execute     get_config_debug -directory 
+Execute     get_config_export -disable_deadlock_detection 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     get_config_rtl -module_prefix 
+INFO-FLOW: DBG:PUTS:       cosim_export_main adding deadlock detection to rayTriangleIntersect
+INFO-FLOW: DBG:PUTS:       copy ip_driver_dir 1_0 /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/driver
+Execute     get_config_export -format 
+INFO-FLOW: DBG:PUTS:       generate_ip_script #gSsdmPorts=0 g_lang=vlog is_sdaccel=false is_sdsoc=true xo_file=
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.dataonly.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.compgen.dataonly.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_config_debug -directory 
+INFO-FLOW: DBG:PUTS:       generate_top_info
+INFO-FLOW: DBG:PUTS:       prepArgInfo -> loadAnalyze_DB top_module=rayTriangleIntersect
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.rtl_wrap.cfg.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Command     ap_part_info done; 0.11 sec.
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_config_export -ip_xdc_ooc_file 
+Execute     get_config_export -ip_xdc_file 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.constraint.tcl 
+INFO-FLOW: DBG:PUTS:       generate_ipi_example_script
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+INFO-FLOW: DBG:PUTS:       generate_syn_sh
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+INFO-FLOW: DBG:PUTS:       generate_imp_constraints
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.constraint.tcl 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/rayTriangleIntersect.tbgen.tcl 
+INFO-FLOW: DBG:PUTS:       delete-temp-dirs (skipped for debug)
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-e -data info -quiet 
+INFO-FLOW: DBG:PUTS: read_platform_lib /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/common.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/APCoreGen.gen 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op.gen 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op_simcore.gen 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/interface.gen 
+Execute     source /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/.autopilot/db/global.setting.tcl 
+Execute     source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute         source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute       source /tools/software/xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command     ap_source done; 0.14 sec.
+INFO-FLOW: DBG:PUTS:     IP package: exec /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/impl/ip/pack.sh
+INFO-FLOW: DBG:PUTS:     IP package: success /nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/impl/ip/pack.sh
+Execute     get_config_export -output 
+Execute     send_msg_by_id INFO @200-802@%s rayTriangleIntersect.zip 
+INFO: [HLS 200-802] Generated output file rayTriangleIntersect.zip
+Command   export_design done; 32.76 sec.
+INFO: [HLS 200-111] Finished Command export_design CPU user time: 21.14 seconds. CPU system time: 3.53 seconds. Elapsed time: 32.76 seconds; current allocated memory: 328.978 MB.
+Command ap_source done; 36.27 sec.
+Execute cleanup_all 

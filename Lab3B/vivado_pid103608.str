@@ -1,0 +1,946 @@
+/*
+
+Xilinx Vivado v2020.2 (64-bit) [Major: 2020, Minor: 2]
+SW Build: 3064766 on Wed Nov 18 09:12:47 MST 2020
+IP Build: 3064653 on Wed Nov 18 14:17:31 MST 2020
+
+Process ID (PID): 103608
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Mon May 02 18:26:54 EDT 2022
+Time zone: 	Eastern Standard Time (America/New_York)
+
+OS: Red Hat Enterprise Linux Server release 7.9 (Maipo)
+OS Version: 3.10.0-1160.59.1.el7.x86_64
+OS Architecture: amd64
+Available processors (cores): 112
+
+Display: localhost:15.0
+Screen size: 1920x1080
+Screen resolution (DPI): 100
+Available screens: 2
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+Scale size: 12
+
+Java version: 	11.0.2 64-bit
+Java home: 	/tools/software/xilinx/Vivado/2020.2/tps/lnx64/jre11.0.2
+Java executable location: 	/tools/software/xilinx/Vivado/2020.2/tps/lnx64/jre11.0.2/bin/java
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	sbn6
+User home directory: /nethome/sbn6
+User working directory: /nethome/sbn6/fpga/Lab3B
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: /tools/software/xilinx/Vivado
+HDI_APPROOT: /tools/software/xilinx/Vivado/2020.2
+RDI_DATADIR: /tools/software/xilinx/Vivado/2020.2/data
+RDI_BINDIR: /tools/software/xilinx/Vivado/2020.2/bin
+
+Vivado preferences file location: /nethome/sbn6/.Xilinx/Vivado/2020.2/vivado.xml
+Vivado preferences directory: /nethome/sbn6/.Xilinx/Vivado/2020.2/
+Vivado layouts directory: /nethome/sbn6/.Xilinx/Vivado/2020.2/data/layouts
+PlanAhead jar file location: 	/tools/software/xilinx/Vivado/2020.2/lib/classes/planAhead.jar
+Vivado log file location: 	/nethome/sbn6/fpga/Lab3B/vivado.log
+Vivado journal file location: 	/nethome/sbn6/fpga/Lab3B/vivado.jou
+Engine tmp dir: 	./.Xil/Vivado-103608-ece-linlabsrv01.ece.gatech.edu
+
+Xilinx Environment Variables
+----------------------------
+XILINX: /tools/software/xilinx/Vivado/2020.2/ids_lite/ISE
+XILINXD_LICENSE_FILE: 2100@ece-winlic.ece.gatech.edu
+XILINX_DSP: /tools/software/xilinx/Vivado/2020.2/ids_lite/ISE
+XILINX_HLS: /tools/software/xilinx/Vitis_HLS/2021.1
+XILINX_PLANAHEAD: /tools/software/xilinx/Vivado/2020.2
+XILINX_SDK: /tools/software/xilinx/Vitis/2020.2
+XILINX_VITIS: /tools/software/xilinx/Vitis/2021.1
+XILINX_VIVADO: /tools/software/xilinx/Vivado/2020.2
+XILINX_VIVADO_HLS: /tools/software/xilinx/Vivado/2020.2
+
+
+GUI allocated memory:	142 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 5,799 MB
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// Tcl Command: 'rdi::info_commands {device::*}'
+// Tcl Command: 'rdi::info_commands {debug::*}'
+// Tcl Command: 'rdi::info_commands {*}'
+// HMemoryUtils.trashcanNow. Engine heap size: 5,804 MB. GUI used memory: 65 MB. Current time: 5/2/22, 6:26:55 PM EDT
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+selectButton(PAResourceEtoH.GettingStartedView_CREATE_NEW_PROJECT, "Create Project"); // y
+// Run Command: PAResourceCommand.PACommandNames_NEW_PROJECT
+// [GUI Memory]: 85 MB (+86550kb) [00:01:35]
+// [Engine Memory]: 5,806 MB (+5936835kb) [00:01:35]
+// [GUI Memory]: 107 MB (+18636kb) [00:01:39]
+// [GUI Memory]: 117 MB (+5035kb) [00:01:40]
+// f (cr): New Project: addNotify
+selectButton("NEXT", "Next >"); // JButton
+// Elapsed time: 14 seconds
+setText(PAResourceOtoP.ProjectNameChooser_PROJECT_NAME, "Lab3B_vivado", true); // aa
+selectButton("NEXT", "Next >"); // JButton
+selectButton("NEXT", "Next >"); // JButton
+selectButton("NEXT", "Next >"); // JButton
+selectButton("NEXT", "Next >"); // JButton
+// WARNING: HEventQueue.dispatchEvent() is taking  1269 ms.
+// Elapsed time: 14 seconds
+setText("PAResourceEtoH.FPGAChooser_FPGA_TABLE_SEARCH_FIELD", "xczu3eg-sbva484-1-e"); // OverlayTextField
+selectTable(PAResourceEtoH.FPGAChooser_FPGA_TABLE, "xczu3eg-sbva484-1-e ; 484 ; 82 ; 70560 ; 141120 ; 216 ; 0 ; 360 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 3 ;  ; 0 ; 100 ; 100 ; E ; 0.825 ; 0.850 ; 0.876", 0, "xczu3eg-sbva484-1-e", 0); // w
+selectButton("NEXT", "Next >"); // JButton
+// bz (cr):  Create Project : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_ADD
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: create_project Lab3B_vivado /nethome/sbn6/fpga/Lab3B/Lab3B_vivado -part xczu3eg-sbva484-1-e 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// WARNING: HEventQueue.dispatchEvent() is taking  3234 ms.
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/software/xilinx/Vivado/2020.2/data/ip'. 
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-3899] Cannot get the environment domain name variable for the component vendor name. Setting the vendor name to 'user.org'. 
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 131 MB (+8828kb) [00:02:30]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 5,871 MB. GUI used memory: 76 MB. Current time: 5/2/22, 6:29:10 PM EDT
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: create_project: Time (s): cpu = 00:00:20 ; elapsed = 00:00:13 . Memory (MB): peak = 7593.902 ; gain = 62.125 ; free physical = 15815 ; free virtual = 110345 
+// Elapsed time: 14 seconds
+selectButton("FINISH", "Finish"); // JButton
+// 'g' command handler elapsed time: 55 seconds
+dismissDialog("Create Project"); // bz
+dismissDialog("New Project"); // f
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager, IP Catalog]", 4, false); // u
+// Run Command: PAResourceCommand.PACommandNames_CORE_GEN
+// WARNING: HEventQueue.dispatchEvent() is taking  1302 ms.
+// PAPropertyPanels.initPanels (/tools/software/xilinx/Vivado/2020.2/data) elapsed time: 0.3s
+// [GUI Memory]: 141 MB (+3474kb) [00:02:39]
+selectTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "User Repository ;  ;  ;  ; ", 0, "User Repository", 0, true, false, false, false, true, false); // L - Popup Trigger - Node
+selectMenuItem(PAResourceAtoD.CoreAndInterfacesBaseTreeTablePanel_ADD_REPOSITORY, "Add Repository..."); // ak
+setFolderChooser("/nethome/sbn6/fpga/Lab3B");
+// TclEventType: PROJECT_CHANGE
+// [GUI Memory]: 149 MB (+1002kb) [00:02:48]
+// Tcl Message: set_property  ip_repo_paths  /nethome/sbn6/fpga/Lab3B [current_project] 
+// TclEventType: CREATE_IP_CATALOG
+// bz (cr):  Refresh All IP Repositories : addNotify
+// TclEventType: CREATE_IP_CATALOG
+// Tcl Message: update_ip_catalog 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1700] Loaded user IP repository '/nethome/sbn6/fpga/Lab3B'. 
+// Tcl Message: INFO: [IP_Flow 19-3899] Cannot get the environment domain name variable for the component vendor name. Setting the vendor name to 'user.org'. 
+// c (cr): Add Repository: addNotify
+expandTree(RDIResource.AddRepositoryInfoDialog_REPOSITORY_TREE, "[root, /nethome/sbn6/fpga/Lab3B, <html>IPs<span style='color: rgb(128, 128, 128)'>&nbsp;(1)</span></html>]", 1); // a
+selectTree(RDIResource.AddRepositoryInfoDialog_REPOSITORY_TREE, "[root, /nethome/sbn6/fpga/Lab3B, <html>IPs<span style='color: rgb(128, 128, 128)'>&nbsp;(1)</span></html>, Raytriangleintersect (xilinx.com:hls:rayTriangleIntersect:1.0)]", 2, false); // a
+selectButton(RDIResource.AddRepositoryInfoDialog_OK, "OK"); // a
+dismissDialog("Add Repository"); // c
+expandTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "User Repository ;  ;  ;  ; ", 0); // L
+expandTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "VITIS HLS IP ;  ;  ;  ; ", 1); // L
+// [GUI Memory]: 160 MB (+2926kb) [00:03:01]
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator, Create Block Design]", 6, false); // u
+// Run Command: PAResourceCommand.PACommandNames_CREATE_NEW_DIAGRAM
+// bq (cr): Create Block Design: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Create Block Design"); // bq
+// TclEventType: LOAD_FEATURE
+// bz (cr):  Create Block Design : addNotify
+// Tcl Message: create_bd_design "design_1" 
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_OPEN_DIAGRAM
+// WARNING: HEventQueue.dispatchEvent() is taking  1003 ms.
+// Tcl Message: Wrote  : </nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.srcs/sources_1/bd/design_1/design_1.bd>  
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // v
+dismissDialog("Create Block Design"); // bz
+selectButton(PAResourceQtoS.SystemBuilderView_ADD_IP, (String) null); // E
+// HMemoryUtils.trashcanNow. Engine heap size: 5,923 MB. GUI used memory: 81 MB. Current time: 5/2/22, 6:29:51 PM EDT
+// Tcl Message: update_compile_order -fileset sources_1 
+setText("PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE_SEARCH_FIELD", "hls"); // OverlayTextField
+applyEnter(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, (String) null); // L
+// bz (cr):  Add IP : addNotify
+// TclEventType: LOAD_FEATURE
+// TclEventType: REPORT_IP_STATUS_STALE
+// Tcl Message: startgroup 
+// Tcl Message: create_bd_cell -type ip -vlnv xilinx.com:hls:rayTriangleIntersect:1.0 rayTriangleIntersect_0 
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// Tcl Message: endgroup 
+selectButton(PAResourceQtoS.SystemBuilderView_ADD_IP, "System_RSB_ADD_IP"); // E
+setText("PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE_SEARCH_FIELD", "zy"); // OverlayTextField
+setText("PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE_SEARCH_FIELD", "zynq"); // OverlayTextField
+selectTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "Zynq UltraScale+ MPSoC", 0, "Zynq UltraScale+ MPSoC", 0, false); // L
+expandTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "Zynq UltraScale+ MPSoC", 0); // L
+selectTreeTable(PAResourceAtoD.CoreTreeTablePanel_CORE_TREE_TABLE, "Zynq UltraScale+ MPSoC", 0, "Zynq UltraScale+ MPSoC", 0, false, false, false, false, false, true); // L - Double Click
+// [Engine Memory]: 7,265 MB (+1225324kb) [00:03:25]
+// bz (cr):  Add IP : addNotify
+// Tcl Message: startgroup 
+// Tcl Message: create_bd_cell -type ip -vlnv xilinx.com:ip:zynq_ultra_ps_e:3.3 zynq_ultra_ps_e_0 
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// Tcl Message: endgroup 
+dismissDialog("Add IP"); // bz
+// Tcl Command: 'set_property location {1 58 -96} [get_bd_cells zynq_ultra_ps_e_0]'
+// TclEventType: RSB_CANVAS_LOCATION
+// Tcl Message: set_property location {1 58 -96} [get_bd_cells zynq_ultra_ps_e_0] 
+// PAPropertyPanels.initPanels (zynq_ultra_ps_e_0) elapsed time: 0.2s
+// Run Command: PAResourceCommand.PACommandNames_CUSTOMIZE_RSB_BLOC
+// HMemoryUtils.trashcanNow. Engine heap size: 7,295 MB. GUI used memory: 111 MB. Current time: 5/2/22, 6:30:15 PM EDT
+// N (cr):  Re-customize IP : addNotify
+// r (cr): Re-customize IP: addNotify
+// WARNING: HEventQueue.dispatchEvent() is taking  2835 ms.
+dismissDialog("Re-customize IP"); // N
+selectButton("PS-PL Configuration", "PS-PL Configuration"); // k
+expandTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "PS-PL Interfaces ; PS-PL Interfaces", 1); // ar
+expandTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "Master Interface ; Master Interface", 2); // ar
+selectTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "AXI HPM0 FPD ; PSU USE M AXI GP0", 3, "PSU USE M AXI GP0", 1, true); // ar - Node
+selectTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "AXI HPM0 LPD ; PSU USE M AXI GP2", 5, "PSU USE M AXI GP2", 1, true); // ar - Node
+expandTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "Slave Interface ; Slave Interface", 6); // ar
+expandTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "AXI HP ; AXI HP", 7); // ar
+selectTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "AXI HP0 FPD ; PSU USE S AXI GP2", 10, "PSU USE S AXI GP2", 1, true); // ar - Node
+selectTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "AXI HP1 FPD ; PSU USE S AXI GP3", 11, "PSU USE S AXI GP3", 1, true); // ar - Node
+selectTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "AXI HP2 FPD ; PSU USE S AXI GP4", 12, "PSU USE S AXI GP4", 1, true); // ar - Node
+selectTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "AXI HP3 FPD ; PSU USE S AXI GP5", 13, "PSU USE S AXI GP5", 1, true); // ar - Node
+selectTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "AXI HPC1 FPD ; PSU USE S AXI GP1", 9, "PSU USE S AXI GP1", 1, true); // ar - Node
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// Tcl Command: 'set_property -dict [list CONFIG.PSU__USE__M_AXI_GP0 {1} CONFIG.PSU__USE__M_AXI_GP2 {0} CONFIG.PSU__USE__S_AXI_GP1 {1} CONFIG.PSU__USE__S_AXI_GP2 {1} CONFIG.PSU__USE__S_AXI_GP3 {1} CONFIG.PSU__USE__S_AXI_GP4 {1} CONFIG.PSU__USE__S_AXI_GP5 {1}] [get_bd_cells zynq_ultra_ps_e_0]'
+dismissDialog("Re-customize IP"); // r
+// [GUI Memory]: 175 MB (+7682kb) [00:03:58]
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// Tcl Message: set_property -dict [list CONFIG.PSU__USE__M_AXI_GP0 {1} CONFIG.PSU__USE__M_AXI_GP2 {0} CONFIG.PSU__USE__S_AXI_GP1 {1} CONFIG.PSU__USE__S_AXI_GP2 {1} CONFIG.PSU__USE__S_AXI_GP3 {1} CONFIG.PSU__USE__S_AXI_GP4 {1} CONFIG.PSU__USE__S_AXI_GP5 {1}] [get_bd_cells zynq_ultra_ps_e_0] 
+// TclEventType: RSB_PROPERTY_CHANGE
+// r (cr): Re-customize IP: addNotify
+// bz (r):  Customize IP : addNotify
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_PROPERTY_CHANGE
+dismissDialog("Customize IP"); // bz
+selectButton(PAResourceQtoS.RSBApplyAutomationBar_RUN_CONNECTION_AUTOMATION, "Run Connection Automation"); // h
+// ah (cr): Run Connection Automation: addNotify
+// WARNING: HEventQueue.dispatchEvent() is taking  1724 ms.
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (0 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP0_FPD]", 4, false, false, ui.utils.collection.couples.TriState.False); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (1 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP0_FPD]", 4, false, true, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (2 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP1_FPD]", 5, false, true, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (3 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP2_FPD]", 6, false, true, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (4 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP3_FPD]", 7, false, true, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (4 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HPC1_FPD]", 8, false, false, ui.utils.collection.couples.TriState.False); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HPC1_FPD]", 8, false, true, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP0_FPD]", 4, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP1_FPD]", 5, false, false, ui.utils.collection.couples.TriState.True); // av
+selectComboBox("Master interface", "/rayTriangleIntersect_0/m_axi_P1_DRAM", 1); // a
+// TclEventType: XGUI_UPDATE_GUI_ELEMENT
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP2_FPD]", 6, false, false, ui.utils.collection.couples.TriState.True); // av
+selectComboBox("Master interface", "/rayTriangleIntersect_0/m_axi_P2_DRAM", 2); // a
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP3_FPD]", 7, false, false, ui.utils.collection.couples.TriState.True); // av
+selectComboBox("Master interface", "/rayTriangleIntersect_0/m_axi_P3_DRAM", 3); // a
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HPC1_FPD]", 8, false, false, ui.utils.collection.couples.TriState.True); // av
+selectComboBox("Master interface", "/rayTriangleIntersect_0/m_axi_intersectIndex", 4); // a
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP0_FPD]", 4, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP1_FPD]", 5, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP2_FPD]", 6, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP3_FPD]", 7, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HPC1_FPD]", 8, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP0_FPD]", 4, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP1_FPD]", 5, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP2_FPD]", 6, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HP3_FPD]", 7, false, false, ui.utils.collection.couples.TriState.True); // av
+selectCheckBoxTree(PAResourceAtoD.ApplyRSBMultiAutomationDialog_CHECKBOX_TREE, "[All Automation (5 out of 6 selected), zynq_ultra_ps_e_0, S_AXI_HPC1_FPD]", 8, false, false, ui.utils.collection.couples.TriState.True); // av
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Run Connection Automation"); // ah
+// bz (cr):  Run Connection Automation : addNotify
+// TclEventType: XGUI_UPDATE_GUI_ELEMENT
+// Tcl Message: startgroup 
+// Tcl Message: apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {Auto} Clk_slave {Auto} Clk_xbar {Auto} Master {/rayTriangleIntersect_0/m_axi_dir} Slave {/zynq_ultra_ps_e_0/S_AXI_HP0_FPD} ddr_seg {Auto} intc_ip {New AXI SmartConnect} master_apm {0}}  [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP0_FPD] 
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: XGUI_UPDATE_GUI_ELEMENT
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// Tcl Message: Slave segment '/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_dir' at <0x0000_0000 [ 2G ]>. Slave segment '/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_dir' at <0xFF00_0000 [ 16M ]>. 
+// Tcl Message: INFO: [BD 41-1051] The usage register of slave segment /zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM does not match the usage memory of address space /rayTriangleIntersect_0/Data_m_axi_dir and will be excluded. Use the include_bd_addr_seg command to override this precaution and make the slave segment visible within this address space. 
+// Tcl Message: Excluding slave segment /zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM from address space /rayTriangleIntersect_0/Data_m_axi_dir. 
+// Tcl Message: apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {Auto} Clk_slave {Auto} Clk_xbar {Auto} Master {/rayTriangleIntersect_0/m_axi_P1_DRAM} Slave {/zynq_ultra_ps_e_0/S_AXI_HP1_FPD} ddr_seg {Auto} intc_ip {New AXI SmartConnect} master_apm {0}}  [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP1_FPD] 
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: XGUI_UPDATE_GUI_ELEMENT
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// Tcl Message: Slave segment '/zynq_ultra_ps_e_0/SAXIGP3/HP1_DDR_LOW' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_P1_DRAM' at <0x0000_0000 [ 2G ]>. Slave segment '/zynq_ultra_ps_e_0/SAXIGP3/HP1_LPS_OCM' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_P1_DRAM' at <0xFF00_0000 [ 16M ]>. 
+// Tcl Message: INFO: [BD 41-1051] The usage register of slave segment /zynq_ultra_ps_e_0/SAXIGP3/HP1_LPS_OCM does not match the usage memory of address space /rayTriangleIntersect_0/Data_m_axi_P1_DRAM and will be excluded. Use the include_bd_addr_seg command to override this precaution and make the slave segment visible within this address space. 
+// Tcl Message: Excluding slave segment /zynq_ultra_ps_e_0/SAXIGP3/HP1_LPS_OCM from address space /rayTriangleIntersect_0/Data_m_axi_P1_DRAM. 
+// Tcl Message: apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {Auto} Clk_slave {Auto} Clk_xbar {Auto} Master {/rayTriangleIntersect_0/m_axi_P2_DRAM} Slave {/zynq_ultra_ps_e_0/S_AXI_HP2_FPD} ddr_seg {Auto} intc_ip {New AXI SmartConnect} master_apm {0}}  [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP2_FPD] 
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: XGUI_UPDATE_GUI_ELEMENT
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// Tcl Message: Slave segment '/zynq_ultra_ps_e_0/SAXIGP4/HP2_DDR_LOW' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_P2_DRAM' at <0x0000_0000 [ 2G ]>. Slave segment '/zynq_ultra_ps_e_0/SAXIGP4/HP2_LPS_OCM' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_P2_DRAM' at <0xFF00_0000 [ 16M ]>. 
+// Tcl Message: INFO: [BD 41-1051] The usage register of slave segment /zynq_ultra_ps_e_0/SAXIGP4/HP2_LPS_OCM does not match the usage memory of address space /rayTriangleIntersect_0/Data_m_axi_P2_DRAM and will be excluded. Use the include_bd_addr_seg command to override this precaution and make the slave segment visible within this address space. 
+// Tcl Message: Excluding slave segment /zynq_ultra_ps_e_0/SAXIGP4/HP2_LPS_OCM from address space /rayTriangleIntersect_0/Data_m_axi_P2_DRAM. 
+// Tcl Message: apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {Auto} Clk_slave {Auto} Clk_xbar {Auto} Master {/rayTriangleIntersect_0/m_axi_P3_DRAM} Slave {/zynq_ultra_ps_e_0/S_AXI_HP3_FPD} ddr_seg {Auto} intc_ip {New AXI SmartConnect} master_apm {0}}  [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP3_FPD] 
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// Tcl Message: Slave segment '/zynq_ultra_ps_e_0/SAXIGP5/HP3_DDR_LOW' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_P3_DRAM' at <0x0000_0000 [ 2G ]>. Slave segment '/zynq_ultra_ps_e_0/SAXIGP5/HP3_LPS_OCM' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_P3_DRAM' at <0xFF00_0000 [ 16M ]>. 
+// Tcl Message: INFO: [BD 41-1051] The usage register of slave segment /zynq_ultra_ps_e_0/SAXIGP5/HP3_LPS_OCM does not match the usage memory of address space /rayTriangleIntersect_0/Data_m_axi_P3_DRAM and will be excluded. Use the include_bd_addr_seg command to override this precaution and make the slave segment visible within this address space. 
+// Tcl Message: Excluding slave segment /zynq_ultra_ps_e_0/SAXIGP5/HP3_LPS_OCM from address space /rayTriangleIntersect_0/Data_m_axi_P3_DRAM. 
+// Tcl Message: apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {Auto} Clk_slave {Auto} Clk_xbar {Auto} Master {/rayTriangleIntersect_0/m_axi_intersectIndex} Slave {/zynq_ultra_ps_e_0/S_AXI_HPC1_FPD} ddr_seg {Auto} intc_ip {New AXI SmartConnect} master_apm {0}}  [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HPC1_FPD] 
+// TclEventType: XGUI_UPDATE_GUI_ELEMENT
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: XGUI_RESET_GUI_ELEMENT
+// Tcl Message: Slave segment '/zynq_ultra_ps_e_0/SAXIGP1/HPC1_DDR_LOW' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_intersectIndex' at <0x0000_0000 [ 2G ]>. Slave segment '/zynq_ultra_ps_e_0/SAXIGP1/HPC1_LPS_OCM' is being assigned into address space '/rayTriangleIntersect_0/Data_m_axi_intersectIndex' at <0xFF00_0000 [ 16M ]>. 
+// Tcl Message: INFO: [BD 41-1051] The usage register of slave segment /zynq_ultra_ps_e_0/SAXIGP1/HPC1_LPS_OCM does not match the usage memory of address space /rayTriangleIntersect_0/Data_m_axi_intersectIndex and will be excluded. Use the include_bd_addr_seg command to override this precaution and make the slave segment visible within this address space. 
+// Tcl Message: Excluding slave segment /zynq_ultra_ps_e_0/SAXIGP1/HPC1_LPS_OCM from address space /rayTriangleIntersect_0/Data_m_axi_intersectIndex. 
+// Tcl Message: endgroup 
+dismissDialog("Run Connection Automation"); // bz
+// HMemoryUtils.trashcanNow. Engine heap size: 7,324 MB. GUI used memory: 114 MB. Current time: 5/2/22, 6:31:26 PM EDT
+selectButton(PAResourceCommand.PACommandNames_SAVE_RSB_DESIGN, "save_rsb_design"); // E
+// Run Command: PAResourceCommand.PACommandNames_SAVE_RSB_DESIGN
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// bz (cr):  Save Design : addNotify
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: save_bd_design 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// Tcl Message: Wrote  : </nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.srcs/sources_1/bd/design_1/design_1.bd>  Wrote  : </nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.srcs/sources_1/bd/design_1/ui/bd_1f5defd0.ui>  
+dismissDialog("Save Design"); // bz
+// Run Command: PAResourceCommand.PACommandNames_CUSTOMIZE_RSB_BLOC
+// N (cr):  Re-customize IP : addNotify
+// r (cr): Re-customize IP: addNotify
+// WARNING: HEventQueue.dispatchEvent() is taking  2636 ms.
+// Elapsed time: 27 seconds
+dismissDialog("Re-customize IP"); // N
+selectButton("PS-PL Configuration", "PS-PL Configuration"); // k
+expandTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "PS-PL Interfaces ; PS-PL Interfaces", 1); // ar
+expandTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "Master Interface ; Master Interface", 2); // ar
+expandTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "Slave Interface ; Slave Interface", 6); // ar
+expandTreeTable(PAResourceOtoP.PSSTreeTablePanelBuilder_GENERAL_TREE, "AXI HP ; AXI HP", 7); // ar
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Re-customize IP"); // r
+selectButton(PAResourceQtoS.RSBApplyAutomationBar_RUN_CONNECTION_AUTOMATION, "Run Connection Automation"); // h
+// ah (cr): Run Connection Automation: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// [GUI Memory]: 189 MB (+5605kb) [00:05:26]
+dismissDialog("Run Connection Automation"); // ah
+// TclEventType: XGUI_UPDATE_GUI_ELEMENT
+// bz (cr):  Run Connection Automation : addNotify
+// TclEventType: REPORT_IP_STATUS_STALE
+// Tcl Message: apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {Auto} Clk_slave {/zynq_ultra_ps_e_0/pl_clk0 (99 MHz)} Clk_xbar {Auto} Master {/zynq_ultra_ps_e_0/M_AXI_HPM0_FPD} Slave {/rayTriangleIntersect_0/s_axi_control} ddr_seg {Auto} intc_ip {New AXI Interconnect} master_apm {0}}  [get_bd_intf_pins rayTriangleIntersect_0/s_axi_control] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_REMOVE_ADDRNETWORK
+// TclEventType: RSB_INSERT_ADDRNETWORK
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: XGUI_RESET_GUI_ELEMENT
+// Tcl Message: Slave segment '/rayTriangleIntersect_0/s_axi_control/Reg' is being assigned into address space '/zynq_ultra_ps_e_0/Data' at <0xA000_0000 [ 64K ]>. 
+dismissDialog("Run Connection Automation"); // bz
+// HMemoryUtils.trashcanNow. Engine heap size: 7,349 MB. GUI used memory: 130 MB. Current time: 5/2/22, 6:32:11 PM EDT
+selectButton(PAResourceCommand.PACommandNames_SAVE_RSB_DESIGN, "save_rsb_design"); // E
+// Run Command: PAResourceCommand.PACommandNames_SAVE_RSB_DESIGN
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// Tcl Message: save_bd_design 
+// Tcl Message: Wrote  : </nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.srcs/sources_1/bd/design_1/design_1.bd>  Wrote  : </nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.srcs/sources_1/bd/design_1/ui/bd_1f5defd0.ui>  
+// Elapsed time: 20 seconds
+collapseTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, rayTriangleIntersect_0]", 9); // a
+collapseTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, zynq_ultra_ps_e_0]", 11); // a
+expandTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, rayTriangleIntersect_0]", 9); // a
+collapseTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, rayTriangleIntersect_0]", 9); // a
+expandTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, rayTriangleIntersect_0]", 9); // a
+expandTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, rst_ps8_0_99M]", 19); // a
+expandTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, zynq_ultra_ps_e_0]", 30); // a
+expandTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, axi_smc_4]", 7); // a
+expandTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, ps8_0_axi_periph]", 12); // a
+expandTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, Interface Connections]", 1); // a
+expandTree(PAResourceQtoS.SystemTreeView_SYSTEM_TREE, "[design_1, Nets]", 14); // a
+selectTab((HResource) null, (HResource) null, "Sources", 0); // aK
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1]", 3); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, design_1 (design_1.bd)]", 4, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, design_1 (design_1.bd)]", 4, true, false, false, false, true, false); // D - Popup Trigger - Node
+selectMenuItem(PAResourceCommand.PACommandNames_CREATE_TOP_HDL, "Create HDL Wrapper..."); // ak
+// Run Command: PAResourceCommand.PACommandNames_CREATE_TOP_HDL
+// a (cr): Create HDL Wrapper: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// TclEventType: RSB_SCRIPT_TASK
+dismissDialog("Create HDL Wrapper"); // a
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: make_wrapper -files [get_files /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.srcs/sources_1/bd/design_1/design_1.bd] -top 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// bz (cr):  Create HDL Wrapper : addNotify
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_CLOSE_DIAGRAM
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_CLOSE_DIAGRAM
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_CLOSE_DIAGRAM
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_CLOSE_DIAGRAM
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_CLOSE_DIAGRAM
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// Tcl Message: Wrote  : </nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.srcs/sources_1/bd/design_1/design_1.bd>  
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_SCRIPT_TASK
+// Tcl Message: VHDL Output written to : /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/synth/design_1.v 
+// Tcl Message: VHDL Output written to : /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/sim/design_1.v VHDL Output written to : /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/hdl/design_1_wrapper.v 
+// Tcl Message: make_wrapper: Time (s): cpu = 00:00:29 ; elapsed = 00:00:28 . Memory (MB): peak = 9502.375 ; gain = 0.000 ; free physical = 14024 ; free virtual = 108784 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files -norecurse /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/hdl/design_1_wrapper.v 
+// Elapsed time: 28 seconds
+dismissDialog("Create HDL Wrapper"); // bz
+// HMemoryUtils.trashcanNow. Engine heap size: 7,510 MB. GUI used memory: 132 MB. Current time: 5/2/22, 6:33:41 PM EDT
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// Elapsed time: 30 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 20, false); // u
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// A (cr): No Implementation Results Available: addNotify
+selectButton(RDIResource.BaseDialog_YES, "Yes"); // a
+selectButton(RDIResource.BaseDialog_YES, "Yes"); // a
+// bz (cr):  Resetting Runs : addNotify
+// cD (cr): Launch Runs: addNotify
+dismissDialog("No Implementation Results Available"); // A
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// 'cA' command handler elapsed time: 14 seconds
+// TclEventType: RSB_SCRIPT_TASK
+dismissDialog("Launch Runs"); // cD
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// bz (cr):  Generate Bitstream : addNotify
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 56 
+// Tcl Message: Wrote  : </nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.srcs/sources_1/bd/design_1/design_1.bd>  
+// Tcl Message: VHDL Output written to : /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/synth/design_1.v 
+// Tcl Message: VHDL Output written to : /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/sim/design_1.v VHDL Output written to : /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/hdl/design_1_wrapper.v 
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block rayTriangleIntersect_0 . 
+// Tcl Message: INFO: [PSU-0] Address Range of DDR (0x1ff00000 to 0x1fffffff) is reserved by PMU for internal purpose. 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block zynq_ultra_ps_e_0 . 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: Exporting to file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/hw_handoff/design_1_axi_smc_0.hwh Generated Block Design Tcl file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/hw_handoff/design_1_axi_smc_0_bd.tcl Generated Hardware Definition File /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/synth/design_1_axi_smc_0.hwdef 
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc . INFO: [BD 41-1029] Generation completed for the IP Integrator block rst_ps8_0_99M . 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: Exporting to file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_1_0/bd_0/hw_handoff/design_1_axi_smc_1_0.hwh Generated Block Design Tcl file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_1_0/bd_0/hw_handoff/design_1_axi_smc_1_0_bd.tcl Generated Hardware Definition File /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_1_0/bd_0/synth/design_1_axi_smc_1_0.hwdef 
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc_1 . 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: Exporting to file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_2_0/bd_0/hw_handoff/design_1_axi_smc_2_0.hwh Generated Block Design Tcl file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_2_0/bd_0/hw_handoff/design_1_axi_smc_2_0_bd.tcl Generated Hardware Definition File /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_2_0/bd_0/synth/design_1_axi_smc_2_0.hwdef 
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc_2 . 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: Exporting to file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_3_0/bd_0/hw_handoff/design_1_axi_smc_3_0.hwh Generated Block Design Tcl file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_3_0/bd_0/hw_handoff/design_1_axi_smc_3_0_bd.tcl Generated Hardware Definition File /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_3_0/bd_0/synth/design_1_axi_smc_3_0.hwdef 
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc_3 . 
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: Exporting to file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_4_0/bd_0/hw_handoff/design_1_axi_smc_4_0.hwh Generated Block Design Tcl file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_4_0/bd_0/hw_handoff/design_1_axi_smc_4_0_bd.tcl Generated Hardware Definition File /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/ip/design_1_axi_smc_4_0/bd_0/synth/design_1_axi_smc_4_0.hwdef 
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc_4 . 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block ps8_0_axi_periph/s00_couplers/auto_ds . 
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block ps8_0_axi_periph/s00_couplers/auto_pc . 
+// Tcl Message: Exporting to file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/hw_handoff/design_1.hwh Generated Block Design Tcl file /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/hw_handoff/design_1_bd.tcl Generated Hardware Definition File /nethome/sbn6/fpga/Lab3B/Lab3B_vivado/Lab3B_vivado.gen/sources_1/bd/design_1/synth/design_1.hwdef 
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_NEW
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_ADD
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// [Engine Memory]: 7,632 MB (+3545kb) [00:08:38]
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// HMemoryUtils.trashcanNow. Engine heap size: 7,747 MB. GUI used memory: 133 MB. Current time: 5/2/22, 6:35:21 PM EDT
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs: Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 9869.098 ; gain = 222.043 ; free physical = 13266 ; free virtual = 108077 
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 60 seconds
+dismissDialog("Generate Bitstream"); // bz
