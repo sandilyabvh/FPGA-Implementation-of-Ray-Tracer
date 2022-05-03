@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Mon May  2 16:17:23 2022
+# Process ID: 246097
+# Current directory: /nethome/sbn6/fpga/Lab3B
+# Command line: vivado
+# Log file: /nethome/sbn6/fpga/Lab3B/vivado.log
+# Journal file: /nethome/sbn6/fpga/Lab3B/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project /nethome/sbn6/fpga/tutorial/project_1/project_1.xpr

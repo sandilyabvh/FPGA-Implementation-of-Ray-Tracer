@@ -1,0 +1,52 @@
+INFO: [HLS 200-10] Running '/tools/software/xilinx/Vitis_HLS/2021.1/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'sbn6' on host 'ece-linlabsrv01.ece.gatech.edu' (Linux_x86_64 version 3.10.0-1160.59.1.el7.x86_64) on Sun May 02 18:24:55 EDT 2021
+INFO: [HLS 200-10] On os "Red Hat Enterprise Linux Server release 7.9 (Maipo)"
+INFO: [HLS 200-10] In directory '/nethome/sbn6/fpga/Lab3B'
+Sourcing Tcl script '/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1/export.tcl'
+INFO: [HLS 200-1510] Running: open_project Lab3B_Vitis 
+INFO: [HLS 200-10] Opening project '/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis'.
+INFO: [HLS 200-1510] Running: set_top rayTriangleIntersect 
+INFO: [HLS 200-1510] Running: add_files common.cpp 
+INFO: [HLS 200-10] Adding design file 'common.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files common.h 
+INFO: [HLS 200-10] Adding design file 'common.h' to the project
+INFO: [HLS 200-1510] Running: add_files fxp_sqrt.h 
+INFO: [HLS 200-10] Adding design file 'fxp_sqrt.h' to the project
+INFO: [HLS 200-1510] Running: add_files raytriangleintersect.cpp 
+INFO: [HLS 200-10] Adding design file 'raytriangleintersect.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files raytriangleintersect.h 
+INFO: [HLS 200-10] Adding design file 'raytriangleintersect.h' to the project
+INFO: [HLS 200-1510] Running: add_files -tb geometry.h 
+INFO: [HLS 200-10] Adding test bench file 'geometry.h' to the project
+INFO: [HLS 200-1510] Running: add_files -tb main.cpp 
+INFO: [HLS 200-10] Adding test bench file 'main.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb verts.cpp 
+INFO: [HLS 200-10] Adding test bench file 'verts.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution solution1 -flow_target vivado 
+INFO: [HLS 200-10] Opening solution '/nethome/sbn6/fpga/Lab3B/Lab3B_Vitis/solution1'.
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1611] Setting target device to 'xczu3eg-sbva484-1-e'
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2021.1;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-1464] Running solution command: config_export -format=ip_catalog
+INFO: [HLS 200-1464] Running solution command: config_export -output=/nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip
+INFO: [HLS 200-1464] Running solution command: config_export -rtl=verilog
+INFO: [HLS 200-1510] Running: set_part xczu3eg-sbva484-1-e 
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: config_export -format ip_catalog -output /nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip -rtl verilog 
+INFO: [HLS 200-1510] Running: export_design -rtl verilog -format ip_catalog -output /nethome/sbn6/fpga/Lab3B/rayTriangleIntersect.zip 
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+
+****** Vivado v2021.1 (64-bit)
+  **** SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+  **** IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+    ** Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+
+source run_ippack.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/software/xilinx/Vivado/2021.1/data/ip'.
+INFO: [Common 17-206] Exiting Vivado at Sun May  2 18:25:21 2021...
+INFO: [HLS 200-802] Generated output file rayTriangleIntersect.zip
+INFO: [HLS 200-111] Finished Command export_design CPU user time: 21.14 seconds. CPU system time: 3.53 seconds. Elapsed time: 32.76 seconds; current allocated memory: 328.978 MB.

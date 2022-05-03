@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="raytriangleintersect.h" path="/nethome/sbn6/fpga/Lab3B/raytriangleintersect.h"/>
+    <originFiles name="raytriangleintersect.cpp" path="/nethome/sbn6/fpga/Lab3B/raytriangleintersect.cpp"/>
+    <originFiles name="fxp_sqrt.h" path="/nethome/sbn6/fpga/Lab3B/fxp_sqrt.h"/>
+    <originFiles name="common.h" path="/nethome/sbn6/fpga/Lab3B/common.h"/>
+    <originFiles name="common.cpp" path="/nethome/sbn6/fpga/Lab3B/common.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="verts.cpp" path="/nethome/sbn6/fpga/Lab3B/verts.cpp"/>
+    <originFiles name="main.cpp" path="/nethome/sbn6/fpga/Lab3B/main.cpp"/>
+    <originFiles name="geometry.h" path="/nethome/sbn6/fpga/Lab3B/geometry.h"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>
