@@ -30,6 +30,7 @@ The code reads a .geo file which defines the structure of the image in terms of 
 
 |-golden_c : C code for the ray tracing implementation </br>
 |-HLS      : HLS optimized code for ray tracing targetted for Pynq Z2 board
+|-Lab3B    : Contains the bitstream, Jupyter notebook and report from running the optimized ray intersection algorithm on FPGA
 
 ## Test Environment
 NOTE: Needs g++ and vitis installed
