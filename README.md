@@ -6,7 +6,7 @@ The goal of the project is to accelerate the ray cast and primitive intersection
 Course: ECE 8893-FPG: Parallel Programming for FPGAs
 
 ### Contributors
-Varun Saxena (varunsax12) </br>
+Varun Saxena (varunsax12 | https://github.com/varunsax12) </br>
 Santhana Bharathi Narasimmachari <add here> </br>
 Venkata Hanuma Sandilya Balemarthy (sandilyabvh) </br>
 
@@ -47,6 +47,7 @@ Environment Setup:
 1. cd golden_c
 2. make clean
 3. make
+4. make run
 
 Expected Output: out.0000.ppm file (displaying the teapot image with checkered texture)
 
