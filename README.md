@@ -7,11 +7,11 @@ Course: ECE 8893-FPG: Parallel Programming for FPGAs
 
 ### Contributors
 Varun Saxena (varunsax12 | https://github.com/varunsax12) </br>
-Santhana Bharathi Narasimmachari <add here> </br>
-Venkata Hanuma Sandilya Balemarthy (sandilyabvh) </br>
+Santhana Bharathi Narasimmachari (nsbneyveli | https://github.com/nsbneyveli) </br>
+Venkata Hanuma Sandilya Balemarthy (sandilyabvh | https://github.com/sandilyabvh) </br>
 
 ## Code Description
-The code reads a .geo file which defines the structure of the image in terms of faces, primitives, vertices, etc. This data is parsed and stored. The render function then casts ray to each pixel in the framebuffer from the camera view (origin). The rays are then tested for intersections with all the primitives. The primitive with the closest point of intersection is considered the main intersection. This point is then used to find the texture coordinates from the texCoordinates fetched from the .geo file. The texture is then applied to the pixel and stored back in the frame buffer. This process is done iteratively for each pixel in the frame buffer.
+The code reads a .geo file [1] which defines the structure of the image in terms of faces, primitives, vertices, etc. This data is parsed and stored. The render function then casts ray to each pixel in the framebuffer from the camera view (origin). The rays are then tested for intersections with all the primitives. The primitive with the closest point of intersection is considered the main intersection. This point is then used to find the texture coordinates fetched from the .geo file. The texture is then applied to the pixel and stored back in the frame buffer. This process is done iteratively for each pixel in the frame buffer.
 
 ## HLS optimization techniques used:
 1. C level code speed up
