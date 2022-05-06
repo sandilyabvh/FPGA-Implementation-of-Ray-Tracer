@@ -54,12 +54,14 @@ Expected Output: out.0000.ppm file (displaying the teapot image with checkered t
 ### HLS (floating point simulations)
 1. cd HLS
 2. ./csim.sh
+3. make run
 
 Expected Output: out.0000.ppm file (displaying the teapot image with checkered texture)
 
 ### HLS (fixed point simulations)
 1. cd HLS
 2. ./csim_f.sh
+3. make run
 
 Expected Output: out.0000.ppm file (displaying the teapot image with checkered texture)
 
