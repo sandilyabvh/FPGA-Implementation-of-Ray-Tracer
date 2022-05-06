@@ -1,2 +1,0 @@
-dict set slaves control {ports {dir_DRAM {type i_ap_none width 64} P1_DRAM_offset {type i_ap_none width 64} P2_DRAM_offset {type i_ap_none width 64} P3_DRAM_offset {type i_ap_none width 64} intersectIndex_offset {type i_ap_none width 64} ap_start {type ap_ctrl width 1} ap_done {type ap_ctrl width 1} ap_ready {type ap_ctrl width 1} ap_idle {type ap_ctrl width 1}} mems {} has_ctrl 1}
-set datawidth 32
