@@ -43,7 +43,7 @@ common.cpp : Custom utilities used in the ray tracing algorithm (Header: common.
 main.cpp : Top testbench file with functionality to read and process the ".geo" file to generate index buffer, primitive buffer, texture coordinates, normals, etc. It also applies the preset transformations. </br>
 tb_common.cpp : Custom utilities used in the processing the ".geo" file. (HEader: tb_common.h) </br>
 
-###Input Files
+### Input Files
 Geometry file: teapot.geo
 
 ## Test Environment
