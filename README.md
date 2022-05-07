@@ -32,6 +32,19 @@ The code reads a .geo file [1] which defines the structure of the image in terms
 |-HLS      : HLS optimized code for ray tracing targetted for Pynq Z2 board </br>
 |-Lab3B    : Contains the bitstream, Jupyter notebook and report from running the optimized ray intersection algorithm on FPGA
 
+## Code Structure
+
+### Ray Tracing Core:
+trianglemesh.cpp : Complete ray tracing algorithm (Header: trainglemesh.h)
+geometry.h : Configurations of workload and other top level run configs
+common.cpp : Custom utilities used in the ray tracing algorithm (Header: common.h)
+
+### Testbench files
+main.cpp : Top testbench file with functionality to read and process the ".geo" file to generate index buffer, primitive buffer, texture coordinates, etc. It also applies the preset transformations.
+tb_common.cpp : Custom utilities used in the processing the ".geo" file. (HEader: tb_common.h)
+
+Input Files: teapot.geo
+
 ## Test Environment
 NOTE: Needs g++ and vitis installed
 Server: ece-linlabsrv01.ece.gatech.edu
