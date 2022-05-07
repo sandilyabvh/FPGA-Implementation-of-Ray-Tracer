@@ -64,7 +64,7 @@ Expected Output: out.0000.ppm file (displaying the teapot image with checkered t
 2. ./csim_f.sh
 3. make run
 
-Expected Output: out.0000.ppm file (displaying the teapot image with checkered texture)
+Expected Output: out.0001.ppm file (displaying the teapot image with checkered texture)
 
 ### HLS synthesis run (fixed point)
 1. cd HLS
