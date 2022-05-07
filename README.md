@@ -35,15 +35,16 @@ The code reads a .geo file [1] which defines the structure of the image in terms
 ## Code Structure
 
 ### Ray Tracing Core:
-trianglemesh.cpp : Complete ray tracing algorithm (Header: trainglemesh.h)
-geometry.h : Configurations of workload and other top level run configs
-common.cpp : Custom utilities used in the ray tracing algorithm (Header: common.h)
+trianglemesh.cpp : Complete ray tracing algorithm (Header: trainglemesh.h) </br>
+geometry.h : Configurations of workload and other top level run configs </br>
+common.cpp : Custom utilities used in the ray tracing algorithm (Header: common.h) </br>
 
 ### Testbench files
-main.cpp : Top testbench file with functionality to read and process the ".geo" file to generate index buffer, primitive buffer, texture coordinates, etc. It also applies the preset transformations.
-tb_common.cpp : Custom utilities used in the processing the ".geo" file. (HEader: tb_common.h)
+main.cpp : Top testbench file with functionality to read and process the ".geo" file to generate index buffer, primitive buffer, texture coordinates, normals, etc. It also applies the preset transformations. </br>
+tb_common.cpp : Custom utilities used in the processing the ".geo" file. (HEader: tb_common.h) </br>
 
-Input Files: teapot.geo
+###Input Files
+Geometry file: teapot.geo
 
 ## Test Environment
 NOTE: Needs g++ and vitis installed
